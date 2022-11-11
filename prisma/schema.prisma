@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model author {
+  id                  BigInt    @id
+  username            String?
+  display_name        String?
+  follower_count      Int?
+  following_count     Int?
+  created_at          DateTime? @default(now()) @db.Timestamp(6)
+  updated_at          DateTime? @default(now()) @db.Timestamp(6)
+  last_tweet_at       DateTime? @db.Timestamp(6)
+  source_account_id   BigInt?
+  source_tweet_id     BigInt?
+  profile_picture_url String?
+  thread              thread[]
+}
+
+model save_bot {
+  id           BigInt    @id(map: "collector_pkey")
+  username     String?
+  display_name String?
+  latest_tweet BigInt?
+  created_at   DateTime? @db.Timestamp(6)
+  updated_at   DateTime? @db.Timestamp(6)
+}
+
+model thread {
+  id                BigInt    @id
+  author_id         BigInt
+  like_count        Int?
+  retweet_count     Int?
+  reply_count       Int?
+  sensitive         Boolean?
+  tweeted_at        DateTime? @default(now()) @db.Timestamp(6)
+  created_at        DateTime? @default(now()) @db.Timestamp(6)
+  updated_at        DateTime? @default(now()) @db.Timestamp(6)
+  length            Int?
+  source_account_id BigInt?
+  source_tweet_id   BigInt?
+  author            author    @relation(fields: [author_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_thread_author")
+  tweet             tweet[]
+}
+
+model tweet {
+  id         BigInt    @id
+  author_id  BigInt?
+  thread_id  BigInt?
+  content    String?
+  tweeted_at DateTime? @default(now()) @db.Timestamp(6)
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @default(now()) @db.Timestamp(6)
+  thread     thread?   @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tweet_thread")
+}
