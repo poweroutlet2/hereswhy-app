@@ -4,8 +4,8 @@ import { trpc } from "../utils/trpc";
 
 
 export function ThreadShowcase(): JSX.Element {
-    const { data, isLoading, isError, error } = trpc.example.get_top_threads.useQuery(
-        { num_threads: 4, period: 'day' },
+    const { data, isError, error } = trpc.example.get_top_threads.useQuery(
+        { num_threads: 2, period: 'day' },
         { staleTime: 10000 },
     )
 

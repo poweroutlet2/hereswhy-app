@@ -57,4 +57,14 @@ model tweet {
   created_at DateTime? @default(now()) @db.Timestamp(6)
   updated_at DateTime? @default(now()) @db.Timestamp(6)
   thread     thread?   @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tweet_thread")
+  media      media[]
+}
+
+model media {
+  id                String  @id
+  type              String?
+  url               String?
+  preview_image_url String?
+  tweet_id          BigInt?
+  tweet             tweet?  @relation(fields: [tweet_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_media_tweet")
 }

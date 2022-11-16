@@ -63,10 +63,13 @@ export async function db_get_top_threads_tweets(num_threads: number, period = 't
             tweet: {
                 orderBy: {
                     tweeted_at: 'asc'
+                },
+                include: {
+                    media: {}
                 }
             },
+            author: {}
         },
     })
-    console.log(top_threads)
     return top_threads
 }
