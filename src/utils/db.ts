@@ -9,6 +9,28 @@ const prisma = new PrismaClient({
     log: ['query'], // this will log sql to console
 });
 
+export async function db_get_thread(id: bigint | string) {
+
+    const thread = await prisma.thread.findFirst({
+        where: {
+            id: BigInt(id)
+        },
+        include: {
+            author: {},
+            tweet: {
+                orderBy: {
+                    created_at: 'asc'
+                },
+                include: {
+                    media: {}
+                }
+            },
+        }
+    })
+
+    return thread
+}
+
 export async function db_get_top_threads_tweets(num_threads: number, period = 'today',) {
     /*
     Returns the @num_threads threads including tweets with the highest number of likes within @period.

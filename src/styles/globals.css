@@ -8,21 +8,16 @@
     }
 
     to {
-        max-height: 500px;
+        max-height: var(--max_height);
     }
 }
 
-.panel-open {
+.panel-open-partial {
+    --max_height: 500px;
     animation-name: open-thread;
     animation-duration: 2s;
     animation-fill-mode: forwards;
-    animation-delay: .05s;
+    animation-delay: .2s;
 }
 
-.thread-container {
-    height: 1000px;
-    max-height: 1000px;
-    position: absolute;
-    overflow: hidden;
-    z-index: -1;
-}
+.panel-open-full {}

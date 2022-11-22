@@ -27,12 +27,12 @@ function linkFormatter(text: string | null): string | null {
     return anchor
 }
 
-export function Tweet({ tweet, author, replies, likes, retweets }: { tweet: tweet, author: author, replies?: number | null, likes?: number | null, retweets?: number | null }): JSX.Element {
+export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet: tweet, author: author, replies?: number | null, likes?: number | null, retweets?: number | null, last?: boolean }): JSX.Element {
     tweet.content = linkFormatter(tweet.content)
     if (tweet) {
         return (
             <article className="tweet-card backdrop-blur-md duration-500 backdrop-brightness-300 hover:backdrop-saturate-200 hover:backdrop-brightness-50 hover:bg-white/[7%] border:hidden border-neutral-800 my-0 p-5 not-prose">
-                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[44px] ${replies && "mt-8"} dark:bg-gray-800 bg-gray-200/70`}></div>
+                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[44px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""}  dark:bg-gray-800 bg-gray-200/70`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer">
