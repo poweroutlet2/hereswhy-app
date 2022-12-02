@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router'
+import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar';
 import { Thread } from '../../components/Thread';
 import { trpc } from '../../utils/trpc';
 
@@ -25,9 +27,11 @@ export default function threadPage() {
                     <meta name="description" content="Thread" />
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                <main className="bg-gray-900 text-gray-200 flex justify-center overflow-x-hidden min-w-screen w-screen transition ease-in-out font-body selection:bg-orange-400 selection:text-gray-20">
+                <Navbar />
+                <main className="bg-gray-900 flex justify-center overflow-x-hidden min-w-screen w-screen transition ease-in-out font-body selection:bg-orange-400 selection:text-gray-20">
                     <Thread thread={data.thread} numExpanded={data.thread.tweet.length} />
                 </main>
+                <Footer />
             </>
         )
     }
