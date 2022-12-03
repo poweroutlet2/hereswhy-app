@@ -1,5 +1,7 @@
 import { Tweet } from "./Tweet";
 import type { author, media, thread as PrismaThread, tweet as PrismaTweet } from "@prisma/client";
+import { useState } from "react";
+
 // Display thread type
 type Thread = PrismaThread & { tweet: (PrismaTweet & { media: media[]; })[]; author: author };
 
@@ -8,22 +10,10 @@ export function Thread({ thread, numExpanded = 0 }: { thread: Thread, numExpande
 
     if (thread && thread.tweet[0]) {
 
-        // Sort tweets by tweeted_at
-        thread.tweet.sort((tweet_a, tweet_b) => {
-            if (tweet_a.tweeted_at < tweet_b.tweeted_at) {
-                return -1;
-            }
-            if (tweet_a.tweeted_at > tweet_b.tweeted_at) {
-                return 1;
-            }
-            return 0;
-        })
-
         const first_tweet = thread?.tweet[0]
         const fully_expanded = (numExpanded == thread.tweet.length)
-
         return (
-            <div className="m-3 max-w-min border break-inside-avoid-column border-neutral-600 backdrop-brightness-50">
+            <div className="w-full border break-inside-avoid-column border-neutral-600 max-w-prose m-5">
                 <Tweet
                     tweet={first_tweet}
                     key={first_tweet.id.toString()}

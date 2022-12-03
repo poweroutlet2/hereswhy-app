@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 import { ThreadShowcase } from "../components/ThreadShowcase";
@@ -15,10 +14,9 @@ const Home: NextPage = () => {
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
       <Navbar />
-      <main className="min-h-screen overflow-x-hidden">
+      <main className="bg-gray-900 text-gray-200 p-4 min-h-screen ease-in-out selection:bg-orange-400 selection:text-gray-20">
         <ThreadShowcase />
       </main>
-      <Footer />
     </>
   );
 };
