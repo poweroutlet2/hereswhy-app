@@ -28,7 +28,7 @@ export default function threadPage() {
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
                 <Navbar />
-                <main className="bg-gray-900 flex justify-center overflow-x-hidden min-w-screen w-screen transition ease-in-out font-body selection:bg-orange-400 selection:text-gray-20">
+                <main className="bg-gray-900 text-gray-200 flex justify-center overflow-x-hidden min-w-screen w-screen transition ease-in-out font-body selection:bg-orange-400 selection:text-gray-20">
                     <Thread thread={data.thread} numExpanded={data.thread.tweet.length} />
                 </main>
                 <Footer />

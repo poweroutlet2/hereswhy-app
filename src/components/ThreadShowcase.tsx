@@ -5,7 +5,7 @@ import { trpc } from "../utils/trpc";
 
 export function ThreadShowcase(): JSX.Element {
     const { data, isError, error } = trpc.threads.get_top_threads.useQuery(
-        { num_threads: 7, period: 'month' },
+        { num_threads: 7, period: 'day' },
         {
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,

@@ -10,6 +10,16 @@ export function Thread({ thread, numExpanded = 0 }: { thread: Thread, numExpande
 
     if (thread && thread.tweet[0]) {
 
+        // Sort tweets by tweeted_at
+        thread.tweet.sort((tweet_a, tweet_b) => {
+            if (tweet_a.tweeted_at < tweet_b.tweeted_at) {
+                return -1;
+            }
+            if (tweet_a.tweeted_at > tweet_b.tweeted_at) {
+                return 1;
+            }
+            return 0;
+        })
         const first_tweet = thread?.tweet[0]
         const fully_expanded = (numExpanded == thread.tweet.length)
         return (
