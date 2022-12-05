@@ -2,22 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.tweet-content a:link:hover {
+    text-decoration: underline;
+}
+
 @keyframes open-thread {
     from {
         max-height: 0px;
+        opacity: 0.5;
     }
 
     to {
-        max-height: var(--max_height);
+        max-height: 500px;
+        height: auto;
+        display: block;
+        opacity: 1;
     }
 }
 
-.panel-open-partial {
-    --max_height: 500px;
-    animation-name: open-thread;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-    animation-delay: .2s;
-}
-
-.panel-open-full {}
+.panel-open-partial {}

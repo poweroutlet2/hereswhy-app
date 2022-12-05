@@ -1,7 +1,6 @@
 import { Tweet } from "./Tweet";
 import type { author, media, thread as PrismaThread, tweet as PrismaTweet } from "@prisma/client";
-import { useState } from "react";
-
+import Link from "next/link";
 // Display thread type
 type Thread = PrismaThread & { tweet: (PrismaTweet & { media: media[]; })[]; author: author };
 
@@ -23,7 +22,7 @@ export function Thread({ thread, numExpanded = 0 }: { thread: Thread, numExpande
         const first_tweet = thread?.tweet[0]
         const fully_expanded = (numExpanded == thread.tweet.length)
         return (
-            <div className="w-full border break-inside-avoid-column border-neutral-600 max-w-prose m-5">
+            <div className="thread-container flex flex-col w-full m-3 max-w-screen-md break-inside-avoid-column border-2 rounded-lg border-slate-800 ">
                 <Tweet
                     tweet={first_tweet}
                     key={first_tweet.id.toString()}
@@ -34,10 +33,7 @@ export function Thread({ thread, numExpanded = 0 }: { thread: Thread, numExpande
                 />
 
                 <div
-                    className={`${(numExpanded == thread.tweet.length) ? "h-auto max-h-min" : "panel-open-partial"} ease-out`}
-                    style={{
-                        "overflow": "hidden",
-                    }}
+                    className={`panel-open-partial`}
                 >
                     {
                         thread.tweet.slice(1, numExpanded).map((tweet, index) => {
@@ -51,8 +47,8 @@ export function Thread({ thread, numExpanded = 0 }: { thread: Thread, numExpande
                 </div>
                 {/* Only show "Read more" button if tweet is not fullt expanded */}
                 {!fully_expanded &&
-                    <div className="border border-white h-10">
-                        <a href={`/thread/${thread.id.toString()}`}>Read more...</a>
+                    <div className="flex items-center justify-self-end rounded-b-lg bg-slate-800 border-white p-2">
+                        <Link className="" href={`/thread/${thread.id.toString()}`}>: Read more... :</Link>
                     </div>
 
                 }
