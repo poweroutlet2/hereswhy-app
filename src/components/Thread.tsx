@@ -7,7 +7,7 @@ type Thread = PrismaThread & { tweet: (PrismaTweet & { media: media[]; })[]; aut
 export function Thread({ thread, numExpanded = 0 }: { thread: Thread, numExpanded?: number }): JSX.Element {
 
 
-    if (thread && thread.tweet[0]) {
+    if (thread?.tweet[0]) {
 
         // Sort tweets by tweeted_at
         thread.tweet.sort((tweet_a, tweet_b) => {
