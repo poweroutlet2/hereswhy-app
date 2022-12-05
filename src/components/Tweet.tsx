@@ -40,20 +40,20 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                             <Image className='rounded-full h-12 w-12 mr-6 hover:opacity-80 border-2 border-slate-800' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
                         </Link>
                     </div>
-                    <div className="flex-auto w-2/3 lg:w-full">
+                    <div className="flex-auto w-2/3 lg:w-full text-xl">
                         <div className="flex flex-row">
-                            <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='text-base font-semibold gap-1 hover:underline'>
+                            <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='font-semibold gap-1 hover:underline'>
                                 {author.display_name}
                             </Link>
-                            <span className="text-4xl relative mx-1 -mt-5 opacity-90">
+                            <span className="text-3xl relative mx-2 -mt-4 opacity-90">
                                 .
                             </span>
-                            <span className='text-sm opacity-80 hover:opacity-100 duration-300 mt-0.5'>
+                            <span className='text-sm opacity-40 hover:opacity-70 duration-300 mt-0.5'>
                                 {tweet.tweeted_at?.toLocaleString().replace(',', '')}
 
                             </span>
                         </div>
-                        <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='text-base font-semibold gap-1 font-normal opacity-70 hover:opacity-100 duration-300 hover:text-blue-500'>
+                        <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='font-semibold gap-1 font-normal opacity-70 hover:opacity-100 duration-300 hover:text-blue-500'>
                             @{author.username}
                         </Link>
                         {/* <div className='text-lg mb-3 mt-1 leading-normal'>

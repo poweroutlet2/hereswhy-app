@@ -20,7 +20,7 @@ export function ThreadShowcase(): JSX.Element {
         const threads = data.threads;
         return (
             < div className="showcase flex justify-center">
-                <div className="xl:columns-2 3xl:columns-3">
+                <div className="xl:columns-2 3xl:columns-3 gap-2 p-4">
                     {
                         threads.map((thread, index) => {
                             // randomly choose number of expanded tweets
