@@ -5,7 +5,7 @@ import { trpc } from "../utils/trpc";
 
 export function ThreadShowcase(): JSX.Element {
     const { data, isError, error } = trpc.threads.get_top_threads.useQuery(
-        { num_threads: 7, period: 'day' },
+        { num_threads: 10, period: 'week' },
         {
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,
@@ -13,15 +13,14 @@ export function ThreadShowcase(): JSX.Element {
         },
     );
 
-
     if (isError) {
         console.log(error.message);
     }
     if (data) {
         const threads = data.threads;
         return (
-            < div className="showcase flex justify-center" >
-                <div className="2xl:columns-2 3xl:columns-3">
+            < div className="showcase flex justify-center">
+                <div className="xl:columns-2 3xl:columns-3">
                     {
                         threads.map((thread, index) => {
                             // randomly choose number of expanded tweets
