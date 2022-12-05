@@ -33,5 +33,7 @@ module.exports = {
       // => @media (min-width: 1782px) { ... }
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-scoped-groups"),
+  ],
 };
