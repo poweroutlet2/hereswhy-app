@@ -1,21 +1,20 @@
 import Head from 'next/head';
-import type { InferGetStaticPropsType } from 'next';
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Layout from '../../components/Layout';
 import { Thread } from '../../components/Thread';
 import { trpc } from '../../utils/trpc';
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
     return { paths: [], fallback: true }
 }
 
+export const getStaticProps: GetStaticProps = async (context) => {
+    const thread_id = context.params?.id?.toString()
 
-export const getStaticProps = async ({ params }: { params: string }) => {
-    const thread_id = params
-
-    if (thread_id.length > 40) {
+    if (!thread_id) {
         return { notFound: true }
     }
-
+    console.log(thread_id)
     const { data, isError, error } = trpc.threads.get_thread_by_id.useQuery(
         { thread_id: thread_id },
         {
@@ -24,7 +23,7 @@ export const getStaticProps = async ({ params }: { params: string }) => {
         }
     )
 
-    if (!data) {
+    if (!data?.thread) {
         return { notFound: true }
     }
 
@@ -34,8 +33,8 @@ export const getStaticProps = async ({ params }: { params: string }) => {
     }
     return {
         props: {
-            thread: data?.thread
-        }
+            thread: data.thread
+        },
     }
 
 }
