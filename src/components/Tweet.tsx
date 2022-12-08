@@ -32,8 +32,8 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
     // tweet.content = linkFormatter(tweet.content)
     if (tweet?.content) {
         return (
-            <article className={`tweet-card my-0 p-5 backdrop-blur-3xl hover:bg-slate-800 hover:bg-opacity-50 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
-                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[44px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} overflow-y-clip bg-slate-800 bg-opacity-80`}></div>
+            <article className={`tweet-card relative my-0 p-5 w-full hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
+                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[44px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer">

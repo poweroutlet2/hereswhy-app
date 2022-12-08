@@ -22,7 +22,7 @@ export function Thread({ thread, numExpanded = 0 }: { thread: Thread, numExpande
         const first_tweet = thread?.tweet[0]
         const fully_expanded = (numExpanded == thread.tweet.length)
         return (
-            <div className="thread-container flex flex-col w-full m-5 mt-0 max-w-screen-sm break-inside-avoid-column border-2 rounded-lg border-slate-800 ">
+            <div className="thread-container flex flex-col m-5 mt-0 max-w-screen-sm break-inside-avoid-column border-2 rounded-lg border-slate-800 ">
                 <Tweet
                     tweet={first_tweet}
                     key={first_tweet.id.toString()}
