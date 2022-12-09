@@ -25,6 +25,4 @@ export function ThreadShowcase({ threads }: { threads: ThreadType[] }): JSX.Elem
             </div >
         )
     }
-
-    return <div>Loading...</div>
 }

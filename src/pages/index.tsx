@@ -17,6 +17,7 @@ const Home: NextPage = () => {
 
   if (isError) {
     console.log(error.message);
+    return <h1>Error fetching threads!</h1>
   }
 
   if (data?.threads) {
@@ -36,6 +37,9 @@ const Home: NextPage = () => {
       </>
     );
   }
+
+
+  return <div>Loading...</div>
 };
 
 export default Home;
