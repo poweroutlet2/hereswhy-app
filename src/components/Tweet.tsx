@@ -42,7 +42,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                     </div>
                     <div className="flex-auto w-2/3 lg:w-full text-xl">
                         <div className="flex flex-row">
-                            <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='font-semibold gap-1 hover:underline'>
+                            <Link href={`/author/${author.id}`} target="_blank" rel="noopener noreferrer" className='font-semibold gap-1 hover:underline'>
                                 {author.display_name}
                             </Link>
                             <span className="text-3xl relative mx-2 -mt-4 opacity-90">
