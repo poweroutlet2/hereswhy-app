@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router'
-import Footer from '../../components/Footer';
 import Layout from '../../components/Layout';
-import Navbar from '../../components/Navbar';
 import { Thread } from '../../components/Thread';
 import { trpc } from '../../utils/trpc';
 
@@ -25,14 +23,16 @@ export default function ThreadPage() {
             <>
                 <Head>
                     <title>Threads</title>
-                    <meta name="description" content="Thread" />
+                    <meta name="description" content="Twitter threads" />
                     <link rel="icon" href="/favicon.ico" />
+                    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
                 </Head>
                 <Layout>
-                    <Thread thread={data.thread} numExpanded={data.thread.tweet.length} />
+                    <div className='mt-5'>
+                        <Thread thread={data.thread} numExpanded={data.thread.tweet.length} />
+                    </div>
                 </Layout>
             </>
         )
     }
-    return <div className="thread-loading">Loading...</div>
 }
