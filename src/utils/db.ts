@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { inferAsyncReturnType } from "@trpc/server";
 
 // Take control of BigInt serialization by force >:) :
 (BigInt.prototype as any).toJSON = function () {
@@ -9,7 +10,40 @@ const prisma = new PrismaClient({
     log: ['query'], // this will log sql to console
 });
 
+export async function db_get_threads_by_author(id: bigint | string) {
+    /*
+    Returns all threads with the specified author_id.
+    Includes author, tweets, and tweet media.
+    */
+    const threads = await prisma.thread.findMany({
+        where: {
+            author_id: BigInt(id),
+        },
+        orderBy: {
+            like_count: 'desc'
+        },
+        include: {
+            tweet: {
+                orderBy: {
+                    tweeted_at: 'asc'
+                },
+                include: {
+                    media: {}
+                }
+            },
+            author: {}
+        },
+    })
+
+    return threads
+}
+
 export async function db_get_thread(id: bigint | string) {
+    /*
+    Returns the thread with the specified id.
+    Includes author, tweets, and tweet media associated with the thread.
+
+    */
 
     const thread = await prisma.thread.findFirst({
         where: {
@@ -34,13 +68,11 @@ export async function db_get_thread(id: bigint | string) {
 export async function db_get_top_threads_tweets(num_threads: number, period = 'today',) {
     /*
     Returns the @num_threads threads including tweets with the highest number of likes within @period.
-
-    Returns: {
-        thread & tweet[]
-    }
+    
     */
 
     // determine since date for query
+    // TODO: this logic should live on the frontend? This function should take in raw dates for period
     const date = new Date();
     let since = ''
 
