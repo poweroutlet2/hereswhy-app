@@ -1,26 +1,15 @@
+import type { ThreadType } from "./Thread";
 import { Thread } from "./Thread";
 import { trpc } from "../utils/trpc";
 
 
 
-export function ThreadShowcase(): JSX.Element {
-    const { data, isError, error } = trpc.threads.get_top_threads.useQuery(
-        { num_threads: 10, period: 'day' },
-        {
-            refetchOnWindowFocus: false,
-            refetchOnReconnect: false,
+export function ThreadShowcase({ threads }: { threads: ThreadType[] }): JSX.Element {
 
-        },
-    );
-
-    if (isError) {
-        console.log(error.message);
-    }
-    if (data) {
-        const threads = data.threads;
+    if (threads) {
         return (
-            < div className="showcase flex justify-center">
-                <div className="xl:columns-2 3xl:columns-3 gap-2 p-4">
+            <div className="showcase flex justify-center">
+                <div className="xl:columns-2 3xl:columns-3 gap-2 p-5">
                     {
                         threads.map((thread, index) => {
                             // randomly choose number of expanded tweets
@@ -37,5 +26,5 @@ export function ThreadShowcase(): JSX.Element {
         )
     }
 
-    return <div className="threads-showcase-loading">Loading...</div>
+    return <div>Loading...</div>
 }
