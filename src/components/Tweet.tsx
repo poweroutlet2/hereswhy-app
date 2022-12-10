@@ -32,7 +32,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
     // tweet.content = linkFormatter(tweet.content)
     if (tweet?.content) {
         return (
-            <article className={`tweet-card relative my-0 p-5 w-full hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
+            <article className={`tweet-card relative max-w-lg my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
                 <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[44px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
@@ -42,18 +42,18 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                     </div>
                     <div className="flex-auto w-2/3 lg:w-full text-xl">
                         <div className="flex flex-row">
-                            <Link href={`/author/${author.id}`} className='font-semibold gap-1 hover:underline'>
+                            <Link href={`/author/${author.id}`} className='font-semibold break-all hover:underline'>
                                 {author.display_name}
                             </Link>
-                            <span className="text-3xl relative mx-2 -mt-4 opacity-90">
+                            <span className="text-3xl inline-block -mt-3 mx-2 opacity-90">
                                 .
                             </span>
-                            <span className='text-sm opacity-40 hover:opacity-70 duration-300 mt-0.5'>
+                            <span className='text-sm opacity-40 hover:opacity-70 duration-300 mt-1'>
                                 {tweet.tweeted_at?.toLocaleString().replace(',', '')}
 
                             </span>
                         </div>
-                        <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='font-semibold gap-1 font-normal opacity-70 hover:opacity-100 duration-300 hover:text-blue-500'>
+                        <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='font-semibold gap-1 font-normal opacity-50 hover:opacity-100 duration-300 hover:text-blue-500'>
                             @{author.username}
                         </Link>
                         {/* <div className='text-lg mb-3 mt-1 leading-normal'>
