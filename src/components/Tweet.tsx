@@ -32,7 +32,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
     // tweet.content = linkFormatter(tweet.content)
     if (tweet?.content) {
         return (
-            <article className={`tweet-card relative max-w-lg my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
+            <article className={`tweet-card relative max-w-sm md:max-w-lg my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
                 <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[44px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
@@ -40,7 +40,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                             <Image className='rounded-full h-12 w-12 mr-6 hover:opacity-80 border-2 border-slate-800' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
                         </Link>
                     </div>
-                    <div className="flex-auto w-2/3 lg:w-full text-xl">
+                    <div className="flex-auto w-2/3 lg:w-full text-base md:text-xl">
                         <div className="flex flex-row">
                             <Link href={`/author/${author.id}`} className='font-semibold break-all hover:underline'>
                                 {author.display_name}
@@ -48,7 +48,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                             <span className="text-3xl inline-block -mt-3 mx-2 opacity-90">
                                 .
                             </span>
-                            <span className='text-sm opacity-40 hover:opacity-70 duration-300 mt-1'>
+                            <span className='text-xs md:text-sm opacity-40 hover:opacity-70 duration-300 mt-1'>
                                 {tweet.tweeted_at?.toLocaleString().replace(',', '')}
 
                             </span>
@@ -59,7 +59,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                         {/* <div className='text-lg mb-3 mt-1 leading-normal'>
                             {tweet.content}
                         </div> */}
-                        <div className="tweet-content" dangerouslySetInnerHTML={{ __html: md().render(tweet.content) }} />
+                        <div className="tweet-content text-base md:text-lg" dangerouslySetInnerHTML={{ __html: md().render(tweet.content) }} />
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
                         {replies &&
                             <div className="flex flex-row justify-center mt-4 -mb-2 gap-8 text-sm font-medium tracking-wider">
