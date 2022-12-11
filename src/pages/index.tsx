@@ -7,7 +7,7 @@ import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
   const { data, isError, error } = trpc.threads.get_top_threads.useQuery(
-    { num_threads: 10, period: 'week' },
+    { num_threads: 10, period: 'day' },
     {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,

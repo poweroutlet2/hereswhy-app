@@ -8,7 +8,7 @@ export function ThreadShowcase({ threads }: { threads: ThreadType[] }): JSX.Elem
 
     return (
         <div className="showcase flex">
-            <div className="xl:columns-2 3xl:columns-3 pt-5">
+            <div className="lg:columns-2 3xl:columns-3 pt-5">
                 {
                     threads.map((thread, index) => {
                         // randomly choose number of expanded tweets
