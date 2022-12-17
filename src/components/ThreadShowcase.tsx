@@ -1,9 +1,9 @@
 import type { ThreadType } from "./Thread";
-import { Thread } from "./Thread";
+import Thread from "./Thread";
 
 
 
-export function ThreadShowcase({ threads }: { threads: ThreadType[] }): JSX.Element {
+export default function ThreadShowcase({ threads }: { threads: ThreadType[] }): JSX.Element {
 
 
     return (

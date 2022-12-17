@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import { Thread } from '../../components/Thread';
 import { trpc } from '../../utils/trpc';
 
-export default function ThreadPage() {
+export function ThreadPage() {
     const router = useRouter()
     const id = router.query.id as string
     const { data, isError, error } = trpc.threads.get_thread_by_id.useQuery(

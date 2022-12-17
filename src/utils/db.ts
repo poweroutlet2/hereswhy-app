@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { inferAsyncReturnType } from "@trpc/server";
+import type { ThreadType } from "../components/Thread";
 
 // Take control of BigInt serialization by force >:) :
 (BigInt.prototype as any).toJSON = function () {
@@ -65,7 +65,7 @@ export async function db_get_thread(id: bigint | string) {
     return thread
 }
 
-export async function db_get_top_threads_tweets(num_threads: number, period = 'today',) {
+export async function db_get_top_threads(num_threads: number, period = 'today',): Promise<ThreadType[]> {
     /*
     Returns the @num_threads threads including tweets with the highest number of likes within @period.
     
@@ -125,5 +125,6 @@ export async function db_get_top_threads_tweets(num_threads: number, period = 't
             author: {}
         },
     })
-    return top_threads
+    const threads_jsonified = JSON.parse(JSON.stringify(top_threads, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
+    return threads_jsonified
 }
