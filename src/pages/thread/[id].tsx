@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout';
-import { Thread } from '../../components/Thread';
+import Thread from '../../components/Thread';
 import { trpc } from '../../utils/trpc';
 
 export function ThreadPage() {
