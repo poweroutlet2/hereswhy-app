@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import testProfilePic from '../../public/dog.jpg'
+import threadLogo from '../../public/thread_logo.png'
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
@@ -30,14 +31,14 @@ export default function Navbar() {
                                 <div className="flex flex-shrink-0 items-center">
                                     <Image
                                         className="block h-8 w-auto lg:hidden"
-                                        src={testProfilePic}
+                                        src={threadLogo}
                                         alt="Your Company"
                                         width="50"
                                         height="50"
                                     />
                                     <Image
                                         className="hidden h-8 w-auto lg:block"
-                                        src={testProfilePic}
+                                        src={threadLogo}
                                         alt="Your Company"
                                         width="50"
                                         height="50"
