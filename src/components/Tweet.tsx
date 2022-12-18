@@ -50,7 +50,6 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                             </span>
                             <span className='text-xs md:text-sm opacity-40 hover:opacity-70 duration-300 mt-1'>
                                 {tweet.tweeted_at?.toLocaleString().replace(',', '')}
-
                             </span>
                         </div>
                         <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='font-semibold gap-1 font-normal opacity-50 hover:opacity-100 duration-300 hover:text-blue-500'>
