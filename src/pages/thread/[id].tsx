@@ -1,5 +1,5 @@
 import { createProxySSGHelpers } from '@trpc/react-query/ssg';
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import superjson from 'superjson';
@@ -7,7 +7,6 @@ import Layout from '../../components/Layout';
 import { Thread } from '../../components/Thread';
 import { createContextInner } from '../../server/trpc/context';
 import { threadsRouter } from '../../server/trpc/router/threadsRouter';
-import { trpc } from '../../utils/trpc';
 
 
 export async function getStaticPaths() {
