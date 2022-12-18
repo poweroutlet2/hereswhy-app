@@ -8,7 +8,7 @@ export type ThreadType = PrismaThread & { tweet: (PrismaTweet & { media: media[]
 export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExpanded?: boolean }): JSX.Element {
 
     // Set number of expanded tweets 
-    const [expanded, setExpanded] = useState(thread.length)
+    const [expanded, setExpanded] = useState(thread.length ?? 1)
     useEffect(() => {
         if (!fullyExpanded) {
             setExpanded(Math.floor(Math.random() * 5) + 1)

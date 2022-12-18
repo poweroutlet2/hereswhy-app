@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { ThreadType } from "../components/Thread";
+import type { ThreadType } from "../components/Thread";
 
 // Take control of BigInt serialization by force >:) :
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
