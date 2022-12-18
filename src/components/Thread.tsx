@@ -8,12 +8,14 @@ export type ThreadType = PrismaThread & { tweet: (PrismaTweet & { media: media[]
 export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExpanded?: boolean }): JSX.Element {
 
     // Set number of expanded tweets 
-    const [expanded, setExpanded] = useState(thread.length ?? 1)
+    const [expanded, setExpanded] = useState(1)
     useEffect(() => {
         if (!fullyExpanded) {
-            setExpanded(Math.floor(Math.random() * 5) + 1)
+            setExpanded(Math.floor(Math.random() * 5))
+        } else {
+            setExpanded(thread.length ?? 1)
         }
-    }, [fullyExpanded])
+    }, [fullyExpanded, thread.length])
 
     if (thread?.tweet[0]) {
         // Sort tweets by tweeted_at
@@ -29,7 +31,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
         const first_tweet = thread?.tweet[0]
         const fully_expanded = (expanded == thread.tweet.length)
         return (
-            <div className="thread-container flex flex-col md:mx-5 mb-5 break-inside-avoid-column border-2 rounded-lg  border-slate-800 ">
+            <div className="thread-container flex flex-col md:mx-5 mb-5 break-inside-avoid-column border-2 rounded-lg duration-200 border-slate-800 ">
                 <Tweet
                     tweet={first_tweet}
                     key={first_tweet.id.toString()}

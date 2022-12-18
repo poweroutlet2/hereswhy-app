@@ -32,7 +32,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
     // tweet.content = linkFormatter(tweet.content)
     if (tweet?.content) {
         return (
-            <article className={`tweet-card relative max-w-sm md:max-w-lg my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
+            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
                 <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[44px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
