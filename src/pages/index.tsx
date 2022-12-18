@@ -1,11 +1,33 @@
-import { type NextPage } from "next";
+import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Layout from "../components/Layout";
-
+import { createProxySSGHelpers } from '@trpc/react-query/ssg';
 import ThreadShowcase from "../components/ThreadShowcase";
+import { createContextInner } from "../server/trpc/context";
+import { threadsRouter } from "../server/trpc/router/threadsRouter";
+import superjson from 'superjson';
 import { trpc } from "../utils/trpc";
 
-const Home: NextPage = () => {
+
+export const getStaticProps = async () => {
+  const ssg = createProxySSGHelpers({
+    router: threadsRouter,
+    ctx: await createContextInner(),
+    transformer: superjson,
+  });
+
+  await ssg.get_top_threads.prefetch({ num_threads: 10, period: 'day' })
+
+  // console.log('state', ssg.dehydrate());
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+    },
+    revalidate: 1,
+  };
+};
+
+export default function Home({ }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { data, isError, error } = trpc.threads.get_top_threads.useQuery(
     { num_threads: 10, period: 'day' },
     {
@@ -40,8 +62,4 @@ const Home: NextPage = () => {
 
 
   return <div>Loading...</div>
-};
-
-export default Home;
-
-
+}
