@@ -22,7 +22,7 @@ export async function getStaticProps() {
       trpcState: ssg.dehydrate(),
       threads: data.threads
     },
-    revalidate: 1,
+    revalidate: 600, // seconds
   };
 }
 
