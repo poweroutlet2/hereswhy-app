@@ -30,19 +30,21 @@ function linkFormatter(text: string | null): string | null {
 
 export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet: tweet, author: author, replies?: number | null, likes?: number | null, retweets?: number | null, last?: boolean }): JSX.Element {
     // tweet.content = linkFormatter(tweet.content)
+    const author_external_url = `https://twitter.com/${author.username}`
+    const author_internal_url = `/authors/${author.id}`
     if (tweet?.content) {
         return (
             <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
                 <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[44px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
-                        <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer">
+                        <Link href={author_external_url} target="_blank" rel="noopener noreferrer">
                             <Image className='rounded-full h-12 w-12 mr-6 hover:opacity-80 border-2 border-slate-800' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
                         </Link>
                     </div>
                     <div className="flex-auto w-2/3 lg:w-full text-base md:text-xl">
                         <div className="flex flex-row">
-                            <Link href={`/author/${author.id}`} className='font-semibold break-all hover:underline'>
+                            <Link href={author_internal_url} className='font-semibold break-all hover:underline'>
                                 {author.display_name}
                             </Link>
                             <span className="text-3xl inline-block -mt-3 mx-2 opacity-90">
@@ -52,7 +54,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                                 {tweet.tweeted_at?.toLocaleString().replace(',', '')}
                             </span>
                         </div>
-                        <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='font-semibold gap-1 font-normal opacity-50 hover:opacity-100 duration-300 hover:text-blue-500'>
+                        <Link href={author_external_url} target="_blank" rel="noopener noreferrer" className='gap-1 opacity-50 hover:opacity-100 duration-300 hover:text-blue-500'>
                             @{author.username}
                         </Link>
                         {/* <div className='text-lg mb-3 mt-1 leading-normal'>
