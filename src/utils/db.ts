@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { ThreadType } from "../components/Thread";
 
 // Take control of BigInt serialization by force >:) :
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -7,7 +8,7 @@ import { PrismaClient } from "@prisma/client";
 }
 
 const prisma = new PrismaClient({
-    log: ['query'], // this will log sql to console
+    //log: ['query'], // this will log sql to console
 });
 
 export async function db_get_threads_by_author(id: bigint | string) {
@@ -34,8 +35,8 @@ export async function db_get_threads_by_author(id: bigint | string) {
             author: {}
         },
     })
-
-    return threads
+    const threads_jsonified = JSON.parse(JSON.stringify(threads, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
+    return threads_jsonified
 }
 
 export async function db_get_thread(id: bigint | string) {
@@ -62,10 +63,11 @@ export async function db_get_thread(id: bigint | string) {
         }
     })
 
-    return thread
+    const thread_jsonified = JSON.parse(JSON.stringify(thread, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
+    return thread_jsonified
 }
 
-export async function db_get_top_threads_tweets(num_threads: number, period = 'today',) {
+export async function db_get_top_threads_tweets(num_threads: number, period = 'today',): Promise<ThreadType[]> {
     /*
     Returns the @num_threads threads including tweets with the highest number of likes within @period.
     
@@ -102,7 +104,7 @@ export async function db_get_top_threads_tweets(num_threads: number, period = 't
             since = date.toISOString()
     }
 
-    const top_threads = await prisma.thread.findMany({
+    const threads = await prisma.thread.findMany({
         where: {
             created_at: {
                 gte: since
@@ -125,5 +127,6 @@ export async function db_get_top_threads_tweets(num_threads: number, period = 't
             author: {}
         },
     })
-    return top_threads
+    const threads_jsonified = JSON.parse(JSON.stringify(threads, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
+    return threads_jsonified
 }
