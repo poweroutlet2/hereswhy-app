@@ -29,7 +29,7 @@ export default function ThreadPage() {
                 </Head>
                 <Layout>
                     <div className='mt-5'>
-                        <Thread thread={data.thread} numExpanded={data.thread.tweet.length} />
+                        <Thread thread={data.thread} />
                     </div>
                 </Layout>
             </>
