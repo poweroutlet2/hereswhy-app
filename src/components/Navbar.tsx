@@ -4,6 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import testProfilePic from '../../public/dog.jpg'
 import threadLogo from '../../public/thread_logo.png'
+import Link from 'next/link'
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
@@ -29,20 +30,22 @@ export default function Navbar() {
                             </div>
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
-                                    <Image
-                                        className="block h-8 w-auto lg:hidden"
-                                        src={threadLogo}
-                                        alt="Your Company"
-                                        width="50"
-                                        height="50"
-                                    />
-                                    <Image
-                                        className="hidden h-8 w-auto lg:block"
-                                        src={threadLogo}
-                                        alt="Your Company"
-                                        width="50"
-                                        height="50"
-                                    />
+                                    <Link href='/'>
+                                        <Image
+                                            className="block h-8 w-auto lg:hidden"
+                                            src={threadLogo}
+                                            alt="Threads"
+                                            width="50"
+                                            height="50"
+                                        />
+                                        <Image
+                                            className="hidden h-8 w-auto lg:block"
+                                            src={threadLogo}
+                                            alt="Threads"
+                                            width="50"
+                                            height="50"
+                                        />
+                                    </Link>
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
