@@ -5,13 +5,15 @@ import { useEffect, useState } from "react";
 // Display thread type
 export type ThreadType = PrismaThread & { tweet: (PrismaTweet & { media: media[]; })[]; author: author };
 
-export function Thread({ thread }: { thread: ThreadType }): JSX.Element {
+export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExpanded?: boolean }): JSX.Element {
 
     // Set number of expanded tweets 
-    const [expanded, setExpanded] = useState(1)
+    const [expanded, setExpanded] = useState(thread.length)
     useEffect(() => {
-        setExpanded(Math.floor(Math.random() * 5) + 1)
-    }, [])
+        if (!fullyExpanded) {
+            setExpanded(Math.floor(Math.random() * 5) + 1)
+        }
+    }, [fullyExpanded])
 
     if (thread?.tweet[0]) {
         // Sort tweets by tweeted_at

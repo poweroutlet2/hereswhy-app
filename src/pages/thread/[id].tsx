@@ -29,7 +29,7 @@ export default function ThreadPage() {
                 </Head>
                 <Layout>
                     <div className='mt-5'>
-                        <Thread thread={data.thread} />
+                        <Thread thread={data.thread} fullyExpanded={true} />
                     </div>
                 </Layout>
             </>
