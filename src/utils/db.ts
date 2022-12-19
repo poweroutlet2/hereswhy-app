@@ -11,7 +11,7 @@ const prisma = new PrismaClient({
     //log: ['query'], // this will log sql to console
 });
 
-export async function db_get_threads_by_author(id: bigint | string) {
+export async function db_get_threads_by_author(id: bigint | string): Promise<ThreadType[]> {
     /*
     Returns all threads with the specified author_id.
     Includes author, tweets, and tweet media.
@@ -39,7 +39,7 @@ export async function db_get_threads_by_author(id: bigint | string) {
     return threads_jsonified
 }
 
-export async function db_get_thread(id: bigint | string) {
+export async function db_get_thread(id: bigint | string): Promise<ThreadType> {
     /*
     Returns the thread with the specified id.
     Includes author, tweets, and tweet media associated with the thread.
