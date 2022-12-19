@@ -38,7 +38,10 @@ export default function Home({ threads }: InferGetStaticPropsType<typeof getStat
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <Layout>
-          <ThreadShowcase threads={threads} />
+          <div className='mt-5'>
+            <h1 className="text-3xl">Top Threads of the Day</h1>
+            <ThreadShowcase threads={threads} />
+          </div>
         </Layout>
       </>
     );
