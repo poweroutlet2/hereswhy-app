@@ -47,14 +47,15 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                             <Link href={author_internal_url} className='font-semibold break-all hover:underline'>
                                 {author.display_name}
                             </Link>
-                            <span className="text-3xl hidden md:inline-block -mt-3 mx-2 opacity-90">
-                                .
-                            </span>
                             {replies &&
-                                <span className='text-xs md:text-sm opacity-40 hover:opacity-70 duration-300 mt-1'>
-                                    {tweet.tweeted_at?.toLocaleString().replace(',', '')}
-                                </span>
-                            }
+                                <>
+                                    <span className="text-3xl hidden md:inline-block -mt-3 mx-2 opacity-90">
+                                        .
+                                    </span>
+                                    <span className='text-xs md:text-sm opacity-40 hover:opacity-70 duration-300 mt-1'>
+                                        {tweet.tweeted_at?.toLocaleString().replace(',', '')}
+                                    </span>
+                                </>}
                         </div>
                         <Link href={author_external_url} target="_blank" rel="noopener noreferrer" className='gap-1 opacity-50 hover:opacity-100 duration-300 hover:text-blue-500'>
                             @{author.username}

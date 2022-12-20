@@ -50,11 +50,11 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                 })}
                 {/* Only show "Read more" button if tweet is not fullt expanded */}
                 {!fully_expanded &&
-                    <div className="p-4 rounded-b-sm bg-slate-800 border-white">
-                        <Link className="" href={`/threads/${thread.id.toString()}`}>: Read more... :</Link>
-                    </div>
-
-                }
+                    <Link className="text-lg" href={`/threads/${thread.id.toString()}`}>
+                        <div className="p-4 rounded-b-sm flex flex-col items-center bg-slate-800 border-white">
+                            Read more
+                        </div>
+                    </Link>}
             </div>
         )
     }
