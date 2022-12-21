@@ -2,6 +2,16 @@ import type { author, tweet } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
 import md from 'markdown-it';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime)
+
+function dateFormatter(dateString: string) {
+    const date = dayjs(dateString)
+    if (date > dayjs().subtract(1, 'day'))
+        return date.fromNow()
+    return date.format('MM/DD/YYYY')
+}
 
 function numberFormatter(num: number | null | undefined): string {
     if (!num) {
@@ -35,11 +45,11 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
     if (tweet?.content) {
         return (
             <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
-                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[44px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80`}></div>
+                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[52px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={author_external_url} target="_blank" rel="noopener noreferrer">
-                            <Image className='rounded-full h-12 w-12 mr-6 hover:opacity-80 border-2 border-slate-800' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
+                            <Image className='rounded-full h-16 w-16 mr-3 xl:mr-6 hover:opacity-80 border-2 border-slate-800' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
                         </Link>
                     </div>
                     <div className="flex-auto w-2/3 lg:w-full text-base md:text-xl">
@@ -49,11 +59,11 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                             </Link>
                             {replies &&
                                 <>
-                                    <span className="text-3xl hidden md:inline-block -mt-3 mx-2 opacity-90">
+                                    <span className="text-3xl hidden md:inline-block -mt-3 mx-2 opacity-70">
                                         .
                                     </span>
                                     <span className='text-xs md:text-sm opacity-40 hover:opacity-70 duration-300 mt-1'>
-                                        {tweet.tweeted_at?.toLocaleString().replace(',', '')}
+                                        {dateFormatter(tweet.tweeted_at?.toLocaleString())}
                                     </span>
                                 </>}
                         </div>
