@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
-    { name: 'Authors', href: '#', current: false }
+    { name: 'Authors', href: '/authors', current: false }
 ]
 
 export default function Navbar() {
