@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import type { ThreadType } from "../components/Thread";
+import dayjs from 'dayjs';
 
 // Take control of BigInt serialization by force >:) :
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,7 +46,6 @@ export async function db_get_thread(id: bigint | string): Promise<ThreadType> {
     Includes author, tweets, and tweet media associated with the thread.
 
     */
-
     const thread = await prisma.thread.findFirst({
         where: {
             id: BigInt(id)
@@ -75,38 +75,34 @@ export async function db_get_top_threads_tweets(num_threads: number, period = 't
 
     // determine since date for query
     // TODO: this logic should live on the frontend? This function should take in raw dates for period
-    const date = new Date();
+
+    let date = dayjs();
     let since = ''
 
     switch (period) {
-        case 'today':
-            date.setDate(date.getDate() - 1)
-            since = date.toISOString()
+        case 'day':
+            date = date.subtract(1, 'day')
             break;
         case 'week':
-            date.setDate(date.getDate() - 7)
-            since = date.toISOString();
+            date = date.subtract(7, 'day')
             break;
         case 'month':
-            date.setDate(date.getDate() - 30)
-            since = date.toISOString();
+            date = date.subtract(1, 'month')
             break;
         case 'year':
-            date.setDate(date.getDate() - 365)
-            since = date.toISOString();
+            date = date.subtract(1, 'year')
             break;
         case 'alltime':
-            date.setDate(date.getDate() - 36500) // will have to update this in year 3006 :3
-            since = date.toISOString();
+            date = date.subtract(10, 'year')
             break;
         default: // default to today
-            date.setDate(date.getDate() - 1)
-            since = date.toISOString()
+            date = date.subtract(1, 'day')
     }
-
+    since = date.toISOString() //.format('YYYY-MM-DD')
+    console.log(since)
     const threads = await prisma.thread.findMany({
         where: {
-            created_at: {
+            tweeted_at: {
                 gte: since
             },
             sensitive: false,
