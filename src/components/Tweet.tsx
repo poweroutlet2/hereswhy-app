@@ -1,9 +1,11 @@
-import type { author, tweet } from "@prisma/client"
+import type { author, media, tweet } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
 import md from 'markdown-it';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+
+
 dayjs.extend(relativeTime)
 
 function dateFormatter(dateString: string) {
@@ -38,18 +40,18 @@ function linkFormatter(text: string | null): string | null {
     return anchor
 }
 
-export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet: tweet, author: author, replies?: number | null, likes?: number | null, retweets?: number | null, last?: boolean }): JSX.Element {
+export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet: tweet & media[], author: author, replies?: number | null, likes?: number | null, retweets?: number | null, last?: boolean }): JSX.Element {
     // tweet.content = linkFormatter(tweet.content)
     const author_external_url = `https://twitter.com/${author.username}`
     const author_internal_url = `/authors/${author.id}`
     if (tweet?.content) {
         return (
-            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
-                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[52px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80`}></div>
+            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-200 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
+                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[52px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80 overflow-hidden`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={author_external_url} target="_blank" rel="noopener noreferrer">
-                            <Image className='rounded-full h-16 w-16 mr-3 xl:mr-6 hover:opacity-80 border-2 border-slate-800' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
+                            <Image className='rounded-full h-16 w-16 mr-6 hover:opacity-80 border-2 border-slate-800' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
                         </Link>
                     </div>
                     <div className="flex-auto w-2/3 lg:w-full text-base md:text-xl">
@@ -59,7 +61,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                             </Link>
                             {replies &&
                                 <>
-                                    <span className="text-3xl hidden md:inline-block -mt-3 mx-2 opacity-70">
+                                    <span className="text-3xl hidden md:inline-block -mt-3 mx-1 opacity-70">
                                         .
                                     </span>
                                     <span className='text-xs md:text-sm opacity-40 hover:opacity-70 duration-300 mt-1'>
@@ -74,7 +76,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                             {tweet.content}
                         </div> */}
                         <div className="tweet-content text-base md:text-lg" dangerouslySetInnerHTML={{ __html: md().render(tweet.content) }} />
-
+                        <div className="media">{ }</div>
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
                         {replies &&
                             <div className="flex flex-row justify-center mt-4 -mb-2 gap-8 text-sm font-medium tracking-wider md:flex">
@@ -116,8 +118,8 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                         }
                     </div>
                     {/* Twitter bird icon */}
-                    <Link href={`https://twitter.com/threadsapp/status/${tweet.id.toString()}`} className="justify-self-end" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 fill-white stroke-white stroke-2 hover:fill-blue-500 duration-300">
+                    <Link href={`https://twitter.com/threadsapp/status/${tweet.id.toString()}`} className="" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-white stroke-white stroke-2 hover:fill-blue-500 duration-300">
                             <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
                         </svg>
                     </Link>

@@ -31,7 +31,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
         const first_tweet = thread?.tweet[0]
         const fully_expanded = (expanded == thread.tweet.length)
         return (
-            <div className="thread-container flex flex-col md:mx-5 mb-5 break-inside-avoid-column border-2 rounded-lg duration-200 shadow-md shadow-black border-slate-800 ">
+            <div className="thread-container flex flex-col xl:mx-5 mb-5 break-inside-avoid-column border-2 rounded-lg duration-200 shadow-md shadow-black border-slate-800 ">
                 <Tweet
                     tweet={first_tweet}
                     key={first_tweet.id.toString()}
@@ -51,7 +51,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                 {/* Only show "Read more" button if tweet is not fullt expanded */}
                 {!fully_expanded &&
                     <Link className="text-lg" href={`/threads/${thread.id.toString()}`}>
-                        <div className="p-4 rounded-b-sm flex flex-col items-center bg-slate-800 border-white">
+                        <div className="p-4 rounded-b-sm flex flex-col items-center bg-slate-800 border-white hover:brightness-90">
                             Read more
                         </div>
                     </Link>}
