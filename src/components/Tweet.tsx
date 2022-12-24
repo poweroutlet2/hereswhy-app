@@ -40,14 +40,14 @@ function linkFormatter(text: string | null): string | null {
     return anchor
 }
 
-export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet: tweet & media[], author: author, replies?: number | null, likes?: number | null, retweets?: number | null, last?: boolean }): JSX.Element {
+export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet: tweet, author: author, replies?: number | null, likes?: number | null, retweets?: number | null, last?: boolean }): JSX.Element {
     // tweet.content = linkFormatter(tweet.content)
     const author_external_url = `https://twitter.com/${author.username}`
     const author_internal_url = `/authors/${author.id}`
     if (tweet?.content) {
         return (
-            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-200 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
-                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[52px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80 overflow-hidden`}></div>
+            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 hover:bg-slate-700 hover:bg-opacity-30 duration-500 border-neutral-800 ${replies ? "rounded-t-lg" : ""} ${last ? "rounded-b-lg" : ""}`}>
+                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[52px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-slate-800 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={author_external_url} target="_blank" rel="noopener noreferrer">
@@ -76,7 +76,7 @@ export function Tweet({ tweet, author, replies, likes, retweets, last }: { tweet
                             {tweet.content}
                         </div> */}
                         <div className="tweet-content text-base md:text-lg" dangerouslySetInnerHTML={{ __html: md().render(tweet.content) }} />
-                        <div className="media">{ }</div>
+
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
                         {replies &&
                             <div className="flex flex-row justify-center mt-4 -mb-2 gap-8 text-sm font-medium tracking-wider md:flex">
