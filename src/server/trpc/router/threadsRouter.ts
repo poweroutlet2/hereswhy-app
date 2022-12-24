@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { db_get_thread, db_get_threads_by_author, db_get_top_threads_tweets } from "../../../utils/db";
+import { db_get_thread, db_get_threads_by_author, db_get_top_threads_tweets, search_threads } from "../../../utils/db";
 
 import { router, publicProcedure } from "../trpc";
 
@@ -41,4 +41,16 @@ export const threadsRouter = router({
         threads: threads
       }
     }),
+  search_threads: publicProcedure
+    .input(
+      z.object({
+        term: z.string(),
+      })
+    )
+    .query(async ({ input }) => {
+      const results = await search_threads(input.term);
+      return {
+        results: results
+      }
+    })
 });
