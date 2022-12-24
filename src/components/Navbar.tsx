@@ -68,7 +68,9 @@ export default function Navbar() {
                                 </div>
                             </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                <Searchbar />
+                                <div className="hidden sm:block">
+                                    <Searchbar />
+                                </div>
 
                                 {/* Profile dropdown */}
                                 <Menu as="div" className="relative ml-3">
@@ -139,6 +141,7 @@ export default function Navbar() {
                                     {item.name}
                                 </Disclosure.Button>
                             ))}
+                            <Searchbar />
                         </div>
                     </Disclosure.Panel>
                 </>

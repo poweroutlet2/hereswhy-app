@@ -17,7 +17,7 @@ export default function Searchbar() {
         <form onSubmit={handleSearchSubmit}>
             <div className="pt-2 relative mx-auto text-gray-600">
                 <input
-                    className=" bg-white h-10 px-5 pr-10 rounded-lg text-sm focus:outline-none"
+                    className=" bg-white h-10 w-full px-5 pr-10 rounded-lg text-sm focus:outline-none"
                     type="search"
                     placeholder="Search"
                     onChange={e => { setTerm(e.currentTarget.value); }}

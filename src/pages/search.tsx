@@ -1,8 +1,7 @@
 import { createProxySSGHelpers } from "@trpc/react-query/ssg"
-import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next"
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next"
 import { createContextInner } from "../server/trpc/context"
 import { threadsRouter } from "../server/trpc/router/threadsRouter"
-import { trpc } from "../utils/trpc"
 import superjson from 'superjson'
 import Layout from "../components/Layout"
 import ThreadShowcase from "../components/ThreadShowcase"
