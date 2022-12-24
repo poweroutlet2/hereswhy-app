@@ -5,8 +5,7 @@ export default function Searchbar() {
     const [term, setTerm] = useState('')
     const router = useRouter()
 
-    const handleSearchSubmit = (e) => {
-        e.preventDefault()
+    const handleSearchSubmit = () => {
         router.push({
             pathname: 'search',
             query: { 'term': term }
