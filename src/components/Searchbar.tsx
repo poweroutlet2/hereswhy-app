@@ -5,7 +5,8 @@ export default function Searchbar() {
     const [term, setTerm] = useState('')
     const router = useRouter()
 
-    const handleSearchSubmit = () => {
+    const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         router.push({
             pathname: 'search',
             query: { 'term': term }
