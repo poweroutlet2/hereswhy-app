@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, thread } from "@prisma/client";
 import type { ThreadType } from "../components/Thread";
 import dayjs from 'dayjs';
 
@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 }
 
 const prisma = new PrismaClient({
-    //log: ['query'], // this will log sql to console
+    log: ['query'], // this will log sql to console
 });
 
 export async function db_get_threads_by_author(id: bigint | string): Promise<ThreadType[]> {
@@ -39,7 +39,6 @@ export async function db_get_threads_by_author(id: bigint | string): Promise<Thr
     const threads_jsonified = JSON.parse(JSON.stringify(threads, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
     return threads_jsonified
 }
-
 export async function db_get_thread(id: bigint | string): Promise<ThreadType> {
     /*
     Returns the thread with the specified id.
@@ -49,6 +48,31 @@ export async function db_get_thread(id: bigint | string): Promise<ThreadType> {
     const thread = await prisma.thread.findFirst({
         where: {
             id: BigInt(id)
+        },
+        include: {
+            author: {},
+            tweet: {
+                orderBy: {
+                    created_at: 'asc'
+                },
+                include: {
+                    media: {}
+                }
+            },
+        }
+    })
+
+    const thread_jsonified = JSON.parse(JSON.stringify(thread, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
+    return thread_jsonified
+}
+
+export async function db_get_threads(ids: bigint[] | string[]): Promise<ThreadType[]> {
+    const bigintIds = ids.map((id) => BigInt(id))
+    const thread = await prisma.thread.findMany({
+        where: {
+            id: {
+                in: bigintIds
+            }
         },
         include: {
             author: {},
@@ -99,7 +123,7 @@ export async function db_get_top_threads_tweets(num_threads: number, period = 't
             date = date.subtract(1, 'day')
     }
     since = date.toISOString() //.format('YYYY-MM-DD')
-    console.log(since)
+
     const threads = await prisma.thread.findMany({
         where: {
             tweeted_at: {
@@ -125,4 +149,30 @@ export async function db_get_top_threads_tweets(num_threads: number, period = 't
     })
     const threads_jsonified = JSON.parse(JSON.stringify(threads, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
     return threads_jsonified
+}
+
+
+type ThreadSearchResults = {
+    tweet_id: bigint
+    thread_id: bigint
+}
+
+export async function search_threads(term: string) {
+    const results: ThreadSearchResults[] = await prisma.$queryRaw`
+        select thread_id, id as tweet_id,
+            ts_rank(search, websearch_to_tsquery('english', ${term})) +
+            ts_rank(search, websearch_to_tsquery('simple', ${term})) as rank
+        from tweet 
+        where search @@ websearch_to_tsquery('english', ${term}) or 
+            search @@ websearch_to_tsquery('simple', ${term})
+        order by rank desc
+        LIMIT 100;
+    `
+    const thread_ids = results.map((search_result) => {
+        return search_result.thread_id
+    })
+
+    const threads = db_get_threads(thread_ids)
+
+    return threads
 }
