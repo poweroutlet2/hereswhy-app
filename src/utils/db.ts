@@ -1,4 +1,4 @@
-import { PrismaClient, thread } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import type { ThreadType } from "../components/Thread";
 import dayjs from 'dayjs';
 

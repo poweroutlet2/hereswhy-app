@@ -1,4 +1,4 @@
-import type { author, media, tweet } from "@prisma/client"
+import type { author, tweet } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
 import md from 'markdown-it';
