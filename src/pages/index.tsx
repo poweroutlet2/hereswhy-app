@@ -31,18 +31,10 @@ export default function Home({ threads }: InferGetStaticPropsType<typeof getStat
   if (threads) {
     return (
       <>
-        <Head>
-          <title>Threads</title>
-          <meta name="description" content="Twitter threads" />
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        </Head>
-        <Layout>
-          <div className='mt-5'>
-            <h1 className="text-3xl">Top Threads in the Past Day</h1>
-            <ThreadShowcase threads={threads} />
-          </div>
-        </Layout>
+        <div className='mt-5'>
+          <h1 className="text-3xl">Top Threads in the Past Day</h1>
+          <ThreadShowcase threads={threads} />
+        </div>
       </>
     );
   }

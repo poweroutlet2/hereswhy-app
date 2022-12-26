@@ -3,7 +3,6 @@ import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import superjson from 'superjson';
-import Layout from '../../components/Layout';
 import { Thread } from '../../components/Thread';
 import { createContextInner } from '../../server/trpc/context';
 import { threadsRouter } from '../../server/trpc/router/threadsRouter';
@@ -36,9 +35,7 @@ export default function ThreadPage({ thread }: InferGetStaticPropsType<typeof ge
     // This will display while getStaticProps runs
     if (router.isFallback) {
         return (
-            <Layout>
-                <div>Loadin the thread...</div>
-            </Layout>
+            <div>Loadin the thread...</div>
         )
     }
 
@@ -50,11 +47,9 @@ export default function ThreadPage({ thread }: InferGetStaticPropsType<typeof ge
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
             </Head>
-            <Layout>
-                <div className='mt-5'>
-                    <Thread thread={thread} fullyExpanded={true} />
-                </div>
-            </Layout>
+            <div className='mt-5'>
+                <Thread thread={thread} fullyExpanded={true} />
+            </div>
         </>
     )
 }

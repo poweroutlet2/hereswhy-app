@@ -1,7 +1,6 @@
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router'
-import Layout from '../../components/Layout';
 import ThreadShowcase from '../../components/ThreadShowcase';
 import { createContextInner } from '../../server/trpc/context';
 import { threadsRouter } from '../../server/trpc/router/threadsRouter';
@@ -36,9 +35,7 @@ export default function ThreadPage({ threads }: InferGetStaticPropsType<typeof g
     if (threads?.length > 0) {
         if (router.isFallback) {
             return (
-                <Layout>
-                    <div>Loadin threads by tha author {threads[0]?.author.username}...</div>
-                </Layout>
+                <div>Loadin threads by tha author {threads[0]?.author.username}...</div>
             )
         }
 
@@ -50,16 +47,14 @@ export default function ThreadPage({ threads }: InferGetStaticPropsType<typeof g
                     <link rel="icon" href="/favicon.ico" />
                     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
                 </Head>
-                <Layout>
-                    <div className='mt-5'>
-                        <h1 className="text-3xl">All threads by
-                            <Link href={`http://twitter.com/${threads[0]?.author.username}`} target="_blank" rel="noopener noreferrer" className='gap-1 text-3xl hover:opacity-100 duration-300 hover:text-blue-500'>
-                                {` @${threads[0]?.author.username}`}
-                            </Link>
-                            <ThreadShowcase threads={threads} />
-                        </h1>
-                    </div>
-                </Layout>
+                <div className='mt-5'>
+                    <h1 className="text-3xl">All threads by
+                        <Link href={`http://twitter.com/${threads[0]?.author.username}`} target="_blank" rel="noopener noreferrer" className='gap-1 text-3xl hover:opacity-100 duration-300 hover:text-blue-500'>
+                            {` @${threads[0]?.author.username}`}
+                        </Link>
+                        <ThreadShowcase threads={threads} />
+                    </h1>
+                </div>
             </>
         )
     }
