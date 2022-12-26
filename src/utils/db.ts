@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import type { ThreadType } from "../components/Thread";
 import dayjs from 'dayjs';
 
-// Take control of BigInt serialization by force >:) :
+// Take control of BigInt serialization by force >:( :
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (BigInt.prototype as any).toJSON = function () {
     return this.toString();
@@ -94,12 +94,11 @@ export async function db_get_threads(ids: bigint[] | string[]): Promise<ThreadTy
 export async function db_get_top_threads_tweets(num_threads: number, period = 'today',): Promise<ThreadType[]> {
     /*
     Returns the @num_threads threads including tweets with the highest number of likes within @period.
-    
     */
 
-    // determine since date for query
-    // TODO: this logic should live on the frontend? This function should take in raw dates for period
 
+    // TODO: this logic should live on frontend? This function should take in raw dates for period
+    // determine since date for query
     let date = dayjs();
     let since = ''
 
