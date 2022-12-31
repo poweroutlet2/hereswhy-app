@@ -35,10 +35,8 @@ export default function SearchPage({ term, data }: InferGetServerSidePropsType<t
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
             </Head>
-            <Layout>
-                <h1 className="text-3xl mt-5">{data.results.length} threads found for the term: {`"${term}"`}</h1>
-                <ThreadShowcase threads={data.results} />
-            </Layout>
+            <h1 className="text-3xl mt-5">{data.results.length} threads found for the term: {`"${term}"`}</h1>
+            <ThreadShowcase threads={data.results} />
         </>
     )
 }
