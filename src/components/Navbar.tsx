@@ -9,12 +9,12 @@ import Searchbar from './Searchbar'
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
-    { name: 'Authors', href: '/authors', current: false }
+    //{ name: 'Authors', href: '/authors', current: false }
 ]
 
 export default function Navbar() {
     return (
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-gray-100 border-b-2 p-1">
             {({ open }) => (
                 <>
                     <div className="mx-auto w-full max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -77,7 +77,7 @@ export default function Navbar() {
                                         <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                             <span className="sr-only">Open user menu</span>
                                             <Image
-                                                className="h-8 w-8 rounded-full"
+                                                className="h-8 w-8 rounded-full hidden"
                                                 src={testProfilePic}
                                                 alt="profile_picture"
                                             />

@@ -13,5 +13,21 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'pbs.twimg.com',
+        port: '',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'video.twimg.com',
+        port: '',
+        pathname: '**',
+      },
+    ],
+  }
 };
 export default config;

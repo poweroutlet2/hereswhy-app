@@ -11,7 +11,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
     const [expanded, setExpanded] = useState(1)
     useEffect(() => {
         if (!fullyExpanded) {
-            setExpanded(Math.floor(Math.random() * 5))
+            setExpanded(Math.floor(Math.random() * 4))
         } else {
             setExpanded(thread.length ?? 1)
         }
@@ -31,11 +31,12 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
         const first_tweet = thread?.tweet[0]
         const fully_expanded = (expanded == thread.tweet.length)
         return (
-            <div className="thread-container flex flex-col xl:mx-5 mb-5 break-inside-avoid-column border-2 rounded-lg duration-200 shadow-md shadow-black border-slate-800 ">
+            <div className="thread-container bg-white flex flex-col xl:mx-5 mb-5 break-inside-avoid-column border-2 rounded-2xl duration-200 shadow-md">
                 <Tweet
                     tweet={first_tweet}
                     key={first_tweet.id.toString()}
                     author={thread.author}
+                    media={first_tweet.media}
                     likes={thread.like_count}
                     retweets={thread.retweet_count}
                     replies={thread.reply_count}
@@ -46,12 +47,12 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                     if (index == thread.tweet.length - 2) {
                         last = true
                     }
-                    return <Tweet tweet={tweet} author={thread.author} key={tweet.id.toString()} last={last} />
+                    return <Tweet tweet={tweet} author={thread.author} key={tweet.id.toString()} media={tweet.media} last={last} />
                 })}
                 {/* Only show "Read more" button if tweet is not fullt expanded */}
                 {!fully_expanded &&
                     <Link className="text-lg" href={`/threads/${thread.id.toString()}`}>
-                        <div className="p-4 rounded-b-sm flex flex-col items-center bg-slate-800 border-white hover:brightness-90">
+                        <div className="p-4 rounded-b-2xl flex flex-col items-center hover:bg-gray-100 hover:shadow-lg">
                             Read more
                         </div>
                     </Link>}
