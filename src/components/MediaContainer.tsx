@@ -22,7 +22,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                         alt="tweet_media"
                                         width={300}
                                         height={100}
-                                        className=""
+                                        className="h-auto w-auto"
                                     />
                                 </div>
                             )
