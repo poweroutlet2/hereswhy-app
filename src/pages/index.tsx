@@ -2,8 +2,6 @@ import { threadsRouter } from "../server/trpc/router/threadsRouter";
 import { createProxySSGHelpers } from '@trpc/react-query/ssg';
 import { createContextInner } from "../server/trpc/context";
 import superjson from 'superjson';
-import Head from "next/head";
-import Layout from "../components/Layout";
 import ThreadShowcase from "../components/ThreadShowcase";
 import type { InferGetStaticPropsType } from "next";
 

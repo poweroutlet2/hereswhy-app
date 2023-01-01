@@ -181,14 +181,3 @@ export async function search_threads(term: string) {
 
     return threads
 }
-
-export async function db_get_top_followed_authors() {
-    // find authors with most followers
-    const authors = await prisma.author.findMany({
-        orderBy: {
-            follower_count: 'desc'
-        }
-    })
-
-    return authors
-}
