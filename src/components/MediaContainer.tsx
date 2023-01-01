@@ -44,7 +44,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                     src={image.src}
                                     loading="eager"
                                     alt={"tweet_media"}
-                                    width={900}
+                                    width={700}
                                     height={1000}
                                 />
                             </div>
