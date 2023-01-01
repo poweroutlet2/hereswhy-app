@@ -50,8 +50,8 @@ export function Tweet(
 
     if (tweet?.content) {
         return (
-            <article className={`tweet-card relative max-w-xl md:max-w-2xl overflow-hidden my-0 p-5 sm:hover:bg-gray-100 duration-100 ${replies ? "rounded-t-2xl" : ""} ${last ? "rounded-b-2xl" : ""}`}>
-                <div className={`absolute top-0 left-0 w-[1.5px] h-full ml-[52px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-gray-200 bg-opacity-80`}></div>
+            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 overflow-clip sm:hover:bg-gray-100 border-gray-200 border-opacity-20 duration-100 ${replies ? "rounded-t-2xl" : ""} ${last ? "rounded-b-2xl" : ""}`}>
+                <div className={`absolute top-0 left-0 w-[2px] h-full ml-[52px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-gray-200 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={author_external_url} passHref target="_blank" rel="noopener noreferrer">
@@ -86,7 +86,7 @@ export function Tweet(
                             <div className="flex flex-row justify-center mt-4 -mb-2 gap-8 text-sm font-medium tracking-wider md:flex">
                                 < a className="flex text-base group gap-1 items-center" href={`https://twitter.com/intent/tweet?in_reply_to=${tweet.id.toString()}`
                                 } target="_blank" rel="noopener noreferrer" >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-transparent stroke-white stroke-2 group-hover:fill-blue-500 duration-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-transparent stroke-white stroke-2 fill-blue-500 duration-200">
                                         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                                     </svg>
                                     <div className="flex flex-col">
@@ -97,7 +97,7 @@ export function Tweet(
                                     </div>
                                 </a>
                                 <a className="flex text-base group gap-1 items-center" href={`https://twitter.com/intent/retweet?tweet_id=${tweet.id.toString()}`} target="_blank" rel="noopener noreferrer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-current fill-white group-hover:fill-green-400 group-hover:stroke-green-400 duration-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-current fill-white fill-green-400 stroke-green-400 duration-100">
                                         <g><path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z" />
                                         </g>
                                     </svg>
@@ -109,7 +109,7 @@ export function Tweet(
                                     </div>
                                 </a>
                                 <a className="flex text-base group gap-1 items-center" href={`https://twitter.com/intent/like?tweet_id=${tweet.id.toString()}`} target="_blank" rel="noopener noreferrer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-transparent stroke-2 group-hover:fill-red-500 stroke-white duration-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-transparent stroke-2 fill-red-500 stroke-white duration-100">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                                     </svg>
                                     <div className="flex flex-col">
@@ -124,7 +124,7 @@ export function Tweet(
                     </div>
                     {/* Twitter bird icon */}
                     <Link href={`https://twitter.com/threadsapp/status/${tweet.id.toString()}`} passHref className="" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-white stroke-white stroke-2 hover:fill-blue-500 duration-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 hover:scale-110 hover:stroke-blue-500 stroke-1 fill-blue-500 duration-200">
                             <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
                         </svg>
                     </Link>
