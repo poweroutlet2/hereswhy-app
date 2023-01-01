@@ -21,6 +21,8 @@ model author {
   source_tweet_id     BigInt?
   profile_picture_url String?
   thread              thread[]
+
+  @@index([last_tweet_at], map: "idx_author_last_tweet_at")
 }
 
 model save_bot {
@@ -33,39 +35,73 @@ model save_bot {
 }
 
 model thread {
-  id                BigInt    @id
+  id                BigInt              @id
   author_id         BigInt
   like_count        Int?
   retweet_count     Int?
   reply_count       Int?
   sensitive         Boolean?
-  tweeted_at        DateTime? @default(now()) @db.Timestamp(6)
-  created_at        DateTime? @default(now()) @db.Timestamp(6)
-  updated_at        DateTime? @default(now()) @db.Timestamp(6)
+  tweeted_at        DateTime?           @default(now()) @db.Timestamp(6)
+  created_at        DateTime?           @default(now()) @db.Timestamp(6)
+  updated_at        DateTime?           @default(now()) @db.Timestamp(6)
   length            Int?
   source_account_id BigInt?
   source_tweet_id   BigInt?
-  author            author    @relation(fields: [author_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_thread_author")
+  lang              String?             @db.VarChar(5)
+  author            author              @relation(fields: [author_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_thread_author")
+  thread_categories thread_categories[]
   tweet             tweet[]
+
+  @@index([author_id], map: "idx_thread_author_id")
+  @@index([lang], map: "idx_thread_lang")
+  @@index([tweeted_at], map: "idx_thread_tweeted_at")
 }
 
 model tweet {
-  id         BigInt    @id
+  id         BigInt                   @id
   author_id  BigInt?
   thread_id  BigInt?
   content    String?
-  tweeted_at DateTime  @default(now()) @db.Timestamp(6)
-  created_at DateTime? @default(now()) @db.Timestamp(6)
-  updated_at DateTime? @default(now()) @db.Timestamp(6)
-  thread     thread?   @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tweet_thread")
+  tweeted_at DateTime                 @default(now()) @db.Timestamp(6)
+  created_at DateTime?                @default(now()) @db.Timestamp(6)
+  updated_at DateTime?                @default(now()) @db.Timestamp(6)
+  search     Unsupported("tsvector")? @default(dbgenerated("to_tsvector('english'::regconfig, content)"))
   media      media[]
+  thread     thread?                  @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tweet_thread")
+
+  @@index([search], map: "idx_search", type: Gin)
+  @@index([content], map: "idx_tweet_content")
+  @@index([thread_id], map: "idx_tweet_thread_id")
 }
 
 model media {
   id                String  @id
-  type              String?
-  url               String?
+  type              String
+  url               String
   preview_image_url String?
-  tweet_id          BigInt?
-  tweet             tweet?  @relation(fields: [tweet_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_media_tweet")
+  tweet_id          BigInt
+  tweet             tweet   @relation(fields: [tweet_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_media_tweet")
+
+  @@index([tweet_id], map: "idx_media_tweet_id")
+}
+
+model category {
+  id          BigInt  @id
+  title       String  @db.VarChar(100)
+  description String? @db.VarChar(255)
+
+  @@index([description], map: "idx_category_description")
+  @@index([title], map: "idx_category_title")
+}
+
+model thread_categories {
+  id             Int     @id @default(autoincrement())
+  thread_id      BigInt?
+  category_id    BigInt?
+  category_title String? @db.VarChar(100)
+  thread         thread? @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([thread_id, category_id])
+  @@index([category_id], map: "idx_thread_categories_category_id")
+  @@index([thread_id], map: "idx_thread_categories_thread_id")
 }

@@ -9,3 +9,6 @@ The backend stack which ingests the data behind the app: Python, sqlAclchemy, Po
 
 https://threads-app.vercel.app/#
 
+
+#Prisma
+The tweet table contains a column "search" which is type tsvector. This field should not be queried or accessed using the Prisma ORM.
