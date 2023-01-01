@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 }
 
 const prisma = new PrismaClient({
-    log: ['query'], // this will log sql to console
+    //log: ['query'], // this will log sql to console
 });
 
 export async function db_get_threads_by_author(id: bigint | string): Promise<ThreadType[]> {
@@ -45,6 +45,7 @@ export async function db_get_thread(id: bigint | string): Promise<ThreadType> {
     Includes author, tweets, and tweet media associated with the thread.
 
     */
+
     const thread = await prisma.thread.findFirst({
         where: {
             id: BigInt(id)
@@ -91,9 +92,13 @@ export async function db_get_threads(ids: bigint[] | string[]): Promise<ThreadTy
     return thread_jsonified
 }
 
-export async function db_get_top_threads_tweets(num_threads: number, period = 'today',): Promise<ThreadType[]> {
+export async function db_get_top_threads(num_threads: number, period = 'today',): Promise<ThreadType[]> {
     /*
-    Returns the @num_threads threads including tweets with the highest number of likes within @period.
+    Returns the @num_threads threads including tweets, authors, and media with the highest number of likes 
+    within the provided period.
+
+    This is only called in the index page during SSG/ISR. To reduce the amount of data passed to the page,
+    thread objects will contain a maximum of 4 tweets.
     */
 
 
@@ -141,7 +146,8 @@ export async function db_get_top_threads_tweets(num_threads: number, period = 't
                 },
                 include: {
                     media: {}
-                }
+                },
+                take: 4
             },
             author: {}
         },
@@ -174,4 +180,15 @@ export async function search_threads(term: string) {
     const threads = db_get_threads(thread_ids)
 
     return threads
+}
+
+export async function db_get_top_followed_authors() {
+    // find authors with most followers
+    const authors = await prisma.author.findMany({
+        orderBy: {
+            follower_count: 'desc'
+        }
+    })
+
+    return authors
 }
