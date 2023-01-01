@@ -27,6 +27,7 @@
     "react-dom": "^18.2.0",
     "superjson": "1.9.1",
     "tailwindcss-scoped-groups": "^2.0.0",
+    "yet-another-react-lightbox": "^2.2.5",
     "zod": "^3.18.0"
   },
   "devDependencies": {
