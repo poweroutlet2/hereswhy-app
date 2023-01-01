@@ -80,7 +80,7 @@ export function Tweet(
                             {tweet.content}
                         </div> */}
                         <div className="tweet-content text-base md:text-lg" dangerouslySetInnerHTML={{ __html: md().render(tweet.content) }} />
-                        {media?.length != 0 ? <MediaContainer media={media} /> : ''}
+                        {/* {media?.length != 0 ? <MediaContainer media={media} /> : ''} */}
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
                         {replies &&
                             <div className="flex flex-row justify-center mt-4 -mb-2 gap-8 text-sm font-medium tracking-wider md:flex">

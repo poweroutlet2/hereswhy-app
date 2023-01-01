@@ -68,7 +68,7 @@ export default function Navbar() {
                             </div>
                             <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:ml-6 sm:pr-0">
                                 <div className="hidden sm:block">
-                                    <Searchbar />
+                                    {/* <Searchbar /> */}
                                 </div>
 
                                 {/* Profile dropdown */}
@@ -140,7 +140,7 @@ export default function Navbar() {
                                     {item.name}
                                 </Disclosure.Button>
                             ))}
-                            <Searchbar />
+                            {/* <Searchbar /> */}
                         </div>
                     </Disclosure.Panel>
                 </>
