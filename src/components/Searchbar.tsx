@@ -15,14 +15,14 @@ export default function Searchbar() {
 
     return (
         <form onSubmit={handleSearchSubmit}>
-            <div className="pt-2 relative mx-auto text-gray-600">
+            <div className="relative mx-auto text-gray-600">
                 <input
-                    className=" bg-white h-10 sm:float-right sm:focus:w-full duration-100  sm:w-3/4 w-full px-5 pr-10 rounded-lg text-sm focus:outline-none"
+                    className="mt-2 sm:mt-0 bg-white h-10 sm:float-right sm:focus:w-full duration-100 sm:w-3/4 w-full px-5 pr-10 rounded-lg text-sm focus:outline-none"
                     type="search"
                     placeholder="Search"
                     onChange={e => { setTerm(e.currentTarget.value); }}
                 />
-                <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
+                <button type="submit" className="absolute right-0 top-0 sm:-top-2 mt-5 mr-4">
                     <svg className="text-gray-600 hover:text-gray-900 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                         x="0px" y="0px"
                         viewBox="0 0 56.966 56.966"
