@@ -29,7 +29,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     }
 
 }
-export default function ThreadPage({ threads }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function AuthorPage({ threads }: InferGetStaticPropsType<typeof getStaticProps>) {
     const router = useRouter()
 
     if (threads?.length > 0) {
