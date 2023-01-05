@@ -84,7 +84,7 @@ export default function Navbar() {
 
                                         </>}
 
-                                        {session && <>
+                                        {session?.user?.image && <>
                                             <Menu.Button className={`${session.user ? '' : 'hidden'} flex rounded-full text-sm sm:ml-4`}>
                                                 <span className="sr-only">Open user menu</span>
                                                 <Image
