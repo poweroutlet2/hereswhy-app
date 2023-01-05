@@ -6,6 +6,8 @@ import testProfilePic from '../../public/dog.jpg'
 import threadLogo from '../../public/thread_logo.png'
 import Link from 'next/link'
 import Searchbar from './Searchbar'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { userAgent } from 'next/server'
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
@@ -13,8 +15,12 @@ const navigation = [
 ]
 
 export default function Navbar() {
+    const { data: session, status } = useSession()
+
+    console.log(session?.user?.image)
+
     return (
-        <Disclosure as="nav" className="bg-gray-100 border-b-2 p-1">
+        <Disclosure as="nav" className="bg-gray-100 border-b-2 p-1 sticky top-0 z-10">
             {({ open }) => (
                 <>
                     <div className="mx-auto w-full max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -34,14 +40,7 @@ export default function Navbar() {
                                 <div className="flex flex-shrink-0 items-center">
                                     <Link passHref href='/'>
                                         <Image
-                                            className="block h-8 w-auto lg:hidden"
-                                            src={threadLogo}
-                                            alt="Threads"
-                                            width="50"
-                                            height="50"
-                                        />
-                                        <Image
-                                            className="hidden h-8 w-auto lg:block"
+                                            className="block h-8 ml-20 w-auto"
                                             src={threadLogo}
                                             alt="Threads"
                                             width="50"
@@ -67,21 +66,36 @@ export default function Navbar() {
                                 </div>
                             </div>
                             <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:ml-6 sm:pr-0">
-                                <div className="hidden sm:block">
+                                <div className="hidden sm:flex sm:justify-center">
                                     <Searchbar />
                                 </div>
 
                                 {/* Profile dropdown */}
                                 <Menu as="div" className="relative ml-3">
                                     <div>
-                                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                            <span className="sr-only">Open user menu</span>
-                                            <Image
-                                                className="h-8 w-8 rounded-full hidden"
-                                                src={testProfilePic}
-                                                alt="profile_picture"
-                                            />
-                                        </Menu.Button>
+                                        {!session && <>
+                                            <button
+                                                type="button"
+                                                onClick={() => signIn("twitter")}
+                                                data-mdb-ripple="true"
+                                                data-mdb-ripple-color="light"
+                                                className="inline-block px-4 py-2.5 bg-blue-500 text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
+                                            >Sign in with Twitter</button>
+
+                                        </>}
+
+                                        {session && <>
+                                            <Menu.Button className={`${session.user ? '' : 'hidden'} flex rounded-full text-sm sm:ml-4`}>
+                                                <span className="sr-only">Open user menu</span>
+                                                <Image
+                                                    className="h-10 w-10 rounded-full"
+                                                    src={session.user?.image}
+                                                    width={40}
+                                                    height={40}
+                                                    alt="profile_picture"
+                                                />
+                                            </Menu.Button>
+                                        </>}
                                     </div>
                                     <Transition
                                         as={Fragment}
@@ -92,30 +106,14 @@ export default function Navbar() {
                                         leaveFrom="transform opacity-100 scale-100"
                                         leaveTo="transform opacity-0 scale-95"
                                     >
-                                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                                             <Menu.Item>
-                                                <a
-                                                    href="#"
-                                                    className={'hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700'}
-                                                >
-                                                    Your Profile
-                                                </a>
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                <a
-                                                    href="#"
-                                                    className={'hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700'}
-                                                >
-                                                    Settings
-                                                </a>
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                <a
-                                                    href="#"
-                                                    className={'hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700'}
+                                                <div
+                                                    className={'hover:bg-gray-100 hover:cursor-pointer block px-4 py-2 text-sm text-gray-700'}
+                                                    onClick={() => signOut()}
                                                 >
                                                     Sign out
-                                                </a>
+                                                </div>
                                             </Menu.Item>
                                         </Menu.Items>
                                     </Transition>

@@ -3,7 +3,6 @@ import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "nex
 import { createContextInner } from "../server/trpc/context"
 import { threadsRouter } from "../server/trpc/router/threadsRouter"
 import superjson from 'superjson'
-import Layout from "../components/Layout"
 import ThreadShowcase from "../components/ThreadShowcase"
 import Head from "next/head"
 
