@@ -6,6 +6,14 @@
     text-decoration: underline;
 }
 
+.mention {
+    color: rgb(44, 93, 171)
+}
+
+.mention:hover {
+    color: rgb(62, 136, 255)
+}
+
 @keyframes open-thread {
     from {
         max-height: 0px;
