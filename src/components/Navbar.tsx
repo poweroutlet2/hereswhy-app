@@ -77,7 +77,7 @@ export default function Navbar() {
                                                 onClick={() => signIn("twitter")}
                                                 data-mdb-ripple="true"
                                                 data-mdb-ripple-color="light"
-                                                className="inline-block px-4 py-2.5 bg-blue-500  text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
+                                                className="inline-block px-4 py-2.5 sm:ml-5 bg-blue-500  text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
                                             >Sign in with Twitter</button>
                                         </>}
 
