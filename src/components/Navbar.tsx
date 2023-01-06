@@ -17,8 +17,6 @@ const navigation = [
 export default function Navbar() {
     const { data: session, status } = useSession()
 
-    console.log(session?.user?.image)
-
     return (
         <Disclosure as="nav" className="bg-gray-100 border-b-2 p-1 sticky top-0 z-10">
             {({ open }) => (
