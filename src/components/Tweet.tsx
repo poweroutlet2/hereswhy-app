@@ -96,7 +96,7 @@ export function Tweet(
                         {/* <div className='text-lg mb-3 mt-1 leading-normal'>
                             {tweet.content}
                         </div> */}
-                        <div className="tweet-content text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content) }} />
+                        <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content) }} />
                         {media?.length != 0 ? <MediaContainer media={media} /> : ''}
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
                         {replies &&
