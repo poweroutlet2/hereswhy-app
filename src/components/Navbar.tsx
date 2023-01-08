@@ -71,14 +71,27 @@ export default function Navbar() {
                                 {/* Profile dropdown */}
                                 <Menu as="div" className="relative flex justify-end">
                                     <div className='flex w-28 sm:w-fit justify-end'>
-                                        {!session && <>
+                                        {/* Display sign in button/profile picture depenging if user is signed in. 
+                                        Loading spinner if authentication is loading */}
+                                        {!session && (status == 'unauthenticated') && <>
                                             <button
                                                 type="button"
                                                 onClick={() => signIn("twitter")}
                                                 data-mdb-ripple="true"
                                                 data-mdb-ripple-color="light"
                                                 className="inline-block px-4 py-2.5 sm:ml-5 bg-blue-500  text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
-                                            >Sign in with Twitter</button>
+                                            >Sign in with Twitter
+                                            </button>
+                                        </>}
+                                        {(status == 'loading') && <>
+                                            <button
+                                                type="button"
+                                                data-mdb-ripple="true"
+                                                data-mdb-ripple-color="light"
+                                                className="inline-block px-4 py-2.5 sm:ml-5 bg-blue-500  text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
+                                            >
+                                                <div className="lds-dual-ring mb-0.5 mr-1"></div>
+                                            </button>
                                         </>}
 
                                         {session?.user?.image && <>
