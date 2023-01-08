@@ -28,12 +28,6 @@ export default function SearchPage({ term, data }: InferGetServerSidePropsType<t
 
     return (
         <>
-            <Head>
-                <title>Threads</title>
-                <meta name="description" content="Twitter threads" />
-                <link rel="icon" href="/favicon.ico" />
-                <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-            </Head>
             <h1 className="text-3xl mt-5">{data.results.length} threads found for the term: {`"${term}"`}</h1>
             <ThreadShowcase threads={data.results} />
         </>
