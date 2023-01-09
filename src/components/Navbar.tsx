@@ -37,13 +37,17 @@ export default function Navbar() {
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
                                     <Link passHref href='/'>
-                                        <Image
+                                        <div className='flex flex-col sm:flex-row text-lg sm:text-xl font-black text-center text-gray-600'>
+                                            <h1>{`here's`}</h1>
+                                            <h1 className='-mr-1 -mt-2 sm:mt-0 sm:ml-1 '>{`why 🧵`}</h1>
+                                        </div>
+                                        {/* <Image
                                             className="block h-8 w-auto"
                                             src={threadLogo}
                                             alt="Threads"
                                             width="50"
                                             height="50"
-                                        />
+                                        /> */}
                                     </Link>
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
