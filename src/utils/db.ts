@@ -131,8 +131,9 @@ export async function db_get_top_threads(num_threads: number, period = 'today',)
     const threads = await prisma.thread.findMany({
         where: {
             tweeted_at: {
-                gte: since
+                gte: since,
             },
+            lang: 'en',
             sensitive: false,
         },
         orderBy: {
