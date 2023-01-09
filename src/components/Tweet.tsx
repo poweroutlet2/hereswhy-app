@@ -67,7 +67,7 @@ export function Tweet(
 
     if (tweet?.content) {
         return (
-            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 overflow-clip sm:hover:bg-gray-100 border-gray-200 border-opacity-20 duration-100 ${replies ? "rounded-t-2xl" : ""} ${last ? "rounded-b-2xl" : ""}`}>
+            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 p-5 overflow-clip sm:hover:bg-gray-50 border-b border-dashed border-spacing-7 duration-50 ${replies ? "rounded-t-2xl" : ""} ${last ? "rounded-b-2xl" : ""}`}>
                 <div className={`absolute top-0 left-0 w-[2px] h-full ml-[52px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-gray-200 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
