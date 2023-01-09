@@ -36,7 +36,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                 {media &&
                     media.map((media_component, index) => {
                         if (media_component.url) {
-                            return (<>
+                            return (<div key={media_component.id}>
                                 {media_component.type == 'video' ?
                                     <>
                                         <div className="video relative">
@@ -57,7 +57,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                         </div>
                                     </>
                                     : <>
-                                        <div key={media_component.id} className="flex justify-center h-full w-full hover:brightness-75 hover:cursor-pointer" onClick={() => setOpen(index)}>
+                                        <div className="flex justify-center h-full w-full hover:brightness-75 hover:cursor-pointer" onClick={() => setOpen(index)}>
                                             <Image
                                                 src={media_component.url}
                                                 alt="tweet_media"
@@ -67,7 +67,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                             />
                                         </div>
                                     </>}
-                            </>)
+                            </div>)
                         }
                     })
                 }
@@ -77,12 +77,14 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                 open={open >= 0}
                 close={() => setOpen(-1)}
                 index={open}
+                // @ts-ignore
                 slides={slides}
                 render={{
                     slide: (image) => {
                         return (
                             <div style={{ position: "relative" }}>
                                 <Image
+                                    // @ts-ignore
                                     src={image.src}
                                     loading="eager"
                                     alt={"tweet_media"}
