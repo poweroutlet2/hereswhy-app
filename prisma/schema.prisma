@@ -48,6 +48,7 @@ model thread {
   source_account_id BigInt?
   source_tweet_id   BigInt?
   lang              String?             @db.VarChar(5)
+  saved_thread      saved_thread[]
   author            author              @relation(fields: [author_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_thread_author")
   thread_categories thread_categories[]
   tweet             tweet[]
@@ -112,15 +113,14 @@ model Account {
   type               String
   provider           String
   providerAccountId  String
-  oauth_token_secret String? @db.Text
-  oauth_token        String? @db.Text
   expires_at         Int?
   token_type         String?
   scope              String?
-  id_token           String? @db.Text
+  id_token           String?
   session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  oauth_token        String?
+  oauth_token_secret String?
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("account")
@@ -143,6 +143,7 @@ model User {
   emailVerified DateTime?
   image         String?
   accounts      Account[]
+  list          list[]
   sessions      Session[]
 
   @@map("user")
@@ -155,4 +156,30 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_token")
+}
+
+model list {
+  id           Int            @id @default(autoincrement())
+  user_id      String
+  name         String
+  created_at   DateTime?      @default(now()) @db.Timestamp(6)
+  updated_at   DateTime?      @default(now()) @db.Timestamp(6)
+  user         User           @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  saved_thread saved_thread[]
+
+  @@index([user_id], map: "idx_list_user")
+}
+
+model saved_thread {
+  id         Int       @id @default(autoincrement())
+  list_id    Int       @default(autoincrement())
+  thread_id  BigInt
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @default(now()) @db.Timestamp(6)
+  list       list      @relation(fields: [list_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  thread     thread    @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([list_id], map: "idx_saved_thread_list_id")
+  @@index([thread_id], map: "idx_saved_thread_thread_id")
+  @@index([updated_at], map: "idx_saved_thread_updated_at")
 }
