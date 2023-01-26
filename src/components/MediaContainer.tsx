@@ -43,7 +43,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                             <video
                                                 className="relative"
                                                 width="300"
-                                                height="100"
+                                                height="300"
                                                 controls
                                                 disablePictureInPicture
                                                 muted>
