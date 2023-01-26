@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { db_get_thread, db_get_threads_by_author, db_get_top_threads, search_threads } from "../../../utils/db";
 
-import { router, publicProcedure } from "../trpc";
+import { router, publicProcedure, protectedProcedure } from "../trpc";
 
 export const threadsRouter = router({
   get_top_threads: publicProcedure
@@ -63,5 +63,15 @@ export const threadsRouter = router({
   //       authors: authors
   //     }
   //   }),
+  save_thread: protectedProcedure
+    .input(
+      z.object({
+        thread: z.string().or(z.string()),
+        list: z.string().or(z.number()).optional()
+      })
+    )
+    .query(async ({ input }) => {
+      return
+    })
 
 });
