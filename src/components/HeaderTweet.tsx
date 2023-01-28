@@ -71,8 +71,8 @@ export function HeaderTweet(
 
     if (tweet?.content) {
         return (
-            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 py-5 px-4 overflow-clip sm:hover:bg-gray-50 duration-50 ${replies ? "rounded-t-2xl" : ""} ${last ? "rounded-b-2xl" : ""}`}>
-                <div className={`absolute top-0 left-0 w-[4px] h-full ml-[56px] ${replies ? "mt-8" : ""} ${last ? "h-1/3" : ""} bg-gray-200 bg-opacity-80`}></div>
+            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 py-5 px-4 overflow-clip sm:hover:bg-gray-50 duration-50 rounded-t-2xl`}>
+                <div className={`absolute top-0 left-0 w-[4px] h-full ml-[56px] mt-8 bg-gray-200 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={author_external_url} passHref target="_blank" rel="noopener noreferrer">
