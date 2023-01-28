@@ -2,12 +2,9 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
-import testProfilePic from '../../public/dog.jpg'
-import threadLogo from '../../public/thread_logo.png'
 import Link from 'next/link'
 import Searchbar from './Searchbar'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { userAgent } from 'next/server'
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
