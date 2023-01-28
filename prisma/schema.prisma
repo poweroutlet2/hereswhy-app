@@ -179,6 +179,7 @@ model saved_thread {
   list       list      @relation(fields: [list_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   thread     thread    @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
+  @@unique([list_id, thread_id])
   @@index([list_id], map: "idx_saved_thread_list_id")
   @@index([thread_id], map: "idx_saved_thread_thread_id")
   @@index([updated_at], map: "idx_saved_thread_updated_at")
