@@ -25,7 +25,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
         props: {
             thread: data?.thread
         },
-        revalidate: 600 // seconds
+        revalidate: 1800 // seconds
     }
 }
 
