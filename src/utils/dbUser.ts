@@ -1,4 +1,9 @@
+import { threadId } from 'worker_threads';
+/*
+These are utils that require the user to be authed.
+*/
 import { PrismaClient } from "@prisma/client";
+import { list } from 'postcss';
 
 // Take control of BigInt serialization by force >:( :
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,16 +35,15 @@ export async function create_list(
 export async function save_thread(
     thread_id: bigint | string,
     user_id?: string,
-    list_id?: number
+    list_id?: number | undefined
 ) {
     /*
-    Saves a thread to a list. If a list is not provided, one will be created for the given user.
+    Saves a thread to a list. If a list is not provided, a default list wil be created for the given user.
     */
     if (!list_id && user_id) {
         // default list name to Saved Threads
         list_id = await create_list(user_id, "Saved Threads").then((list) => list.id)
     }
-
     let saved_thread;
     if (list_id) {
         saved_thread = await prisma.saved_thread.create({
@@ -50,4 +54,26 @@ export async function save_thread(
         })
     }
     return saved_thread
+}
+
+export async function unsave_thread(
+    thread_id: bigint | string,
+    list_id?: number | undefined
+) {
+    /*
+    Saves a thread to a list. If a list is not provided, a default list wil be created for the given user.
+    */
+    let unsaved_thread;
+    if (list_id && thread_id) {
+        unsaved_thread = await prisma.saved_thread.delete({
+            where: {
+                list_id_thread_id: {
+                    thread_id: BigInt(thread_id),
+                    list_id: list_id
+                }
+            }
+        })
+    }
+
+    return unsaved_thread
 }
