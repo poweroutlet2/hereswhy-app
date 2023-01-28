@@ -1,5 +1,7 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { db_get_thread, db_get_threads_by_author, db_get_top_threads, search_threads } from "../../../utils/db";
+import { save_thread, unsave_thread } from "../../../utils/dbUser";
 
 import { router, publicProcedure, protectedProcedure } from "../trpc";
 
@@ -66,12 +68,46 @@ export const threadsRouter = router({
   save_thread: protectedProcedure
     .input(
       z.object({
-        thread: z.string().or(z.string()),
-        list: z.string().or(z.number()).optional()
+        thread_id: z.string().or(z.bigint()),
+        list_id: z.number().optional()
       })
     )
-    .query(async ({ input }) => {
-      return
-    })
+    .mutation(async ({ ctx, input }) => {
+      if (!ctx.session.user) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
+      await save_thread(input.thread_id, ctx.session.user.id, input.list_id)
+    }),
+  unsave_thread: protectedProcedure
+    .input(
+      z.object({
+        thread_id: z.string().or(z.bigint()),
+        list_id: z.number().optional()
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!ctx.session.user) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
+      await unsave_thread(input.thread_id, input.list_id)
+    }),
+  get_lists: protectedProcedure
+    .input(
+      z.object({})
+    )
+    .query(async ({ ctx }) => {
+      if (!ctx.session.user) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
+      return await ctx.prisma.list.findMany({
+        select: {
+          id: true,
+          name: true,
+          saved_thread: { select: { thread_id: true } }
+        },
+        where: { user_id: ctx.session.user.id },
+      })
+    }),
+
 
 });
