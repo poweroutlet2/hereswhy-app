@@ -1,3 +1,4 @@
+import { typeinferAsyncReturnType } from '@trpc/server';
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import TwitterProvider from "next-auth/providers/twitter";
 // Prisma adapter for NextAuth, optional and can be removed
@@ -9,9 +10,17 @@ import { prisma } from "../../../server/db/client";
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
-    session({ session, user }) {
+    async session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
+        session.user.lists = await prisma.list.findMany({
+          select: {
+            id: true,
+            name: true,
+            saved_thread: { select: { thread_id: true } }
+          },
+          where: { user_id: user.id },
+        })
       }
       return session;
     },
