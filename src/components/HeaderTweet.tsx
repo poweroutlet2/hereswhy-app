@@ -128,6 +128,7 @@ export function HeaderTweet(
                             </div>
                         </div>
                     </div>
+                    <SaveButton thread_id={thread_id} />
                     <div>
                         {/* Twitter bird icon */}
                         <Link href={`https://twitter.com/threadsapp/status/${tweet.id.toString()}`} passHref target="_blank" rel="noopener noreferrer">
