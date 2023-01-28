@@ -2,6 +2,7 @@ import { Tweet } from "./Tweet";
 import type { author, media, thread as PrismaThread, tweet as PrismaTweet } from "@prisma/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { HeaderTweet } from "./HeaderTweet";
 // Display thread type
 export type ThreadType = PrismaThread & { tweet: (PrismaTweet & { media: media[]; })[]; author: author };
 
@@ -11,7 +12,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
     const [expanded, setExpanded] = useState(1)
     useEffect(() => {
         if (!fullyExpanded) {
-            setExpanded(Math.floor(Math.random() * 4))
+            setExpanded(Math.floor(Math.random() * 3))
         } else {
             setExpanded(thread.length ?? 1)
         }
@@ -32,7 +33,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
         const fully_expanded = (expanded == thread.tweet.length)
         return (
             <div className="thread-container bg-white flex flex-col xl:mx-5 mb-5 break-inside-avoid-column border-2 rounded-2xl duration-200 shadow-md">
-                <Tweet
+                <HeaderTweet
                     tweet={first_tweet}
                     key={first_tweet.id.toString()}
                     author={thread.author}
@@ -41,7 +42,6 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                     retweets={thread.retweet_count}
                     replies={thread.reply_count}
                 />
-
                 {thread.tweet.slice(1, expanded).map((tweet, index) => {
                     let last = false
                     if (index == thread.tweet.length - 2) {
