@@ -41,8 +41,8 @@ export async function save_thread(
     Saves a thread to a list. If a list is not provided, a default list wil be created for the given user.
     */
     if (!list_id && user_id) {
-        // default list name to Saved Threads
-        list_id = await create_list(user_id, "Saved Threads").then((list) => list.id)
+        // default list name to Read Later
+        list_id = await create_list(user_id, "Read Later").then((list) => list.id)
     }
     let saved_thread;
     if (list_id) {

@@ -182,3 +182,14 @@ export async function search_threads(term: string) {
 
     return threads
 }
+
+export async function get_lists(user_id: string) {
+    return await prisma.list.findMany({
+        select: {
+            id: true,
+            name: true,
+            saved_thread: { select: { thread_id: true } }
+        },
+        where: { user_id: user_id },
+    })
+}

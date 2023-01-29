@@ -64,7 +64,7 @@ function renderTweetText(text: string) {
 export function HeaderTweet(
     { thread_id, tweet, author, replies, likes, retweets, media }:
         { thread_id: bigint, tweet: tweet, author: author, media?: media[], replies: number | null, likes: number | null, retweets: number | null }): JSX.Element {
-    const { status } = useSession()
+    const { data: session, status } = useSession()
     if (tweet?.content) {
         return (
             <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 py-5 px-4 overflow-clip sm:hover:bg-gray-50 duration-50 rounded-t-2xl`}>
@@ -86,8 +86,8 @@ export function HeaderTweet(
                                 {dateFormatter(tweet.tweeted_at?.toLocaleString())}
                             </span>
                             <div className="absolute -top-1 right-4">
-                                {(status == "authenticated") ?
-                                    <SaveButton thread_id={thread_id} />
+                                {(session?.user) ?
+                                    <SaveButton thread_id={thread_id} user_id={session.user.id} />
                                     :
                                     <SaveButtonDisabled />
                                 }
