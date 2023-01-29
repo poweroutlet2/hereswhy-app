@@ -12,7 +12,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
     const [expanded, setExpanded] = useState(1)
     useEffect(() => {
         if (!fullyExpanded) {
-            setExpanded(Math.floor(Math.random() * 3))
+            setExpanded(1)
         } else {
             setExpanded(thread.length ?? 1)
         }
