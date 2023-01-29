@@ -22,7 +22,6 @@ Managing list 'state': Knowing what lists are available, and which threads are a
 */
 
 export function SaveButton({ thread_id }: { thread_id: bigint }) {
-    const { data: session, status } = useSession()
     const utils = trpc.useContext();
     let not_in_list: boolean;
     const { data: user_lists } = trpc.threads.get_lists.useQuery({})
@@ -77,7 +76,7 @@ export function SaveButton({ thread_id }: { thread_id: bigint }) {
                             <Menu.Items className="absolute right-0 z-10 mt-0 w-48 origin-top-right rounded-md bg-white shadow-xl ring-2 ring-gray-500 ring-opacity-10 focus:outline-none">
                                 <div className=" ">
                                     {/* If user is singed in, clicking save button will display the users lists.*/}
-                                    {(status == "authenticated") && user_lists &&
+                                    {user_lists &&
                                         user_lists.map((list) => (
                                             <Menu.Item
                                                 as="div" key={list.id}
@@ -95,14 +94,14 @@ export function SaveButton({ thread_id }: { thread_id: bigint }) {
                                                         </div>
                                                         :
                                                         (not_in_list = list.saved_thread.findIndex((thread) => thread.thread_id.toString() == thread_id.toString()) === -1)
-                                                            ? <PlusIcon className="h-5 w-5 ml-auto text-gray-700 hover:text-text-gray-700" title="Add to list" />
-                                                            : <TrashIcon className="h-5 w-5 ml-auto text-rose-300 hover:text-text-gray-700" title="Remove from list" />
+                                                            ? <PlusIcon className="h-5 w-5 ml-auto text-gray-700" title="Add to list" />
+                                                            : <TrashIcon className="h-5 w-5 ml-auto text-rose-300" title="Remove from list" />
                                                     }
                                                 </>
                                             </Menu.Item>
                                         ))}
                                     {/* If the user has no lists, the default one will be displayed. */}
-                                    {(status == "authenticated" && !user_lists?.length) &&
+                                    {(!user_lists?.length) &&
                                         <Menu.Item
                                             as="div"
                                             className={'flex px-3 py-2 text-sm text-gray-700 hover:cursor-pointer hover:bg-gray-100'}
@@ -114,15 +113,6 @@ export function SaveButton({ thread_id }: { thread_id: bigint }) {
                                             <PlusIcon className="h-5 ml-6 w-5 text-gray-700 hover:text-text-gray-700" />
                                         </Menu.Item>
                                     }
-                                    {/* If the user is not signed in, sign in prompt will be displayed */}
-                                    {(status != "authenticated") &&
-                                        <Menu.Item
-                                            as="div"
-                                            className={'flex px-2 py-2 text-sm text-gray-700'}
-                                        >
-                                            <ExclamationTriangleIcon className="mr-2 h-10 w-10 text-rose-300" aria-hidden="true" />
-                                            You must be signed save threads!
-                                        </Menu.Item>}
                                 </div>
                             </Menu.Items>
                         </Transition>
