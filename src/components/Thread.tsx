@@ -46,17 +46,17 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                     likes={thread.like_count}
                     retweets={thread.retweet_count}
                     replies={thread.reply_count}
-                    // />
-                    // {thread.tweet.slice(1, expanded).map((tweet, index) => {
-                    //     let last = false
-                    //     if (index == thread.tweet.length - 2) {
-                    //         last = true
-                    //     }
-                    //     return <Tweet key={tweet.id.toString()} tweet={tweet} author={thread.author} media={tweet.media} last={last} />
-                    // })}
-                    {/* Only show "Read more" button if tweet is not fullt expanded */}
+                />
+                {/* {thread.tweet.slice(1, expanded).map((tweet, index) => {
+                    let last = false
+                    if (index == thread.tweet.length - 2) {
+                        last = true
+                    }
+                    return <Tweet key={tweet.id.toString()} tweet={tweet} author={thread.author} media={tweet.media} last={last} />
+                })} */}
+                {/* Only show "Read more" button if tweet is not fullt expanded */}
 
-                    {!fully_expanded &&
+                {!fully_expanded &&
                     <Link className="text-base" href={`/threads/${thread.id.toString()}`} passHref>
                         <div className="read-more flex p-4 rounded-b-2xl hover:bg-gray-100 hover:shadow-lg">
                             <div className="lds-ellipsis rotate-90"><div></div><div></div><div></div><div></div></div>
