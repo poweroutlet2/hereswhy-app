@@ -23,8 +23,8 @@ Managing list 'state': Knowing what lists are available, and which threads are a
 
 export function SaveButton({ thread_id }: { thread_id: bigint }) {
     const utils = trpc.useContext();
-    let not_in_list: boolean;
-    const { data: user_lists } = trpc.threads.get_lists.useQuery({})
+    let not_in_list = true;
+    const { data: user_lists } = trpc.threads.get_lists.useQuery({}, { staleTime: 20 })
     const { mutateAsync: save_mutation, isLoading: saveLoading } = trpc.threads.save_thread.useMutation({
         onSuccess() {
             utils.threads.get_lists.invalidate();
@@ -44,6 +44,7 @@ export function SaveButton({ thread_id }: { thread_id: bigint }) {
         // if (!list_id && user_lists?.length) {
         //     list_id = user_lists[0]?.id;
         // }
+        console.log("listid = " + list_id);
         if (not_in_list) {
             await save_mutation({ thread_id, list_id })
         } else {
