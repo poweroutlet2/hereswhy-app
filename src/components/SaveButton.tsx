@@ -42,7 +42,7 @@ export function SaveButton({ thread_id }: { thread_id: bigint }) {
         
         If the thread is in the list, unsaves. If thread is not in list, saves
         */
-        // if (!list_id && user_lists) {
+        // if (!list_id && user_lists?.length) {
         //     list_id = user_lists[0]?.id;
         // }
         if (not_in_list) {
@@ -102,7 +102,7 @@ export function SaveButton({ thread_id }: { thread_id: bigint }) {
                                             </Menu.Item>
                                         ))}
                                     {/* If the user has no lists, the default one will be displayed. */}
-                                    {(status == "authenticated" && !session?.user?.lists.length) &&
+                                    {(status == "authenticated" && !user_lists?.length) &&
                                         <Menu.Item
                                             as="div"
                                             className={'flex px-3 py-2 text-sm text-gray-700 hover:cursor-pointer hover:bg-gray-100'}

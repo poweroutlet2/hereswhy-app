@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import MediaContainer from "./MediaContainer";
 import { SaveButton } from "./SaveButton";
-import { trpc } from "../utils/trpc";
 
 
 dayjs.extend(relativeTime)
