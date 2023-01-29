@@ -47,13 +47,9 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                     retweets={thread.retweet_count}
                     replies={thread.reply_count}
                 />
-                {/* {thread.tweet.slice(1, expanded).map((tweet, index) => {
-                    let last = false
-                    if (index == thread.tweet.length - 2) {
-                        last = true
-                    }
-                    return <Tweet key={tweet.id.toString()} tweet={tweet} author={thread.author} media={tweet.media} last={last} />
-                })} */}
+                {thread.tweet.slice(1, expanded).map((tweet) => {
+                    return <Tweet key={tweet.id.toString()} tweet={tweet} author={thread.author} media={tweet.media} />
+                })}
                 {/* Only show "Read more" button if tweet is not fullt expanded */}
 
                 {!fully_expanded &&
