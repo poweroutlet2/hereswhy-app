@@ -10,17 +10,17 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
 
     // Set number of expanded tweets 
     let expanded = 1;
-    if (fullyExpanded) {
-        expanded = thread.length ?? 1
+    if (thread.length) {
+        if (fullyExpanded) {
+            expanded = thread.length
+        } else if (thread.length <= 6) {
+            expanded = 1
+        } else if (thread.length > 7 && thread.length < 15) {
+            expanded = 2
+        } else {
+            expanded = 3
+        }
     }
-    else if (length <= 3) {
-        expanded = 1
-    } else if (expanded > 3 && expanded < 6) {
-        expanded = 2
-    } else {
-        expanded = 3
-    }
-
 
     if (thread?.tweet[0]) {
         // Sort tweets by tweeted_at
