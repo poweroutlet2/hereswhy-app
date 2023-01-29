@@ -1,10 +1,9 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { ChevronDownIcon, ListBulletIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon, ListBulletIcon, PlusIcon } from '@heroicons/react/20/solid'
 import { useSession } from 'next-auth/react'
 import { ExclamationTriangleIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { trpc } from '../utils/trpc'
-import { threadId } from 'worker_threads'
 import { CircleSpinner } from './svg/CircleSpinner'
 
 /* 
@@ -58,17 +57,17 @@ export function SaveButton({ thread_id }: { thread_id: bigint }) {
             <Menu as="div" className="relative inline-block text-left">
                 {({ open }) => (
                     <>
-                        <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                        <Menu.Button className="inline-flex w-full justify-center rounded-md bg-gray-400 bg-opacity-80 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                             Save to...
                             <ChevronDownIcon
-                                className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+                                className="ml-2 -mr-1 h-5 w-5 text-white"
                                 aria-hidden="true"
                             />
                         </Menu.Button>
                         <Transition
                             as={Fragment}
                             show={open}
-                            enter="transition ease-out duration-100"
+                            enter="transition ease-out duration-50"
                             enterFrom="transform opacity-0 scale-95"
                             enterTo="transform opacity-100 scale-100"
                             leave="transition ease-in duration-75"
