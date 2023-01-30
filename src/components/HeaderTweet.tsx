@@ -86,7 +86,7 @@ export function HeaderTweet(
                                 {dateFormatter(tweet.tweeted_at?.toLocaleString())}
                             </span>
                             <div className="absolute -top-1 right-4">
-                                {(session?.user) ?
+                                {(session?.user && status == 'authenticated') ?
                                     <SaveButton thread_id={thread_id} user_id={session.user.id} />
                                     :
                                     <SaveButtonDisabled />
