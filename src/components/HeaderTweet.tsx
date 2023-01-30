@@ -83,14 +83,13 @@ export function HeaderTweet(
                             {/* tweet at date */}
                             <span className="text-3xl hidden md:inline-block -mt-3 mx-1 opacity-70">.</span>
                             <span className='text-xs md:text-sm opacity-40 hover:opacity-70 duration-300 mt-1'>
-                                {dateFormatter(tweet.tweeted_at?.toLocaleString())}
+                               
                             </span>
                             <div className="absolute -top-1 right-4">
-                                {
-                                    // (session?.user && status == 'authenticated') ?
-                                    //     <SaveButton thread_id={thread_id} user_id={session.user.id} />
-                                    //     :
-                                    //     <SaveButtonDisabled />
+                                {(session?.user && status == 'authenticated') ?
+                                    <SaveButton thread_id={thread_id} user_id={session.user.id} />
+                                    :
+                                    <SaveButtonDisabled />
                                 }
                             </div>
                         </div>
@@ -98,9 +97,7 @@ export function HeaderTweet(
                             @{author.username}
                         </Link>
                         <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content) }} />
-                        {
-                            //media?.length != 0 ? <MediaContainer media={media} /> : ''
-                        }
+                        {media?.length != 0 ? <MediaContainer media={media} /> : ''}
 
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
                         <div className="flex flex-row justify-center mt-4 -mb-2 gap-8 text-sm font-medium tracking-wider md:flex">
