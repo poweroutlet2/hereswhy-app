@@ -76,7 +76,13 @@ export function HeaderTweet(
                         </Link>
                     </div>
                     <div className="flex-auto w-2/3 text-base md:text-xl">
+                        <div className="flex flex-col relative md:flex-row">
 
+                        </div>
+                        <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='gap-1 opacity-50 hover:opacity-100 duration-100 hover:text-blue-500'>
+                            @{author.username}
+                        </Link>
+                        <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content) }} />
 
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
                         <div className="flex flex-row justify-center mt-4 -mb-2 gap-8 text-sm font-medium tracking-wider md:flex">
