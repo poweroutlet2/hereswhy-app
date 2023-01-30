@@ -33,9 +33,10 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
             return 0;
         })
         const first_tweet = thread?.tweet[0]
+
         return (
             <div className="thread-container bg-white flex flex-col xl:mx-5 mb-5 break-inside-avoid-column border-2 rounded-2xl duration-200 shadow-md">
-                <HeaderTweet
+                {/* <HeaderTweet
                     thread_id={thread.id}
                     tweet={first_tweet}
                     key={first_tweet.id.toString()}
@@ -47,10 +48,10 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                 />
                 {thread.tweet.slice(1, expanded).map((tweet) => {
                     return <Tweet key={tweet.id.toString()} tweet={tweet} author={thread.author} media={tweet.media} />
-                })}
+                })} */}
                 {/* Only show "Read more" button if tweet is not fullt expanded */}
 
-                {!fullyExpanded &&
+                {/* {!fullyExpanded &&
                     <Link className="text-base" href={`/threads/${thread.id.toString()}`} passHref>
                         <div className="read-more flex p-4 rounded-b-2xl hover:bg-gray-100 hover:shadow-lg">
                             <div className="lds-ellipsis rotate-90"><div></div><div></div><div></div><div></div></div>
@@ -58,7 +59,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                                 Read more
                             </span>
                         </div>
-                    </Link>}
+                    </Link>} */}
             </div>
         )
     }
