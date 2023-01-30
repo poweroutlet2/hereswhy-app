@@ -10,7 +10,7 @@ export default function ThreadShowcase({ threads, thread_ids }: { threads: Threa
                 {
                     threads.map((thread) => {
                         //return <ThreadTest thread={thread} key={thread.id.toString()} />
-                        return <Thread thread={thread} key={thread.id.toString()} />
+                        return <Thread thread={thread} fullyExpanded={false} key={thread.id.toString()} />
                     })
                 }
             </div>
