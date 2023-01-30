@@ -1,7 +1,6 @@
 import { Tweet } from "./Tweet";
 import type { author, media, thread as PrismaThread, tweet as PrismaTweet } from "@prisma/client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { HeaderTweet } from "./HeaderTweet";
 // Display thread type
 export type ThreadType = PrismaThread & { tweet: (PrismaTweet & { media: media[]; })[]; author: author };
@@ -47,9 +46,9 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                     retweets={thread.retweet_count}
                     replies={thread.reply_count}
                 />
-                {thread.tweet.slice(1, expanded).map((tweet) => {
+                {/* {thread.tweet.slice(1, expanded).map((tweet) => {
                     return <Tweet key={tweet.id.toString()} tweet={tweet} author={thread.author} media={tweet.media} />
-                })}
+                })} */}
                 {/* Only show "Read more" button if tweet is not fullt expanded */}
 
                 {!fully_expanded &&
