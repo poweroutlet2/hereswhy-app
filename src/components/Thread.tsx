@@ -9,7 +9,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
 
     // Set number of expanded tweets 
     let expanded = 1;
-    if (thread.length) {
+    if (thread?.length) {
         if (fullyExpanded) {
             expanded = thread.length
         } else if (thread.length <= 6) {
