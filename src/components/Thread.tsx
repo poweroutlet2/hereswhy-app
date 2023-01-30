@@ -5,7 +5,7 @@ import { HeaderTweet } from "./HeaderTweet";
 // Display thread type
 export type ThreadType = PrismaThread & { tweet: (PrismaTweet & { media: media[]; })[]; author: author };
 
-export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExpanded?: boolean }): JSX.Element {
+export function Thread({ thread, fullyExpanded = true }: { thread: ThreadType, fullyExpanded?: boolean }): JSX.Element {
 
     // Set number of expanded tweets 
     let expanded = 1;
@@ -46,12 +46,12 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                     retweets={thread.retweet_count}
                     replies={thread.reply_count}
                 />
-                {/* {thread.tweet.slice(1, expanded).map((tweet) => {
+                {thread.tweet.slice(1, expanded).map((tweet) => {
                     return <Tweet key={tweet.id.toString()} tweet={tweet} author={thread.author} media={tweet.media} />
-                })} */}
+                })}
                 {/* Only show "Read more" button if tweet is not fullt expanded */}
 
-                {/* {!fullyExpanded &&
+                {!fullyExpanded &&
                     <Link className="text-base" href={`/threads/${thread.id.toString()}`} passHref>
                         <div className="read-more flex p-4 rounded-b-2xl hover:bg-gray-100 hover:shadow-lg">
                             <div className="lds-ellipsis rotate-90"><div></div><div></div><div></div><div></div></div>
@@ -59,7 +59,7 @@ export function Thread({ thread, fullyExpanded }: { thread: ThreadType, fullyExp
                                 Read more
                             </span>
                         </div>
-                    </Link>} */}
+                    </Link>}
             </div>
         )
     }
