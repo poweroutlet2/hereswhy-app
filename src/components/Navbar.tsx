@@ -8,6 +8,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
+    { name: 'Lists', href: '/lists', current: false }
     //{ name: 'Authors', href: '/authors', current: false }
 ]
 

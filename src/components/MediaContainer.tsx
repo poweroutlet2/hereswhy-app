@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import Video from "yet-another-react-lightbox/plugins/video";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 export default function MediaContainer({ media }: { media: media[] | undefined }) {
     /*
@@ -18,6 +19,8 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
         if (media_component.type == 'video') {
             return ({
                 type: media_component.type,
+                width: 1280,
+                height: 720,
                 sources: [
                     {
                         src: media_component.url,
@@ -88,8 +91,8 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                     src={image.src}
                                     loading="eager"
                                     alt={"tweet_media"}
-                                    width={700}
-                                    height={1000}
+                                    width={1600}
+                                    height={1200}
                                 />
                             </div>
                         );
@@ -97,7 +100,11 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                 }}
                 carousel={{ finite: true }}
                 styles={{ container: { backgroundColor: "rgba(0, 0, 0, .95)" } }}
-                plugins={[Video]}
+                zoom={{
+                    maxZoomPixelRatio: undefined,
+                    scrollToZoom: true
+                }}
+                plugins={[Video, Zoom]}
             />
         </>
     )

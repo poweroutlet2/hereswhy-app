@@ -35,7 +35,6 @@ export function SaveButton({ thread_id, user_id }: { thread_id: bigint, user_id:
             utils.threads.get_lists.invalidate({ user_id });
         }
     })
-    console.log(isStale)
     async function handleSaveUnsave(thread_id: string | bigint, list_id?: number) {
         /*Called when a list in the save drop down is clicked
         

@@ -86,11 +86,11 @@ export function HeaderTweet(
                                 {dateFormatter(tweet.tweeted_at?.toLocaleString())}
                             </span>
                             <div className="absolute -top-1 right-4">
-                                {(session?.user && status == 'authenticated') ?
+                                {/* {(session?.user && status == 'authenticated') ?
                                     <SaveButton thread_id={thread_id} user_id={session.user.id} />
                                     :
                                     <SaveButtonDisabled />
-                                }
+                                } */}
                             </div>
                         </div>
                         <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='gap-1 opacity-50 hover:opacity-100 duration-100 hover:text-blue-500'>
