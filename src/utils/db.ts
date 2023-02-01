@@ -148,7 +148,7 @@ export async function db_get_top_threads(num_threads: number, period = 'today',)
                 include: {
                     media: {}
                 },
-                take: 4
+                take: 3
             },
             author: {}
         },
@@ -183,7 +183,7 @@ export async function search_threads(term: string) {
     return threads
 }
 
-export async function get_lists(user_id: string) {
+export async function get_user_lists(user_id: string) {
     return await prisma.list.findMany({
         select: {
             id: true,
@@ -191,5 +191,33 @@ export async function get_lists(user_id: string) {
             saved_thread: { select: { thread_id: true } }
         },
         where: { user_id: user_id },
+    })
+}
+
+export async function get_threads_by_list(list_id: number) {
+    /*
+    Gets all threads that are in the specified list.
+    This outputs an object that is renderable by ThreadShowcase
+    */
+    return await prisma?.thread.findMany({
+        where: {
+            saved_thread: {
+                some: {
+                    list_id: list_id
+                }
+            }
+        },
+        include: {
+            tweet: {
+                orderBy: {
+                    tweeted_at: 'asc'
+                },
+                include: {
+                    media: {}
+                },
+                take: 3
+            },
+            author: {}
+        }
     })
 }
