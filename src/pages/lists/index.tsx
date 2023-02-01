@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { trpc } from "../../utils/trpc";
 
 export default function ListsPage() {
@@ -7,7 +8,7 @@ export default function ListsPage() {
 	const { data: session, status } = useSession()
 	const user_id = session?.user?.id || 'none'
 
-	const { data: lists } = trpc.threads.get_lists.useQuery(
+	const { data: lists } = trpc.threads.get_user_lists.useQuery(
 		{ user_id },
 		{ enabled: (status == 'authenticated') })
 
@@ -15,7 +16,10 @@ export default function ListsPage() {
 		return (
 			<>
 				{lists?.map((list) => {
-					return list.id
+					return <Link
+						href={`/lists/${list.id}`}
+						className="p-5 mt-5 hover:underline text-blue-500 border-2 rounded-xl"
+						key={list.id}>{list.name}</Link>
 				})}
 			</>
 		)
