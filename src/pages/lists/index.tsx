@@ -15,6 +15,7 @@ export default function ListsPage() {
 	if (session?.user?.id) {
 		return (
 			<>
+				<h1>Your Lists</h1>
 				{lists?.map((list) => {
 					return <Link
 						href={`/lists/${list.id}`}
