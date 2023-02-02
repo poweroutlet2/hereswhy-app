@@ -4,7 +4,6 @@ import { createContextInner } from "../server/trpc/context"
 import { threadsRouter } from "../server/trpc/router/threadsRouter"
 import superjson from 'superjson'
 import ThreadShowcase from "../components/ThreadShowcase"
-import Head from "next/head"
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     const term = query.term as string

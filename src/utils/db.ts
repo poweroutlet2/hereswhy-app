@@ -217,7 +217,7 @@ export async function get_threads_by_list(list_id: number) {
                 },
                 take: 3
             },
-            author: {}
+            author: {},
         }
     })
 }
