@@ -143,7 +143,7 @@ export async function db_get_top_threads(num_threads: number, period = 'today',)
         include: {
             tweet: {
                 orderBy: {
-                    tweeted_at: 'asc'
+                    index: 'asc'
                 },
                 include: {
                     media: {}

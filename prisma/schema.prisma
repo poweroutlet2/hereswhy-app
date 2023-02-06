@@ -16,13 +16,9 @@ model author {
   following_count     Int?
   created_at          DateTime? @default(now()) @db.Timestamp(6)
   updated_at          DateTime? @default(now()) @db.Timestamp(6)
-  last_tweet_at       DateTime? @db.Timestamp(6)
-  source_account_id   BigInt?
-  source_tweet_id     BigInt?
   profile_picture_url String?
+  source_account_id   BigInt?
   thread              thread[]
-
-  @@index([last_tweet_at], map: "idx_author_last_tweet_at")
 }
 
 model save_bot {
@@ -45,9 +41,8 @@ model thread {
   created_at        DateTime?           @default(now()) @db.Timestamp(6)
   updated_at        DateTime?           @default(now()) @db.Timestamp(6)
   length            Int?
-  source_account_id BigInt?
-  source_tweet_id   BigInt?
   lang              String?             @db.VarChar(5)
+  source_account_id BigInt?
   saved_thread      saved_thread[]
   author            author              @relation(fields: [author_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_thread_author")
   thread_categories thread_categories[]
@@ -58,57 +53,8 @@ model thread {
   @@index([tweeted_at], map: "idx_thread_tweeted_at")
 }
 
-model tweet {
-  id         BigInt                   @id
-  author_id  BigInt?
-  thread_id  BigInt?
-  content    String?
-  tweeted_at DateTime                 @default(now()) @db.Timestamp(6)
-  created_at DateTime?                @default(now()) @db.Timestamp(6)
-  updated_at DateTime?                @default(now()) @db.Timestamp(6)
-  search     Unsupported("tsvector")? @default(dbgenerated("to_tsvector('english'::regconfig, content)"))
-  media      media[]
-  thread     thread?                  @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tweet_thread")
-
-  @@index([search], map: "idx_search", type: Gin)
-  @@index([content], map: "idx_tweet_content")
-  @@index([thread_id], map: "idx_tweet_thread_id")
-}
-
-model media {
-  id                String  @id
-  type              String
-  url               String
-  preview_image_url String?
-  tweet_id          BigInt
-  tweet             tweet   @relation(fields: [tweet_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_media_tweet")
-
-  @@index([tweet_id], map: "idx_media_tweet_id")
-}
-
-model category {
-  id          BigInt  @id
-  title       String  @db.VarChar(100)
-  description String? @db.VarChar(255)
-
-  @@index([description], map: "idx_category_description")
-  @@index([title], map: "idx_category_title")
-}
-
-model thread_categories {
-  id             Int     @id @default(autoincrement())
-  thread_id      BigInt?
-  category_id    BigInt?
-  category_title String? @db.VarChar(100)
-  thread         thread? @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@unique([thread_id, category_id])
-  @@index([category_id], map: "idx_thread_categories_category_id")
-  @@index([thread_id], map: "idx_thread_categories_thread_id")
-}
-
-model Account {
-  id                 String  @id @default(cuid())
+model account {
+  id                 String  @id
   userId             String
   type               String
   provider           String
@@ -120,42 +66,18 @@ model Account {
   session_state      String?
   oauth_token        String?
   oauth_token_secret String?
-  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user               user    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@map("account")
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model category {
+  id          BigInt  @id
+  title       String  @db.VarChar(100)
+  description String? @db.VarChar(255)
 
-  @@map("session")
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  list          list[]
-  sessions      Session[]
-
-  @@map("user")
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-  @@map("verification_token")
+  @@index([description], map: "idx_category_description")
+  @@index([title], map: "idx_category_title")
 }
 
 model list {
@@ -164,10 +86,21 @@ model list {
   name         String
   created_at   DateTime?      @default(now()) @db.Timestamp(6)
   updated_at   DateTime?      @default(now()) @db.Timestamp(6)
-  user         User           @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user         user           @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   saved_thread saved_thread[]
 
   @@index([user_id], map: "idx_list_user")
+}
+
+model media {
+  id                String  @id
+  type              String
+  url               String
+  preview_image_url String?
+  tweet_id          BigInt
+  tweet             tweet   @relation(fields: [tweet_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_media_tweet")
+
+  @@index([tweet_id], map: "idx_media_tweet_id")
 }
 
 model saved_thread {
@@ -183,4 +116,57 @@ model saved_thread {
   @@index([list_id], map: "idx_saved_thread_list_id")
   @@index([thread_id], map: "idx_saved_thread_thread_id")
   @@index([updated_at], map: "idx_saved_thread_updated_at")
+}
+
+model session {
+  id           String   @id
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         user     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model thread_categories {
+  id             Int     @id @default(autoincrement())
+  thread_id      BigInt?
+  category_id    BigInt?
+  category_title String? @db.VarChar(100)
+  thread         thread? @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([thread_id, category_id])
+  @@index([category_id], map: "idx_thread_categories_category_id")
+  @@index([thread_id], map: "idx_thread_categories_thread_id")
+}
+
+model tweet {
+  id        BigInt                   @id
+  thread_id BigInt?
+  content   String?
+  search    Unsupported("tsvector")? @default(dbgenerated("to_tsvector('english'::regconfig, content)"))
+  index     Int                      @default(-1)
+  media     media[]
+  thread    thread?                  @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tweet_thread")
+
+  @@index([search], map: "idx_search", type: Gin)
+  @@index([content], map: "idx_tweet_content")
+  @@index([thread_id], map: "idx_tweet_thread_id")
+}
+
+model user {
+  id            String    @id
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  account       account[]
+  list          list[]
+  session       session[]
+}
+
+model verification_token {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
