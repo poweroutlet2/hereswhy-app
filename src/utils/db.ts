@@ -54,7 +54,7 @@ export async function db_get_thread(id: bigint | string): Promise<ThreadType> {
             author: {},
             tweet: {
                 orderBy: {
-                    created_at: 'asc'
+                    index: 'asc'
                 },
                 include: {
                     media: {}
