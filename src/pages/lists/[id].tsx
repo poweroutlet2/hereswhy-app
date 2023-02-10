@@ -28,7 +28,6 @@ export default function ListPage(props: InferGetServerSidePropsType<typeof getSe
     const { id } = props
 
     const { data } = trpc.threads.get_threads_by_list.useQuery({ list_id: id })
-    console.log()
     if (data) {
         return (
             <ThreadShowcase threads={data} />

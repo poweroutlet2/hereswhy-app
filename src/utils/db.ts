@@ -17,6 +17,7 @@ export async function db_get_threads_by_author(id: bigint | string): Promise<Thr
     Returns all threads with the specified author_id.
     Includes author, tweets, and tweet media.
     */
+
     const threads = await prisma.thread.findMany({
         where: {
             author_id: BigInt(id),
@@ -27,7 +28,7 @@ export async function db_get_threads_by_author(id: bigint | string): Promise<Thr
         include: {
             tweet: {
                 orderBy: {
-                    tweeted_at: 'asc'
+                    index: 'asc'
                 },
                 include: {
                     media: {}
@@ -79,7 +80,7 @@ export async function db_get_threads(ids: bigint[] | string[]): Promise<ThreadTy
             author: {},
             tweet: {
                 orderBy: {
-                    created_at: 'asc'
+                    index: 'asc'
                 },
                 include: {
                     media: {}
@@ -134,7 +135,6 @@ export async function db_get_top_threads(num_threads: number, period = 'today',)
                 gte: since,
             },
             lang: 'en',
-            sensitive: false,
         },
         orderBy: {
             like_count: 'desc'
@@ -210,7 +210,7 @@ export async function get_threads_by_list(list_id: number) {
         include: {
             tweet: {
                 orderBy: {
-                    tweeted_at: 'asc'
+                    index: 'asc'
                 },
                 include: {
                     media: {}
