@@ -43,6 +43,7 @@ model thread {
   length            Int?
   lang              String?             @db.VarChar(5)
   source_account_id BigInt?
+  view_count        Int?
   saved_thread      saved_thread[]
   author            author              @relation(fields: [author_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_thread_author")
   thread_categories thread_categories[]
@@ -144,6 +145,7 @@ model tweet {
   content   String?
   search    Unsupported("tsvector")? @default(dbgenerated("to_tsvector('english'::regconfig, content)"))
   index     Int                      @default(-1)
+  links     String[]
   media     media[]
   thread    thread?                  @relation(fields: [thread_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tweet_thread")
 
