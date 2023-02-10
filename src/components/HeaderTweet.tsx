@@ -63,14 +63,16 @@ function renderTweetText(text: string) {
 
 
 export function HeaderTweet(
-    { thread_id, tweet, author, replies, likes, retweets, media }:
-        { thread_id: bigint, tweet: tweet, author: author, media?: media[], replies: number | null, likes: number | null, retweets: number | null }): JSX.Element {
+    { thread_id, tweeted_at, tweet, author, replies, likes, retweets, media }:
+        { thread_id: bigint, tweeted_at: Date | null, tweet: tweet, author: author, media?: media[], replies: number | null, likes: number | null, retweets: number | null }): JSX.Element {
 
     const { data: session, status } = useSession()
     const [date, setDate] = useState('')
     useEffect(() => {
-        setDate(tweet.tweeted_at?.toLocaleString())
-    }, [tweet.tweeted_at])
+        if (tweeted_at) {
+            setDate(tweeted_at?.toLocaleString())
+        }
+    }, [tweeted_at])
 
     if (tweet?.content) {
         return (
