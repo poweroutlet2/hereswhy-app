@@ -94,7 +94,7 @@ model list {
 }
 
 model media {
-  id                String  @id
+  id                String  @id @default(dbgenerated("gen_random_uuid()"))
   type              String
   url               String
   preview_image_url String?
