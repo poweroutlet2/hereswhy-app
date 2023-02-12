@@ -53,10 +53,16 @@ function renderAtMentions(text: string) {
     return text.replace(/@([a-z\d_]+)/ig, '<a href="http://twitter.com/$1" class="mention">@$1</a>');
 }
 
-function renderTweetText(text: string) {
+export function renderTweetText(text: string, links: string[]) {
     // renders links and at mentions from tweet text
     let result = md().render(text)
     result = renderAtMentions(result)
+    links.forEach((link, index) => {
+        const next = links[index + 1]
+        if (next) {
+            result = result.replace(link, `<a href="${next}">${link}</a>`)
+        }
+    })
 
     return result
 }
@@ -105,7 +111,7 @@ export function HeaderTweet(
                         <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='gap-1 opacity-50 hover:opacity-100 duration-100 hover:text-blue-500'>
                             @{author.username}
                         </Link>
-                        <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content) }} />
+                        <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content, tweet.links) }} />
                         {media?.length != 0 ? <MediaContainer media={media} /> : ''}
 
                         {/* Metric buttons - only show if replies exists (is first tweet) */}

@@ -5,6 +5,7 @@ import md from 'markdown-it';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import MediaContainer from "./MediaContainer";
+import { renderTweetText } from "./HeaderTweet";
 
 
 dayjs.extend(relativeTime)
@@ -13,13 +14,6 @@ function renderAtMentions(text: string) {
     return text.replace(/@([a-z\d_]+)/ig, '<a href="http://twitter.com/$1" class="mention">@$1</a>');
 }
 
-function renderTweetText(text: string) {
-    // renders links and at mentions from tweet text
-    let result = md().render(text)
-    result = renderAtMentions(result)
-
-    return result
-}
 
 export function Tweet(
     { tweet, author, last, media }:
@@ -50,7 +44,7 @@ export function Tweet(
                         {/* <div className='text-lg mb-3 mt-1 leading-normal'>
                             {tweet.content}
                         </div> */}
-                        <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content) }} />
+                        <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content, tweet.links) }} />
                         {media?.length != 0 ? <MediaContainer media={media} /> : ''}
                     </div>
                     <div>
