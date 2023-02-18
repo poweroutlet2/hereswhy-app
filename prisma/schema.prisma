@@ -67,6 +67,8 @@ model Account {
   session_state      String?
   oauth_token        String?
   oauth_token_secret String?
+  access_token       String?
+  refresh_token      String?
   user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
