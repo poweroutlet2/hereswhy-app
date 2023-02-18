@@ -78,11 +78,11 @@ export default function Navbar() {
                                         {!session && (status == 'unauthenticated') && <>
                                             <button
                                                 type="button"
-                                                onClick={() => signIn("twitter")}
+                                                onClick={() => signIn("google")}
                                                 data-mdb-ripple="true"
                                                 data-mdb-ripple-color="light"
                                                 className="inline-block px-4 py-2.5 sm:ml-5 bg-blue-500  text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
-                                            >Sign in with Twitter
+                                            >Sign in with Google
                                             </button>
                                         </>}
                                         {(status == 'loading') && <>
@@ -100,7 +100,7 @@ export default function Navbar() {
                                             <Menu.Button className={`${session.user ? '' : 'hidden'} flex rounded-full text-sm sm:ml-4 hover:shadow-lg hover:ring-gray-300 active:ring-blue-500 active:ring-2 transition duration-100 ease-in-out`}>
                                                 <span className="sr-only">Open user menu</span>
                                                 <Image
-                                                    className="h-10 w-10 rounded-full"
+                                                    className="h-12 w-12 rounded-full"
                                                     src={session.user?.image}
                                                     width={40}
                                                     height={40}
