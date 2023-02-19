@@ -1,20 +1,30 @@
 import { Switch } from "@headlessui/react"
-import { useState } from "react"
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 export default function ThemeToggle() {
 	const [enabled, setEnabled] = useState(false)
+	const { theme, setTheme } = useTheme()
+	useEffect(() => {
+		enabled ? setTheme('dark') : setTheme('light')
+	}, [enabled])
 
 	return (
 		<Switch
 			checked={enabled}
 			onChange={setEnabled}
-			className={`${enabled ? 'bg-blue-600' : 'bg-gray-200'
-				} relative inline-flex h-6 w-11 items-center rounded-full`}
+			className={`${enabled ? 'bg-gray-200' : 'bg-gray-200'
+				} relative inline-flex h-10 w-11 items-center rounded-full`}
 		>
 			<span className="sr-only">Enable notifications</span>
+			<div className="relative flex">
+				<SunIcon className={`absolute z-20 w-6 -top-3 left-2 ${theme == 'dark' ? 'hidden' : ''}`} />
+				<MoonIcon className={`absolute z-20 w-6 left-3 -top-3 ${theme == 'light' ? 'hidden' : ''}`} />
+			</div>
 			<span
-				className={`${enabled ? 'translate-x-6' : 'translate-x-1'
-					} inline-block h-4 w-4 transform rounded-full bg-white transition`}
+				className={`${enabled ? 'translate-x-2' : 'translate-x-1'
+					} inline-block h-8 w-8 transform rounded-full bg-slate-500 transition`}
 			/>
 		</Switch>
 	)
