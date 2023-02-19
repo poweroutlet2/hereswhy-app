@@ -17,7 +17,7 @@ export default function Layout({ children }: LayoutProps) {
                 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
             </Head>
             <Navbar />
-            <main className="min-h-screen flex flex-col items-center overflow-x-clip ease-in-out bg-gray-100 selection:bg-orange-400 selection:text-gray-20">
+            <main className="min-h-screen flex flex-col items-center overflow-x-clip ease-in-out bg-gray-100 dark:bg-slate-900 selection:text-gray-20">
                 {children}
             </main>
         </>

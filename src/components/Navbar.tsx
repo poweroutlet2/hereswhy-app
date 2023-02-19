@@ -17,14 +17,14 @@ export default function Navbar() {
   const { data: session, status } = useSession()
 
   return (
-    <Disclosure as="nav" className="bg-gray-100 border-b-2 p-1 sticky top-0 z-10">
+    <Disclosure as="nav" className="bg-gray-100 dark:bg-slate-900 dark:text-white border-b-2 p-1 sticky top-0 z-10">
       {({ open }) => (
         <>
           <div className="mx-auto w-full max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="inset-y-0 left-0 flex items-center sm:hidden w-28 sm:w-fit">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-start rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-start rounded-md p-2 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -36,7 +36,7 @@ export default function Navbar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <Link passHref href='/'>
-                    <div className='flex flex-col sm:flex-row text-xl sm:text-3xl font-black text-center text-gray-600'>
+                    <div className='flex flex-col sm:flex-row text-xl sm:text-3xl font-black text-center text-gray-600 dark:text-gray-200'>
                       <h1>{`here's`}</h1>
                       <h1 className='-mr-1 -mt-2 sm:mt-0 sm:ml-1 '>{`why 👇`}</h1>
                     </div>
@@ -82,7 +82,7 @@ export default function Navbar() {
                         onClick={() => signIn("google")}
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
-                        className="inline-block px-4 py-2.5 sm:ml-5 bg-blue-500  text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
+                        className="inline-block px-4 py-2.5 sm:ml-5 bg-blue-500  font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
                       >Sign in with Google
                       </button>
                     </>}
@@ -91,7 +91,7 @@ export default function Navbar() {
                         type="button"
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
-                        className="inline-block px-4 py-2.5 sm:ml-5 bg-blue-500  text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
+                        className="inline-block px-4 py-2.5 sm:ml-5 bg-blue-500  font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
                       >
                         <div className="lds-dual-ring mb-0.5 mr-1"></div>
                       </button>
