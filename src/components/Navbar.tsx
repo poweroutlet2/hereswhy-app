@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Searchbar from './Searchbar'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import ThemeToggle from './ThemeToggle'
+import DarkToggle from './DarkToggle'
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -111,7 +111,7 @@ export default function Navbar() {
                     </>}
                   </div>
                   <div className='ml-2'>
-                    <ThemeToggle />
+                    <DarkToggle />
                   </div>
                   <Transition
                     as={Fragment}

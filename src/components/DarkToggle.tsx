@@ -19,8 +19,8 @@ export default function ThemeToggle() {
 		>
 			<span className="sr-only">Enable notifications</span>
 			<div className="relative flex">
-				<SunIcon className={`absolute z-20 w-6 -top-3 left-2 ${theme == 'dark' ? 'hidden' : ''}`} />
-				<MoonIcon className={`absolute z-20 w-6 left-3 -top-3 ${theme == 'light' ? 'hidden' : ''}`} />
+				<SunIcon className={`absolute z-20 w-6 -top-3 left-[.45rem] dark:hidden`} />
+				<MoonIcon className={`absolute z-20 w-5 left-[.85rem] -top-[.60rem] hidden dark:block`} />
 			</div>
 			<span
 				className={`${enabled ? 'translate-x-2' : 'translate-x-1'
