@@ -3,13 +3,15 @@
 @tailwind utilities;
 
 
-.tweet-text a:link {
-    color: rgb(44, 93, 171)
-}
+
 
 .tweet-text a:link:hover {
     text-decoration: underline;
     color: rgb(62, 136, 255)
+}
+
+.external-link {
+    color: rgb(44, 93, 171)
 }
 
 .mention {

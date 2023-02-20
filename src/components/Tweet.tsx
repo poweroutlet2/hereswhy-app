@@ -1,9 +1,6 @@
 import type { author, media, tweet } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
-import md from 'markdown-it';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import MediaContainer from "./MediaContainer";
 import { renderTweetText } from "./HeaderTweet";
 

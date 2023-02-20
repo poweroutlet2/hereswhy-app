@@ -59,9 +59,11 @@ export function renderTweetText(text: string, links: string[]) {
     let result = md().render(text)
     result = renderAtMentions(result)
     links.forEach((link, index) => {
-        const next = links[index + 1]
-        if (next) {
-            result = result.replace(link, `<a href="${next}">${link}</a>`)
+        if (index % 2 == 0) {
+            const next = links[index + 1]
+            if (next) {
+                result = result.replace(link, `<a href="${next}" class="external-link">${link}</a>`)
+            }
         }
     })
 
