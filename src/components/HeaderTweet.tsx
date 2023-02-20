@@ -87,8 +87,8 @@ export function HeaderTweet(
                 <div className={`absolute top-0 left-0 w-[4px] h-full ml-[56px] mt-8 bg-gray-200 dark:bg-gray-700 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
-                        <Link href={`/authors/${author.username}`}>
-                            <Image className='rounded-full h-20 w-20 mr-2 hover:brightness-90 border-4 border-gray-200 dark:border-gray-700' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
+                        <Link href={`/authors/${author.id}`}>
+                            <Image className='rounded-full h-20 w-20 mr-2 hover:brightness-90 border-4 border-gray-200 dark:border-gray-700' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} />
                         </Link>
                     </div>
                     <div className="flex-auto w-2/3 text-base md:text-xl">

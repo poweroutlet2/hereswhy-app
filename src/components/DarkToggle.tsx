@@ -14,7 +14,7 @@ export default function ThemeToggle() {
 		<Switch
 			checked={enabled}
 			onChange={setEnabled}
-			className={`${enabled ? 'bg-gray-900' : 'bg-gray-100'
+			className={`${enabled ? '' : ''
 				} relative inline-flex h-10 w-11 items-center rounded-full mt-1`}
 		>
 			<span className="sr-only">Enable notifications</span>
