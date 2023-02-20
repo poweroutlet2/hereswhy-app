@@ -8,7 +8,7 @@ export default function Searchbar() {
     const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         router.push({
-            pathname: 'search',
+            pathname: '/search',
             query: { 'term': term }
         })
     }
@@ -17,7 +17,7 @@ export default function Searchbar() {
         <form onSubmit={handleSearchSubmit}>
             <div className="relative mx-auto text-gray-600">
                 <input
-                    className="mt-2 sm:mt-0 bg-white h-10 sm:float-right sm:focus:w-full duration-100 sm:w-3/4 w-full px-5 pr-10 rounded-lg text-sm focus:outline-none"
+                    className="mt-2 sm:mt-0 bg-white dark:bg-slate-800 dark:text-slate-300 h-10 sm:float-right sm:focus:w-full duration-100 sm:w-3/4 w-full px-5 pr-10 rounded-lg text-sm focus:outline-none"
                     type="search"
                     placeholder="Search"
                     onChange={e => { setTerm(e.currentTarget.value); }}

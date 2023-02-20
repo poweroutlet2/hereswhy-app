@@ -28,7 +28,7 @@ export function Tweet(
                 <div className={`absolute top-0 left-0 w-[4px] h-full ml-[56px] ${last ? "h-1/3" : ""} bg-gray-200 bg-opacity-80 dark:bg-gray-700`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
-                        <Link href={author_external_url} passHref target="_blank" rel="noopener noreferrer">
+                        <Link href={author_internal_url} passHref target="_blank" rel="noopener noreferrer">
                             <Image className='rounded-full h-20 w-20 mr-2 hover:brightness-90 border-4 border-gray-200 dark:border-gray-700' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
                         </Link>
                     </div>
