@@ -49,7 +49,7 @@ export default function AuthorPage({ threads }: InferGetStaticPropsType<typeof g
                 </Head>
                 <div className='mt-5'>
                     <h1 className="text-3xl">All threads by
-                        <Link href={`http://twitter.com/${threads[0]?.author.username}`} target="_blank" rel="noopener noreferrer" className='gap-1 text-3xl hover:opacity-100 duration-300 hover:text-blue-500'>
+                        <Link href={`http://twitter.com/${threads[0]?.author.username}`} target="_blank" rel="noopener noreferrer" className='gap-1 text-3xl hover:opacity-100 '>
                             {` @${threads[0]?.author.username}`}
                         </Link>
                         <ThreadShowcase threads={threads} />

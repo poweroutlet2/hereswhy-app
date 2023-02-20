@@ -25,7 +25,7 @@ export function Thread({ thread, fullyExpanded = true }: { thread: ThreadType, f
         const first_tweet = thread?.tweet[0]
 
         return (
-            <div className="thread-container bg-inherit flex flex-col xl:mx-5 mb-5 break-inside-avoid-column border-2 rounded-2xl duration-200 shadow-md">
+            <div className="thread-container bg-inherit flex flex-col xl:mx-5 mb-5 break-inside-avoid-column border-2 dark:border-slate-500 rounded-2xl shadow-md">
                 <HeaderTweet
                     thread_id={thread.id}
                     tweeted_at={thread.tweeted_at}
@@ -49,7 +49,7 @@ export function Thread({ thread, fullyExpanded = true }: { thread: ThreadType, f
 
                 {!fullyExpanded &&
                     <Link className="text-base" href={`/threads/${thread.id.toString()}`} passHref>
-                        <div className="read-more flex p-4 rounded-b-2xl hover:bg-gray-100 hover:shadow-lg">
+                        <div className="read-more flex p-4 rounded-b-2xl hover:opacity-50">
                             <div className="lds-ellipsis rotate-90"><div></div><div></div><div></div><div></div></div>
                             <span className="flex-1 text-center">
                                 Read more
