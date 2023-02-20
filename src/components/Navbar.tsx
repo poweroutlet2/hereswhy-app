@@ -17,7 +17,7 @@ export default function Navbar() {
   const { data: session, status } = useSession()
 
   return (
-    <Disclosure as="nav" className="w-full bg-gray-100 dark:bg-slate-900 dark:text-white border-b-2 p-1 sticky top-0 z-10">
+    <Disclosure as="nav" className="w-full bg-gray-100 dark:bg-slate-900 dark:text-white border-b-2 dark:border-slate-800 p-1 sticky top-0 z-10">
       {({ open }) => (
         <>
           <div className="mx-auto w-full max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -40,13 +40,6 @@ export default function Navbar() {
                       <h1>{`here's`}</h1>
                       <h1 className='-mr-1 -mt-2 sm:mt-0 sm:ml-1 '>{`why 👇`}</h1>
                     </div>
-                    {/* <Image
-                                            className="block h-8 w-auto"
-                                            src={threadLogo}
-                                            alt="Threads"
-                                            width="50"
-                                            height="50"
-                                        /> */}
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -96,12 +89,11 @@ export default function Navbar() {
                         <div className="lds-dual-ring mb-0.5 mr-1"></div>
                       </button>
                     </>}
-
                     {session?.user?.image && <>
                       <Menu.Button className={`${session.user ? '' : 'hidden'} flex rounded-full text-sm sm:ml-4 hover:shadow-lg hover:ring-gray-300 active:ring-blue-500 active:ring-2 transition duration-100 ease-in-out`}>
                         <span className="sr-only">Open user menu</span>
                         <Image
-                          className="h-12 w-12 rounded-full"
+                          className="h-12 w-12 min-w-max rounded-full"
                           src={session.user?.image}
                           width={40}
                           height={40}
@@ -110,7 +102,7 @@ export default function Navbar() {
                       </Menu.Button>
                     </>}
                   </div>
-                  <div className='ml-2'>
+                  <div className='ml-2 hidden sm:flex'>
                     <DarkToggle />
                   </div>
                   <Transition
@@ -140,6 +132,7 @@ export default function Navbar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
+              <DarkToggle />
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
