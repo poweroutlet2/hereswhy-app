@@ -44,6 +44,7 @@ export function Thread({ thread, fullyExpanded = true }: { thread: ThreadType, f
                         tweet={tweet}
                         author={thread.author}
                         media={tweet.media}
+                        last={(tweet.index == (thread.tweet.length - 1))}
                     />
                 })}
                 {/* Only show "Read more" button if tweet is not fullt expanded */}

@@ -8,24 +8,20 @@ import MediaContainer from "./MediaContainer";
 import { renderTweetText } from "./HeaderTweet";
 
 
-dayjs.extend(relativeTime)
-
-function renderAtMentions(text: string) {
-    return text.replace(/@([a-z\d_]+)/ig, '<a href="http://twitter.com/$1" class="mention">@$1</a>');
-}
-
-
 export function Tweet(
-    { tweet, author, last, media }:
+    { tweet, author, media, last = false }:
         { tweet: tweet, author: author, media?: media[], last?: boolean }): JSX.Element {
-    // tweet.content = linkFormatter(tweet.content)
+    /* last should be true if the tweet is the last tweet in the thread. If so, the thread connector will stop at the profile picture and
+    the bottom will be rounded 
+    */
+
     const author_external_url = `https://twitter.com/${author.username}`
     const author_internal_url = `/authors/${author.id}`
 
     if (tweet?.content) {
         return (
             <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 py-5 px-4 overflow-clip ${last ? "rounded-b-2xl" : ""}`}>
-                <div className={`absolute top-0 left-0 w-[4px] h-full ml-[56px] ${last ? "h-1/3" : ""} bg-gray-200 bg-opacity-80 dark:bg-gray-700`}></div>
+                <div className={`absolute top-0 left-0 w-[4px] h-full ml-[56px] ${last ? "h-16" : ""} bg-gray-200 bg-opacity-80 dark:bg-gray-700`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={author_internal_url} passHref target="_blank" rel="noopener noreferrer">
