@@ -54,7 +54,7 @@ export function SaveButton({ thread_id, user_id }: { thread_id: bigint, user_id:
             <Menu as="div" className="relative inline-block text-left">
                 {({ open }) => (
                     <>
-                        <Menu.Button className="inline-flex w-full justify-center rounded-md bg-gray-400 bg-opacity-80 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                        <Menu.Button className="inline-flex w-full justify-center rounded-md bg-gray-400 dark:bg-gray-600 bg-opacity-80 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                             Save to...
                             <ChevronDownIcon
                                 className="ml-2 -mr-1 h-5 w-5 text-white"
@@ -78,7 +78,7 @@ export function SaveButton({ thread_id, user_id }: { thread_id: bigint, user_id:
                                         user_lists.map((list) => (
                                             <Menu.Item
                                                 as="div" key={list.id}
-                                                className={'flex px-3 py-2 text-sm text-gray-700 hover:cursor-pointer hover:bg-gray-100'}
+                                                className={'flex px-3 py-2 text-sm text-gray-700 hover:cursor-pointer hover:rounded-md hover:bg-gray-100'}
                                                 onClick={() => { handleSaveUnsave(thread_id, list.id) }}
                                             >
                                                 <>
