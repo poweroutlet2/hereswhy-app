@@ -4,8 +4,8 @@ import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
 export default function ThemeToggle() {
-	const [enabled, setEnabled] = useState(false)
 	const { theme, setTheme } = useTheme()
+	const [enabled, setEnabled] = useState(theme == 'light' ? false : true)
 	useEffect(() => {
 		enabled ? setTheme('dark') : setTheme('light')
 	}, [enabled])
@@ -14,7 +14,7 @@ export default function ThemeToggle() {
 		<Switch
 			checked={enabled}
 			onChange={setEnabled}
-			className={`${enabled ? 'bg-gray-200' : 'bg-gray-200'
+			className={`${enabled ? 'bg-gray-900' : 'bg-gray-100'
 				} relative inline-flex h-10 w-11 items-center rounded-full`}
 		>
 			<span className="sr-only">Enable notifications</span>
@@ -24,7 +24,7 @@ export default function ThemeToggle() {
 			</div>
 			<span
 				className={`${enabled ? 'translate-x-2' : 'translate-x-1'
-					} inline-block h-8 w-8 transform rounded-full bg-slate-500 transition`}
+					} inline-block h-8 w-8 transform rounded-full bg-slate-600 transition`}
 			/>
 		</Switch>
 	)
