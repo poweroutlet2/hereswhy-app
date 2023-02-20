@@ -9,6 +9,7 @@ import { SaveButton } from "./SaveButton";
 import { SaveButtonDisabled } from "./SaveButtonDisabled";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { ChartBarIcon } from "@heroicons/react/20/solid";
 
 
 dayjs.extend(relativeTime)
@@ -69,8 +70,8 @@ export function renderTweetText(text: string, links: string[]) {
 
 
 export function HeaderTweet(
-    { thread_id, tweeted_at, tweet, author, replies, likes, retweets, media }:
-        { thread_id: bigint, tweeted_at: Date | null, tweet: tweet, author: author, media?: media[], replies: number | null, likes: number | null, retweets: number | null }): JSX.Element {
+    { thread_id, tweeted_at, tweet, author, replies, likes, retweets, media, views }:
+        { thread_id: bigint, tweeted_at: Date | null, tweet: tweet, author: author, media?: media[], replies: number | null, likes: number | null, retweets: number | null, views: number | null }): JSX.Element {
 
     const { data: session, status } = useSession()
     const [date, setDate] = useState('')
@@ -117,7 +118,7 @@ export function HeaderTweet(
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
                         <div className="flex flex-row justify-center mt-4 -mb-2 gap-8 text-sm font-medium tracking-wider md:flex">
                             <div className="flex text-base group gap-1 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-transparent stroke-white stroke-2 fill-blue-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-blue-500">
                                     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                                 </svg>
                                 <div className="flex flex-col">
@@ -140,13 +141,22 @@ export function HeaderTweet(
                                 </div>
                             </div>
                             <div className="flex text-base group gap-1 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-transparent stroke-2 fill-red-500 stroke-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-red-500">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                                 </svg>
                                 <div className="flex flex-col">
                                     <span className="mb-1 flex gap-1">
                                         {numberFormatter(likes)}
                                         <span className="hidden md:block">Likes</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex text-base group gap-1 items-center">
+                                <ChartBarIcon className="w-6 h-6 mb-1 fill-blue-500" />
+                                <div className="flex flex-col">
+                                    <span className="mb-1 flex gap-1">
+                                        {numberFormatter(views)}
+                                        <span className="hidden md:block">Views</span>
                                     </span>
                                 </div>
                             </div>

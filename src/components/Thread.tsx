@@ -36,6 +36,7 @@ export function Thread({ thread, fullyExpanded = true }: { thread: ThreadType, f
                     likes={thread.like_count}
                     retweets={thread.retweet_count}
                     replies={thread.reply_count}
+                    views={thread.view_count}
                 />
                 {thread.tweet.slice(1, expanded).map((tweet) => {
                     return <Tweet
