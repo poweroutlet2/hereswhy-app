@@ -98,7 +98,7 @@ export function HeaderTweet(
                             <Link href={`/authors/${author.id}`} className='font-semibold break-all hover:underline'>
                                 {author.display_name}
                             </Link>
-                            {/* tweet at date */}
+                            {/* tweeted at date */}
                             <span className="text-3xl hidden md:inline-block -mt-3 mx-1 opacity-70">.</span>
                             <span className='text-xs md:text-sm opacity-40 hover:opacity-70 mt-1'>
                                 {dateFormatter(date)}

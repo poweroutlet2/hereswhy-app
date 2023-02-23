@@ -14,7 +14,7 @@ export function Thread({ thread, fullyExpanded = true }: { thread: ThreadType, f
             expanded = thread.length
         } else if (thread.length <= 6) {
             expanded = 1
-        } else if (thread.length > 7 && thread.length < 15) {
+        } else if (thread.length > 7) {
             expanded = 2
         } else {
             expanded = 3
