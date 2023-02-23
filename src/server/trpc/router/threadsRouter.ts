@@ -1,6 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { db_get_thread, db_get_threads_by_author, db_get_top_threads, get_user_lists, get_threads_by_list, search_threads } from "../../../utils/db";
+import { db_get_thread, db_get_threads_by_author, db_get_top_threads, get_user_lists, get_threads_by_list, search_threads, get_random_thread } from "../../../utils/db";
 import { save_thread, unsave_thread } from "../../../utils/dbUser";
 
 import { router, publicProcedure, protectedProcedure } from "../trpc";
@@ -104,5 +104,12 @@ export const threadsRouter = router({
     )
     .query(async ({ input }) => {
       return get_threads_by_list(Number(input.list_id))
+    }),
+  get_random_thread: publicProcedure
+    .input(
+      z.object({})
+    )
+    .query(async () => {
+      return get_random_thread()
     })
 });
