@@ -17,7 +17,7 @@ export default function Navbar() {
   const { data: session, status } = useSession()
 
   return (
-    <Disclosure as="nav" className="w-full bg-gray-100 dark:bg-slate-900 dark:text-white border-b-2 dark:border-slate-800 p-1 sticky top-0 z-10">
+    <Disclosure as="nav" className="w-full bg-gray-100 dark:bg-slate-900 dark:text-white border-b-2 dark:border-slate-800 p-1 sticky top-0 left-0 right-0 z-10">
       {({ open }) => (
         <>
           <div className="mx-auto w-full max-w-7xl px-2 sm:px-6 lg:px-8">

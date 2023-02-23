@@ -3,7 +3,7 @@ import { Thread } from "./Thread";
 import TweetSkelly from "./TweetSkelly";
 
 export default function ThreadShuffler() {
-    const { data: thread, status } = trpc.threads.get_random_thread.useQuery({})
+    const { data: thread, status } = trpc.threads.get_random_thread.useQuery({}, { enabled: false })
     // todo: disbale automatic invalidation of query
     if (status == "success" && thread) {
         return (
