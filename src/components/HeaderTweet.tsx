@@ -102,10 +102,10 @@ export function HeaderTweet(
                             </div>
                             {/* tweeted at date */}
                             <span className="text-3xl hidden md:inline-block -mt-3 mx-1 opacity-70">.</span>
-                            <span className='text-xs md:text-sm opacity-40 hover:opacity-70 mt-1'>
+                            <span className='text-xs md:text-sm md:mt-1 opacity-40 '>
                                 {dateFormatter(date)}
                             </span>
-                            <div className="absolute -top-1 right-4 w-10 mr-1">
+                            <div className="absolute -top-1 right-4 w-10 mr-2">
                                 {(session?.user && status == 'authenticated') ?
                                     <SaveButton thread_id={thread_id} user_id={session.user.id} />
                                     :
@@ -116,7 +116,7 @@ export function HeaderTweet(
                         <Link href={`https://twitter.com/${author.username}`} target="_blank" rel="noopener noreferrer" className='gap-1 opacity-50 hover:opacity-100 hover:text-blue-500'>
                             @{author.username}
                         </Link>
-                        <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content, tweet.links) }} />
+                        <div className="tweet-text text-base md:text-lg mt-1" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content, tweet.links) }} />
                         {media?.length != 0 ? <MediaContainer media={media} /> : ''}
 
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
@@ -156,7 +156,7 @@ export function HeaderTweet(
                                 </div>
                             </div>
                             <div className="flex group gap-1 items-center" title="Views">
-                                <ChartBarIcon className="w-6 h-6 mb-1 fill-blue-500" />
+                                <ChartBarIcon className="w-10 h-10 mb-1 fill-blue-500" />
                                 <div className="flex flex-col">
                                     <span className="mb-1 flex gap-1">
                                         {numberFormatter(views)}
