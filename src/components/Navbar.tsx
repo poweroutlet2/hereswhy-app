@@ -17,7 +17,7 @@ export default function Navbar() {
   const { data: session, status } = useSession()
 
   return (
-    <Disclosure as="nav" className="sticky top-0 z-40 w-full bg-inherit dark:bg-slate-900 dark:text-white border-b-2 dark:border-slate-800 p-1 ">
+    <Disclosure as="nav" className="sticky top-0 z-40 w-full h-18 bg-inherit dark:bg-slate-900 dark:text-white border-b-2 dark:border-slate-800 p-1 ">
       {({ open }) => (
         <>
           <div className="mx-auto w-full max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -92,7 +92,7 @@ export default function Navbar() {
                     {session?.user?.image && <>
                       <Menu.Button className={`${session.user ? '' : 'hidden'} flex rounded-full text-sm sm:ml-4 hover:opacity-80`}>
                         <Image
-                          className="h-12 w-12 min-w-max rounded-full active:border-4 duration-100 ease-in-out"
+                          className="h-12 w-12 min-w-max rounded-full"
                           src={session.user?.image}
                           width={40}
                           height={40}
