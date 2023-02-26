@@ -95,15 +95,17 @@ export function HeaderTweet(
                     </div>
                     <div className="flex-auto w-2/3 text-base md:text-xl">
                         <div className="flex flex-col relative md:flex-row">
-                            <Link href={`/authors/${author.id}`} className='font-semibold break-all hover:underline'>
-                                {author.display_name}
-                            </Link>
+                            <div>
+                                <Link href={`/authors/${author.id}`} className='font-semibold break-all hover:underline'>
+                                    {author.display_name}
+                                </Link>
+                            </div>
                             {/* tweeted at date */}
                             <span className="text-3xl hidden md:inline-block -mt-3 mx-1 opacity-70">.</span>
                             <span className='text-xs md:text-sm opacity-40 hover:opacity-70 mt-1'>
                                 {dateFormatter(date)}
                             </span>
-                            <div className="absolute -top-1 right-4">
+                            <div className="absolute -top-1 right-4 w-10 mr-1">
                                 {(session?.user && status == 'authenticated') ?
                                     <SaveButton thread_id={thread_id} user_id={session.user.id} />
                                     :
