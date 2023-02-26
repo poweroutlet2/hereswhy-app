@@ -90,10 +90,9 @@ export default function Navbar() {
                       </button>
                     </>}
                     {session?.user?.image && <>
-                      <Menu.Button className={`${session.user ? '' : 'hidden'} flex rounded-full text-sm sm:ml-4 hover:shadow-lg hover:ring-gray-300 active:ring-blue-500 active:ring-2 transition duration-100 ease-in-out`}>
-                        <span className="sr-only">Open user menu</span>
+                      <Menu.Button className={`${session.user ? '' : 'hidden'} flex rounded-full text-sm sm:ml-4 hover:opacity-80`}>
                         <Image
-                          className="h-12 w-12 min-w-max rounded-full"
+                          className="h-12 w-12 min-w-max rounded-full active:border-4 duration-100 ease-in-out"
                           src={session.user?.image}
                           width={40}
                           height={40}
