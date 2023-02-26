@@ -105,7 +105,7 @@ export function HeaderTweet(
                             <span className='text-xs md:text-sm md:mt-1 opacity-40 '>
                                 {dateFormatter(date)}
                             </span>
-                            <div className="absolute -top-1 right-4 w-10 mr-2">
+                            <div className="absolute -top-2 right-4 w-10 -mr-1">
                                 {(session?.user && status == 'authenticated') ?
                                     <SaveButton thread_id={thread_id} user_id={session.user.id} />
                                     :
@@ -156,7 +156,7 @@ export function HeaderTweet(
                                 </div>
                             </div>
                             <div className="flex group gap-1 items-center" title="Views">
-                                <ChartBarIcon className="w-10 h-10 mb-1 fill-blue-500" />
+                                <ChartBarIcon className="w-6 h-6 mb-1 fill-blue-500" />
                                 <div className="flex flex-col">
                                     <span className="mb-1 flex gap-1">
                                         {numberFormatter(views)}
