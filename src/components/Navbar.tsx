@@ -65,11 +65,70 @@ export default function Navbar() {
                 </div>
 
                 {/* Profile dropdown */}
-
+                <Menu as="div" className="relative flex justify-end">
+                  <div className='flex w-28 sm:w-fit justify-end'>
+                    {/* Display sign in button/profile picture depenging if user is signed in. 
+                                        Loading spinner if authentication is loading */}
+                    {!session && (status == 'unauthenticated') && <>
+                      <button
+                        type="button"
+                        onClick={() => signIn("google")}
+                        data-mdb-ripple="true"
+                        data-mdb-ripple-color="light"
+                        className="inline-block px-4 py-2.5 sm:ml-5 text-white bg-blue-500  font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
+                      >Sign in with Google
+                      </button>
+                    </>}
+                    {(status == 'loading') && <>
+                      <button
+                        type="button"
+                        data-mdb-ripple="true"
+                        data-mdb-ripple-color="light"
+                        className="inline-block px-4 py-2.5 sm:ml-5 bg-blue-500  font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-lg transition duration-150 ease-in-out"
+                      >
+                        <div className="lds-dual-ring mb-0.5 mr-1"></div>
+                      </button>
+                    </>}
+                    {session?.user?.image && <>
+                      <Menu.Button className={`${session.user ? '' : 'hidden'} flex rounded-full text-sm sm:ml-4 hover:opacity-80`}>
+                        <Image
+                          className="h-12 w-12 min-w-max rounded-full"
+                          src={session.user?.image}
+                          width={40}
+                          height={40}
+                          alt="profile_picture"
+                        />
+                      </Menu.Button>
+                    </>}
+                  </div>
+                  <div className='ml-2 hidden sm:flex'>
+                    <DarkToggle />
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-2 top-12 z-10 w-48 h-10 rounded bg-white py-1 shadow-xl">
+                      <Menu.Item>
+                        <div
+                          className={'hover:bg-gray-100 rounded-md hover:cursor-pointer block px-4 py-2 text-sm text-gray-700'}
+                          onClick={() => signOut()}
+                        >
+                          Sign out
+                        </div>
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
               </div>
             </div>
           </div>
-
+          {/* 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               <DarkToggle />
@@ -89,7 +148,7 @@ export default function Navbar() {
               ))}
               <Searchbar />
             </div>
-          </Disclosure.Panel>
+          </Disclosure.Panel> */}
         </>
       )
       }
