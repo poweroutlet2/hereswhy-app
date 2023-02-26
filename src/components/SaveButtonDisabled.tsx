@@ -9,7 +9,7 @@ export function SaveButtonDisabled() {
                 {({ open }) => (
                     <>
                         <Menu.Button className="">
-                            <div className="w-10 h-10 rounded-lg fill-gray-300 hover:bg-slate-700 active:bg-slate-300 focus:outline-none active:fill-slate-800">
+                            <div className="w-10 h-10 rounded-lg fill-gray-300 hover:bg-slate-700 active:bg-slate-300 outline-none active:fill-slate-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960"><path d="M120 726v-60h300v60H120Zm0-165v-60h470v60H120Zm0-165v-60h470v60H120Zm530 500V726H480v-60h170V496h60v170h170v60H710v170h-60Z" /></svg>
                             </div>
                         </Menu.Button>
