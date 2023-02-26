@@ -113,10 +113,10 @@ export default function Navbar() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-11 w-48 origin-top-right rounded-md bg-white py-1 shadow-xl ring-2 ring-blue-500 ring-opacity-10 focus:outline-none">
+                    <Menu.Items className="absolute right-2 top-12 z-10 w-48 h-10 rounded bg-white py-1 shadow-xl">
                       <Menu.Item>
                         <div
-                          className={'hover:bg-gray-100 hover:cursor-pointer block px-4 py-2 text-sm text-gray-700'}
+                          className={'hover:bg-gray-100 rounded-md hover:cursor-pointer block px-4 py-2 text-sm text-gray-700'}
                           onClick={() => signOut()}
                         >
                           Sign out
