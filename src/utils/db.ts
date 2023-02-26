@@ -222,7 +222,7 @@ export async function get_threads_by_list(list_id: number) {
     })
 }
 
-export async function get_random_thread() {
+export async function get_random_thread(count?: number) {
     /* Returns a random thread.
 
     Calls db twice: first to get total count of threads, second to get random thread.
@@ -231,7 +231,9 @@ export async function get_random_thread() {
     then for subsequent calls generate random skip client side
 
     */
-    const count = await prisma.thread.count()
+    if (!count) {
+        count = await get_thread_count()
+    }
     const skip = Math.floor(Math.random() * count)
 
     return prisma.thread.findFirst({
@@ -248,4 +250,8 @@ export async function get_random_thread() {
             author: {}
         }
     })
+}
+
+export async function get_thread_count() {
+    return await prisma.thread.count();
 }
