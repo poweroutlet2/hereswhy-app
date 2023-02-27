@@ -33,7 +33,7 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              {/* <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <Link passHref href='/'>
                     <div className='flex flex-col sm:flex-row text-xl sm:text-3xl font-black text-center text-gray-600 dark:text-gray-200'>
@@ -58,11 +58,11 @@ export default function Navbar() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:pr-0">
-                <div className="hidden sm:flex sm:justify-center">
+                {/* <div className="hidden sm:flex sm:justify-center">
                   <Searchbar />
-                </div>
+                </div> */}
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative flex justify-end">
@@ -128,7 +128,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          {/* 
+
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               <DarkToggle />
@@ -148,7 +148,7 @@ export default function Navbar() {
               ))}
               <Searchbar />
             </div>
-          </Disclosure.Panel> */}
+          </Disclosure.Panel>
         </>
       )
       }
