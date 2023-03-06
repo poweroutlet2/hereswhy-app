@@ -1,3 +1,4 @@
+'use client';
 import { Switch } from "@headlessui/react"
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
 import { useTheme } from "next-themes"

@@ -16,24 +16,27 @@ const config = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'pbs.twimg.com',
-        port: '',
-        pathname: '**',
+        protocol: "https",
+        hostname: "pbs.twimg.com",
+        port: "",
+        pathname: "**",
       },
       {
-        protocol: 'https',
-        hostname: 'video.twimg.com',
-        port: '',
-        pathname: '**',
+        protocol: "https",
+        hostname: "video.twimg.com",
+        port: "",
+        pathname: "**",
       },
       {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-        port: '',
-        pathname: '**',
-      }
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        port: "",
+        pathname: "**",
+      },
     ],
-  }
+  },
+  experimental: {
+    appDir: false,
+  },
 };
 export default config;
