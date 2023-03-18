@@ -24,11 +24,14 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
 }
 
 export default function SearchPage({ term, data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    console.log(term)
 
-    return (
-        <>
-            <h1 className="text-3xl mt-5">{data.results.length} threads found for the term: {`"${term}"`}</h1>
-            <ThreadShowcase threads={data.results} />
-        </>
-    )
+    if (data) {
+        return (
+            <>
+                <h1 className="text-3xl mt-5">{data.length} threads found for the term: {`"${term}"`}</h1>
+                <ThreadShowcase threads={data} />
+            </>
+        )
+    }
 }
