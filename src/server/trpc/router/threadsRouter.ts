@@ -50,10 +50,7 @@ export const threadsRouter = router({
 			})
 		)
 		.query(async ({ input }) => {
-			const results = await search_threads(input.term);
-			return {
-				results: results
-			}
+			return await search_threads(input.term);
 		}),
 	// get_top_authors: publicProcedure
 	//   .input(

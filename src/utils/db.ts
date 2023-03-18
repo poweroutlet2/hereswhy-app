@@ -119,10 +119,10 @@ export async function db_get_top_threads(num_threads: number, period = 'today',)
     }
     since = date.toISOString() //.format('YYYY-MM-DD')
 
-    const threads = await prisma.thread.findMany({
+    let threads = await prisma.thread.findMany({
         where: {
             tweeted_at: {
-                gte: since,
+                gte: since
             },
             lang: 'en',
         },
@@ -143,6 +143,33 @@ export async function db_get_top_threads(num_threads: number, period = 'today',)
             author: {}
         },
     })
+
+    if (threads.length < 1) {
+        threads = await prisma.thread.findMany({
+            where: {
+                tweeted_at: {
+                    gte: date.subtract(1, 'month').toISOString(),
+                },
+                lang: 'en',
+            },
+            orderBy: {
+                like_count: 'desc'
+            },
+            take: num_threads,
+            include: {
+                tweet: {
+                    orderBy: {
+                        index: 'asc'
+                    },
+                    include: {
+                        media: {}
+                    },
+                    take: 3
+                },
+                author: {},
+            }
+        })
+    }
     const threads_jsonified = JSON.parse(JSON.stringify(threads, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
     return threads_jsonified
 }
