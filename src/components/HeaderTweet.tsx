@@ -85,7 +85,7 @@ export function HeaderTweet(
 
     if (tweet?.content) {
         return (
-            <article className={`tweet-card relative max-w-xl md:max-w-2xl my-0 py-5 px-4 overflow-clip rounded-t-2xl`}>
+            <article className={`tweet-card relative my-0 py-5 px-4 overflow-clip rounded-t-2xl`}>
                 <div className={`absolute top-0 left-0 w-[4px] h-full ml-[56px] mt-8 bg-gray-200 dark:bg-gray-700 bg-opacity-80`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
