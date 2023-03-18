@@ -4,6 +4,7 @@ import { createContextInner } from "../server/trpc/context";
 import superjson from 'superjson';
 import ThreadShowcase from "../components/ThreadShowcase";
 import type { InferGetStaticPropsType } from "next";
+import ThreadMarquee from "../components/ThreadMarquee";
 
 
 export async function getStaticProps() {
@@ -29,6 +30,10 @@ export default function Home({ threads }: InferGetStaticPropsType<typeof getStat
   if (threads) {
     return (
       <>
+        <div>
+          <h1 className="text-3xl">Trending Threads</h1>
+          <ThreadMarquee threads={threads} />
+        </div>
         <div className='mt-5'>
           <h1 className="text-3xl">Top Threads in the Past Day</h1>
           <ThreadShowcase threads={threads} />

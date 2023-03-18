@@ -76,7 +76,7 @@ export async function db_get_threads(ids: bigint[] | string[]): Promise<ThreadTy
                 in: bigintIds
             }
         },
-  
+
     })
 
     const thread_jsonified = JSON.parse(JSON.stringify(thread, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
@@ -164,7 +164,7 @@ export async function db_get_top_threads(num_threads: number, period = 'today',)
                     include: {
                         media: {}
                     },
-                    take: 3
+                    take: 1
                 },
                 author: {},
             }
@@ -290,7 +290,7 @@ export async function get_trending_threads(num_threads = 10,) {
                 include: {
                     media: {}
                 },
-                take: 1                    
+                take: 1
             },
             author: {}
         },
