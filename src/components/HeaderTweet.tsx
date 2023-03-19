@@ -120,7 +120,7 @@ export function HeaderTweet(
                         {media?.length != 0 ? <MediaContainer media={media} /> : ''}
 
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
-                        <div className="flex flex-row justify-center mt-4 -mb-2 gap-4 text-sm sm:text-sm md:text-base md:gap-6 font-medium tracking-wider md:flex">
+                        <div className="flex flex-row justify-center mt-4 -mb-2 gap-4 text-xs md:text-sm md:gap-6 font-medium tracking-wider md:flex">
                             <div className="flex group gap-1 items-center" title="Replies">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1 fill-blue-500">
                                     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />

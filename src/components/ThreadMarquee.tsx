@@ -9,7 +9,7 @@ export default function ThreadMarquee({ threads }: { threads: ThreadType[] }) {
                     ?
                     threads.map((thread) => {
                         return (
-                            <div className="min-w-max max-h-96" key={thread.id.toString()}>
+                            <div className="lg:min-w-fit max-h-96" key={thread.id.toString()}>
                                 <Thread thread={thread} fullyExpanded={false} />
                             </div>
                         )
