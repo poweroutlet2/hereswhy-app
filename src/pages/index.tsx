@@ -37,7 +37,7 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
           <ThreadMarquee threads={trending_threads} />
         </div>
         <div className='mt-5'>
-          <h1 className="text-3xl">Top Threads in the Past Day</h1>
+          <h1 className="text-3xl">Top Recent Thread</h1>
           <ThreadShowcase threads={top_threads} />
         </div>
       </>
