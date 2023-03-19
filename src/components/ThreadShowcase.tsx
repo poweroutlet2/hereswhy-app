@@ -11,7 +11,9 @@ export default function ThreadShowcase({ threads }: { threads: ThreadType[] }): 
                     threads &&
                     threads.map((thread) => {
                         //return <ThreadTest thread={thread} key={thread.id.toString()} />
-                        return <Thread thread={thread} fullyExpanded={false} key={thread.id.toString()} />
+                        return (
+                            <Thread thread={thread} fullyExpanded={false} key={thread.id.toString()} />
+                        )
                     })
                 }
             </div>

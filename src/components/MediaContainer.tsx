@@ -34,7 +34,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
     })
     return (
         <>
-            <div className="grid grid-flow-col place-items-center bg-gray-200 gap-1 gap mt-2 w-full max-h-full rounded-3xl overflow-hidden border-4 border-gray-200">
+            <div className="grid grid-flow-col place-items-center bg-gray-200 dark:bg-slate-900 gap-1 gap mt-2 w-full max-h-full rounded-3xl overflow-hidden border-4 border-gray-200 dark:border-slate-700">
                 {media &&
                     media.map((media_component, index) => {
                         const is_gif = media_component.type == 'gif'
@@ -46,8 +46,8 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                         <div className="video relative">
                                             <video
                                                 className="relative"
-                                                width={is_gif ? "500" : "500"}
-                                                height={is_gif ? "500" : "500"}
+                                                width={is_gif ? "300" : "300"}
+                                                height={is_gif ? "300" : "300"}
                                                 disablePictureInPicture
                                                 muted
                                                 controls={!is_gif}
@@ -68,7 +68,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                             <Image
                                                 src={media_component.url}
                                                 alt="tweet_media"
-                                                width={300}
+                                                width={250}
                                                 height={100}
                                                 className="h-auto w-auto"
                                             />
@@ -95,8 +95,8 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                     src={image.src}
                                     loading="eager"
                                     alt={"tweet_media"}
-                                    width={1600}
-                                    height={1200}
+                                    width={800}
+                                    height={600}
                                 />
                             </div>
                         );
@@ -104,10 +104,6 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                 }}
                 carousel={{ finite: true }}
                 styles={{ container: { backgroundColor: "rgba(0, 0, 0, .95)" } }}
-                zoom={{
-                    maxZoomPixelRatio: undefined,
-                    scrollToZoom: true
-                }}
                 plugins={[Video, Zoom]}
             />
         </>

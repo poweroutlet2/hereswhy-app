@@ -25,7 +25,7 @@ export function Thread({ thread, fullyExpanded = true }: { thread: ThreadType, f
         const first_tweet = thread?.tweet[0]
 
         return (
-            <div className="thread-container flex flex-col xl:mx-5 mb-5 h-min max-w-xl md:max-w-2xl break-inside-avoid-column bg-white dark:bg-slate-800 rounded-2xl shadow-md">
+            <div className="thread-container relative flex flex-col mx-2 mb-5 max-w-xl md:max-w-2xl max-h-full break-inside-avoid-column bg-white dark:bg-slate-800 rounded-2xl shadow-md">
                 <HeaderTweet
                     thread_id={thread.id}
                     tweeted_at={thread.tweeted_at}
@@ -44,20 +44,21 @@ export function Thread({ thread, fullyExpanded = true }: { thread: ThreadType, f
                         tweet={tweet}
                         author={thread.author}
                         media={tweet.media}
-                        last={(tweet.index == (thread.tweet.length - 1))}
+                        last={(tweet.index == (thread.length - 1))}
                     />
                 })}
                 {/* Only show "Read more" button if tweet is not fullt expanded */}
 
                 {!fullyExpanded &&
-                    <Link className="text-base" href={`/threads/${thread.id.toString()}`} passHref>
+                    <Link className={`text-base absolute bottom-0 left-0 w-full rounded-b-2xl backdrop-blur-sm bg-black/20`} href={`/threads/${thread.id.toString()}`} passHref>
                         <div className="read-more flex p-4 rounded-b-2xl hover:opacity-50">
                             <div className="lds-ellipsis rotate-90"><div></div><div></div><div></div><div></div></div>
                             <span className="flex-1 text-center">
                                 Read more
                             </span>
                         </div>
-                    </Link>}
+                    </Link>
+                }
             </div>
         )
     }

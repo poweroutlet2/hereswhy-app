@@ -32,12 +32,12 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
   if (top_threads) {
     return (
       <>
-        <div className="mt-5 flex flex-col">
-          <h1 className="text-3xl ml-48">Trending Threads</h1>
+        <div className="pt-5 flex flex-col bg-blue-900 bg-opacity-10">
+          <h1 className="text-3xl ml-48 pb-3">Trending Threads</h1>
           <ThreadMarquee threads={trending_threads} />
         </div>
-        <div className='mt-5'>
-          <h1 className="text-3xl">Top Recent Thread</h1>
+        <div className='mt-10'>
+          <h1 className="text-3xl">Top Recent Threads</h1>
           <ThreadShowcase threads={top_threads} />
         </div>
       </>
