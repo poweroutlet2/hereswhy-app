@@ -1,7 +1,7 @@
 import { threadsRouter } from "../server/trpc/router/threadsRouter";
 import { createProxySSGHelpers } from '@trpc/react-query/ssg';
 import { createContextInner } from "../server/trpc/context";
-import superjson from 'superjson';
+import superjson from 'superjson'
 import ThreadShowcase from "../components/ThreadShowcase";
 import type { InferGetStaticPropsType } from "next";
 import ThreadMarquee from "../components/ThreadMarquee";
@@ -32,12 +32,14 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
   if (top_threads) {
     return (
       <>
-        <div className="pt-5 flex flex-col bg-blue-900 bg-opacity-10">
-          <h1 className="text-3xl ml-48 pb-3">Trending Threads</h1>
+
+        <div className="pt-1 bg-blue-900 bg-opacity-10">
+          <h1 className="text-3xl p-3 self-start">Trending Threads</h1>
           <ThreadMarquee threads={trending_threads} />
         </div>
-        <div className='mt-10'>
-          <h1 className="text-3xl">Top Recent Threads</h1>
+
+        <h1 className="text-3xl p-3 self-start">Top Recent Threads</h1>
+        <div className=''>
           <ThreadShowcase threads={top_threads} />
         </div>
       </>

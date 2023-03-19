@@ -4,7 +4,7 @@ import { Thread, ThreadType } from "./Thread";
 export default function ThreadMarquee({ threads }: { threads: ThreadType[] }) {
     return (
         <>
-            <div className="flex overflow-x-auto w-screen pb-16 scrollbar-hide">
+            <div className="flex overflow-x-auto w-screen pb-16 px-2 scrollbar-hide">
                 {(threads != undefined)
                     ?
                     threads.map((thread) => {
