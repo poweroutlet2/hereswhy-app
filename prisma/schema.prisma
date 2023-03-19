@@ -40,7 +40,7 @@ model thread {
   tweeted_at        DateTime?           @default(now()) @db.Timestamp(6)
   created_at        DateTime?           @default(now()) @db.Timestamp(6)
   updated_at        DateTime?           @default(now()) @db.Timestamp(6)
-  length            Int?
+  length            Int
   lang              String?             @db.VarChar(5)
   source_account_id BigInt?
   view_count        Int?
