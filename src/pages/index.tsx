@@ -14,29 +14,31 @@ export async function getStaticProps() {
     transformer: superjson,
   });
 
-  const data = await ssg.get_top_threads.fetch({ num_threads: 10, period: 'day' })
+  const top_threads = await ssg.get_top_threads.fetch({ num_threads: 10, period: 'day' })
+  const trending_threads = await ssg.get_trending_threads.fetch({ num_threads: 10 })
   // console.log('state', ssg.dehydrate());
 
   return {
     props: {
       trpcState: ssg.dehydrate(),
-      threads: data.threads,
+      top_threads: top_threads.threads,
+      trending_threads: trending_threads
     },
     revalidate: 1800, // seconds
   };
 }
 
-export default function Home({ threads }: InferGetStaticPropsType<typeof getStaticProps>) {
-  if (threads) {
+export default function Home({ top_threads, trending_threads }: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (top_threads) {
     return (
       <>
-        <div>
-          <h1 className="text-3xl">Trending Threads</h1>
-          <ThreadMarquee threads={threads} />
+        <div className="mt-5 flex flex-col">
+          <h1 className="text-3xl ml-48">Trending Threads</h1>
+          <ThreadMarquee threads={trending_threads} />
         </div>
         <div className='mt-5'>
           <h1 className="text-3xl">Top Threads in the Past Day</h1>
-          <ThreadShowcase threads={threads} />
+          <ThreadShowcase threads={top_threads} />
         </div>
       </>
     );

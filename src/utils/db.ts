@@ -274,12 +274,12 @@ export async function get_thread_count() {
 }
 
 export async function get_trending_threads(num_threads = 10,) {
-    return await prisma.thread.findMany({
+    const threads = await prisma.thread.findMany({
         where: {
             lang: 'en',
         },
         orderBy: {
-            like_count: 'desc'
+            view_count: 'desc'
         },
         take: num_threads,
         include: {
@@ -295,4 +295,6 @@ export async function get_trending_threads(num_threads = 10,) {
             author: {}
         },
     })
+    const threads_jsonified = JSON.parse(JSON.stringify(threads, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
+    return threads_jsonified
 }
