@@ -277,6 +277,9 @@ export async function get_trending_threads(num_threads = 10,) {
     const threads = await prisma.thread.findMany({
         where: {
             lang: 'en',
+            view_count: {
+                not: null
+            }
         },
         orderBy: {
             view_count: 'desc'
