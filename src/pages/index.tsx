@@ -33,8 +33,8 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
     return (
       <>
 
-        <div className="pt-1 bg-blue-900 bg-opacity-10">
-          <h1 className="text-3xl p-3 self-start">Trending Threads</h1>
+        <h1 className="text-3xl p-3 self-start">Trending Threads From Twitter</h1>
+        <div className="pt-1 bg-blue-900 bg-opacity-10 min-w-max">
           <ThreadMarquee threads={trending_threads} />
         </div>
 
