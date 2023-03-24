@@ -5,6 +5,8 @@ import superjson from 'superjson'
 import ThreadShowcase from "../components/ThreadShowcase";
 import type { InferGetStaticPropsType } from "next";
 import ThreadMarquee from "../components/ThreadMarquee";
+import { TimeDropdown } from "../components/TimeDropdown";
+import { SortDropdown } from "../components/SortDropdown";
 
 
 export async function getStaticProps() {
@@ -33,12 +35,15 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
     return (
       <>
 
-        <h1 className="text-3xl p-3 self-start">Trending Threads From Twitter</h1>
-        <div className="pt-1 bg-blue-900 bg-opacity-10 min-w-max">
+        <h1 className="text-3xl w-screen bg-blue-900 bg-opacity-10 p-3 self-center sm:self-start">Trending Threads From Twitter</h1>
+        <div className="p-2 bg-blue-900 bg-opacity-10 min-w-max">
           <ThreadMarquee threads={trending_threads} />
         </div>
+        <h1 className="flex flex-col sm:flex-row text-3xl p-3 self-center sm:self-start">
+          <div className="flex"> Most <SortDropdown /> </div>
+          <div className="flex"> Threads From <TimeDropdown /> </div>
+        </h1>
 
-        <h1 className="text-3xl p-3 self-start">Top Recent Threads</h1>
         <div className=''>
           <ThreadShowcase threads={top_threads} />
         </div>

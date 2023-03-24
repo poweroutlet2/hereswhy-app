@@ -25,7 +25,8 @@ export function Thread({ thread, fullyExpanded = true }: { thread: ThreadType, f
         const first_tweet = thread?.tweet[0]
 
         return (
-            <div className="thread-container relative flex flex-col mx-2 mb-5 max-w-xl md:max-w-2xl max-h-full break-inside-avoid-column bg-white dark:bg-slate-800 rounded-2xl shadow-md">
+            <div className="thread-container mx-4 mb-10 relative flex flex-col w-screen sm:max-w-xl md:max-w-2xl max-h-full break-inside-avoid-column bg-white dark:bg-slate-800 dark:backdrop-blur-md dark:bg-white/10 dark:backdrop-brightness-75
+             rounded-2xl shadow-md">
                 <HeaderTweet
                     thread_id={thread.id}
                     tweeted_at={thread.tweeted_at}

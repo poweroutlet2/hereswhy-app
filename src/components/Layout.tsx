@@ -16,8 +16,8 @@ export default function Layout({ children }: LayoutProps) {
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
             </Head>
-            <Navbar />
             <main className="min-w-full h-screen flex flex-col items-center overflow-x-hidden ease-in-out bg-gray-100 text-gray-900 dark:text-slate-200 dark:bg-gradient-to-b from-gray-900 via-[#0d0d3e] to-[#000030]">
+                <Navbar /> {/* Putting this outside main resulted in 2 scrollbars ? */}
                 {children}
             </main>
         </>

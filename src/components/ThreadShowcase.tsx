@@ -6,7 +6,7 @@ export default function ThreadShowcase({ threads }: { threads: ThreadType[] }): 
 
     return (
         <div className="showcase flex">
-            <div className="xl:columns-2 3xl:columns-3 pt-5 pb-5">
+            <div className="xl:columns-2 3xl:columns-3 pt-2 pb-5">
                 {
                     threads &&
                     threads.map((thread) => {
