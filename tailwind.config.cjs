@@ -13,9 +13,9 @@ module.exports = {
         ".5": ".5px",
       },
       animation: {
-        marquee: 'marquee 40s linear infinite',
-        marquee2: 'marquee2 40s linear infinite',
-        marquee3: 'marquee3 40s linear infinite',
+        marquee: 'marquee 180s linear infinite',
+        marquee2: 'marquee2 180s linear infinite',
+        marquee3: 'marquee3 180s linear infinite',
 
       },
       keyframes: {
