@@ -24,8 +24,6 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
 }
 
 export default function SearchPage({ term, data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    console.log(term)
-
     if (data) {
         return (
             <>

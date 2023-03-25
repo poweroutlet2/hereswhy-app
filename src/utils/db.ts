@@ -76,7 +76,18 @@ export async function db_get_threads(ids: bigint[] | string[]): Promise<ThreadTy
                 in: bigintIds
             }
         },
-
+        include: {
+            tweet: {
+                orderBy: {
+                    index: 'asc'
+                },
+                include: {
+                    media: {}
+                },
+                take: 1
+            },
+            author: {}
+        },
     })
 
     const thread_jsonified = JSON.parse(JSON.stringify(thread, (key, value) => (typeof value === 'bigint' ? value.toString() : value)))
@@ -189,7 +200,7 @@ export async function search_threads(term: string) {
         where search @@ websearch_to_tsquery('english', ${term}) or 
             search @@ websearch_to_tsquery('simple', ${term})
         order by rank desc
-        LIMIT 100;
+        LIMIT 20;
     `
     const thread_ids = results.map((search_result) => {
         return search_result.thread_id
