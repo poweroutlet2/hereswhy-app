@@ -5,7 +5,8 @@ import Lightbox from "yet-another-react-lightbox";
 import Video from "yet-another-react-lightbox/plugins/video";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
-export default function MediaContainer({ media }: { media: media[] | undefined }) {
+export default function MediaContainer({ media, alt }: { media: media[] | undefined, alt: string}) {
+
     /*
      media.type can be [
             'animated_gif',
@@ -67,7 +68,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                         <div className="flex justify-center h-full w-full hover:brightness-75 hover:cursor-pointer" onClick={() => setOpen(index)}>
                                             <Image
                                                 src={media_component.url}
-                                                alt="tweet_media"
+                                                alt={alt}
                                                 width={250}
                                                 height={100}
                                                 className="h-auto w-auto"
@@ -94,7 +95,7 @@ export default function MediaContainer({ media }: { media: media[] | undefined }
                                     // @ts-ignore
                                     src={image.src}
                                     loading="eager"
-                                    alt={"tweet_media"}
+                                    alt={alt}
                                     width={800}
                                     height={600}
                                 />
