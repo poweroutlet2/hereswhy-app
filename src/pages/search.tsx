@@ -4,6 +4,7 @@ import { createContextInner } from "../server/trpc/context"
 import { threadsRouter } from "../server/trpc/router/threadsRouter"
 import superjson from 'superjson'
 import ThreadShowcase from "../components/ThreadShowcase"
+import Head from "next/head"
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     const term = query.term as string
@@ -27,6 +28,10 @@ export default function SearchPage({ term, data }: InferGetServerSidePropsType<t
     if (data) {
         return (
             <>
+                <Head>
+                    <title>Search results for "{term}"</title>
+                    <meta name="robots" content="noindex" />
+                </Head>
                 <h1 className="text-3xl mt-5">{data.length} threads found for the term: {`"${term}"`}</h1>
                 <ThreadShowcase threads={data} />
             </>
