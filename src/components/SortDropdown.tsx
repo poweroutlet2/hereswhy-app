@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronDoubleDownIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { CheckIcon } from '@heroicons/react/20/solid'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 
 const people = [

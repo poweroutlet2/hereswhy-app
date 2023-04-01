@@ -9,7 +9,7 @@ import { SaveButton } from "./SaveButton";
 import { SaveButtonDisabled } from "./SaveButtonDisabled";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { ArrowPathRoundedSquareIcon, ChartBarIcon } from "@heroicons/react/20/solid";
+import { ChartBarIcon } from "@heroicons/react/20/solid";
 
 
 dayjs.extend(relativeTime)

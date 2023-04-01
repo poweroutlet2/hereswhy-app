@@ -1,4 +1,3 @@
-import TweetSkelly from "./TweetSkelly"
 import { Thread, ThreadType } from "./Thread";
 
 export default function ThreadMarquee({ threads }: { threads: ThreadType[] }) {
