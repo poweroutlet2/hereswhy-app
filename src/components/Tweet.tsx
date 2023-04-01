@@ -38,7 +38,7 @@ export function Tweet(
                             {tweet.content}
                         </div> */}
                         <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content, tweet.links) }} />
-                        {media?.length != 0 ? <MediaContainer media={media} /> : ''}
+                        {media?.length != 0 ? <MediaContainer media={media} alt={tweet.content} /> : ''}
                     </div>
                     <div>
                         {/* Twitter bird icon */}
