@@ -42,7 +42,7 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
 
           <meta property="og:title" content="hereswhy.io" />
           <meta property="og:description" content="Discover Twitter threads" />
-          <meta property="og:description" content="Discover Twitter threads" />"
+          <meta property="og:url" content="hereswhy.io" />"
         </Head>
         <h1 className="text-3xl w-screen bg-blue-900 bg-opacity-10 p-3 self-center sm:self-start">Trending Threads From Twitter</h1>
         <div className="p-2 bg-blue-900 bg-opacity-10 min-w-max">
@@ -51,7 +51,7 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
         <h1 className="flex flex-col sm:flex-row text-3xl p-3 self-center sm:self-start">
           <div className="flex hidden"> Most <SortDropdown /> </div>
           <div className="flex hidden"> Threads From <TimeDropdown /> </div>
-          <div>Top Threads of Today</div>
+          <div>Top Threads of Today </div>
         </h1>
         <div className=''>
           <ThreadShowcase threads={top_threads} />

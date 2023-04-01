@@ -9,8 +9,7 @@ import { threadsRouter } from '../../server/trpc/router/threadsRouter';
 
 
 export async function getStaticPaths() {
-    return { paths: [], fallback: true }
-}
+    return { paths: [], fallback: true }}
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
     const ssg = createProxySSGHelpers({
@@ -23,29 +22,34 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
 
     return {
         props: {
+            author: data?.thread.author.username,
+            description: data?.thread.tweet[0]?.content,
             thread: data?.thread
         },
         revalidate: 1800 // seconds
     }
 }
 
-export default function ThreadPage({ thread }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function ThreadPage({ thread, author, description }: InferGetStaticPropsType<typeof getStaticProps>) {
     const router = useRouter()
-    // for more info on fallback: https://nextjs.org/docs/api-reference/data-fetching/get-static-paths
+    description = description ? description : ""
+    
     // This will display while getStaticProps runs
     if (router.isFallback) {
         return (
-            <div>Loadin the thread...</div>
+            <div>Loadin tha thread...</div>
         )
     }
-
     return (
         <>
             <Head>
-                <title>Threads</title>
-                <meta name="description" content="Twitter threads" />
-                <link rel="icon" href="/favicon.ico" />
-                <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+                <title>{`Thread by @${author}`}</title>
+                <meta name="description" content={description} />
+                <meta name="robots" content="index, follow" />
+
+                <meta property="og:title" content={`Thread by @${author}`} />
+                <meta property="og:description" content={description} />
+                <meta property="og:url" content={`hereswhy.io/threads/${thread.id}`} />
             </Head>
             <div className='mt-5'>
                 <Thread thread={thread} fullyExpanded={true} />

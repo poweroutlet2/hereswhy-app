@@ -5,6 +5,7 @@ import { threadsRouter } from "../../server/trpc/router/threadsRouter";
 import superjson from 'superjson'
 import { trpc } from "../../utils/trpc";
 import ThreadShowcase from "../../components/ThreadShowcase";
+import Head from "next/head";
 
 export async function getServerSideProps(
     context: GetServerSidePropsContext<{ id: string }>,
@@ -30,7 +31,12 @@ export default function ListPage(props: InferGetServerSidePropsType<typeof getSe
     const { data } = trpc.threads.get_threads_by_list.useQuery({ list_id: id })
     if (data) {
         return (
-            <ThreadShowcase threads={data} />
+            <>
+                <Head>
+                    <meta name="robots" content="noindex, nofollow" />
+                </Head>
+                <ThreadShowcase threads={data} />
+            </>
         )
     } else {
         <>No threads here...</>

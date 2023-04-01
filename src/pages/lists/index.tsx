@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import Link from "next/link";
 import { trpc } from "../../utils/trpc";
 
@@ -15,6 +16,9 @@ export default function ListsPage() {
 	if (session?.user?.id) {
 		return (
 			<>
+				<Head>
+                    <meta name="robots" content="noindex, nofollow" />
+                </Head>
 				<h1>Your Lists</h1>
 				{lists?.map((list) => {
 					return <Link

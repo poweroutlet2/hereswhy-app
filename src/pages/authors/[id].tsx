@@ -23,30 +23,34 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
 
     return {
         props: {
+            author: data.threads[0]?.author.username,
             threads: data.threads
         },
         revalidate: 1800
     }
 
 }
-export default function AuthorPage({ threads }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function AuthorPage({ threads, author }: InferGetStaticPropsType<typeof getStaticProps>) {
     const router = useRouter()
 
     if (threads?.length > 0) {
         if (router.isFallback) {
             return (
-                <div>Loadin threads by tha author {threads[0]?.author.username}...</div>
+                <div>Loadin threads by tha author...</div>
             )
         }
 
         return (
             <>
-                <Head>
-                    <title>Threads</title>
-                    <meta name="description" content="Twitter threads" />
-                    <link rel="icon" href="/favicon.ico" />
-                    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-                </Head>
+            <Head>
+                <title>{`Thread by @${author}`}</title>
+                <meta name="description" content={`All Twitter threads by ${author}`} />
+                <meta name="robots" content="index, follow" />
+
+            <meta property="og:title" content={`All threads by @${author}`} />
+                <meta property="og:description" content={`Twitter threads by author ${author}`} />
+                <meta property="og:url" content={`hereswhy.io/authors${threads[0]?.author.id}`} />
+            </Head>
                 <div className='mt-5'>
                     <h1 className="text-3xl">All threads by
                         <Link href={`http://twitter.com/${threads[0]?.author.username}`} target="_blank" rel="noopener noreferrer" className='gap-1 text-3xl hover:opacity-100 '>
