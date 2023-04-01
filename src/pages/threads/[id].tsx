@@ -49,7 +49,7 @@ export default function ThreadPage({ thread, author, description }: InferGetStat
 
                 <meta property="og:title" content={`Thread by @${author}`} />
                 <meta property="og:description" content={description} />
-                <meta property="og:url" content={`hereswhy.io/threads/${thread.id}`} />
+                <meta property="og:url" content={`hereswhy.io/threads/${thread?.id}`} />
             </Head>
             <div className='mt-5'>
                 <Thread thread={thread} fullyExpanded={true} />

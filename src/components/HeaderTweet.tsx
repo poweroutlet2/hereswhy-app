@@ -82,7 +82,7 @@ export function HeaderTweet(
             setDate(tweeted_at?.toLocaleString())
         }
     }, [tweeted_at])
-
+    
     if (tweet?.content) {
         return (
             <article className={`tweet-card relative my-0 py-5 px-4 overflow-clip rounded-t-2xl`}>
@@ -90,7 +90,7 @@ export function HeaderTweet(
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={`/authors/${author.id}`}>
-                            <Image className='rounded-full h-20 w-20 mr-2 hover:brightness-90 border-4 border-gray-200 dark:border-gray-700' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} />
+                            <Image className='rounded-full h-20 w-20 mr-2 hover:brightness-90 border-4 border-gray-200 dark:border-gray-700' src={author.profile_picture_url || ""} alt={`profile picture for @${author.username}`} height={400} width={400} unoptimized={true} />
                         </Link>
                     </div>
                     <div className="flex-auto w-2/3 text-base md:text-xl">
@@ -117,7 +117,7 @@ export function HeaderTweet(
                             @{author.username}
                         </Link>
                         <div className="tweet-text text-base md:text-lg mt-1" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content, tweet.links) }} />
-                        {media?.length != 0 ? <MediaContainer media={media} /> : ''}
+                        {media?.length != 0 ? <MediaContainer media={media} alt={tweet.content.substring(0, 100)} /> : ''}
 
                         {/* Metric buttons - only show if replies exists (is first tweet) */}
                         <div className="flex flex-row justify-center mt-4 -mb-2 gap-4 text-xs md:text-sm md:gap-6 font-medium tracking-wider md:flex">
