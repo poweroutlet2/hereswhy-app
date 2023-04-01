@@ -40,9 +40,9 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
           <meta name="description" content="Discover and save Twitter threads." />
           <meta name="robots" content="index, follow" />
 
-          <meta property="og:title" content="hereswhy.io" />
+          <meta property="og:title" content={`hereswhy.io`} />
           <meta property="og:description" content="Discover Twitter threads" />
-          <meta property="og:url" content="hereswhy.io" />"
+          {/* <meta property="og:url" content={`hereswhy.io`} />" */}
         </Head>
         <h1 className="text-3xl w-screen bg-blue-900 bg-opacity-10 p-3 self-center sm:self-start">Trending Threads From Twitter</h1>
         <div className="p-2 bg-blue-900 bg-opacity-10 min-w-max">
@@ -60,4 +60,3 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
     );
   }
 }
-

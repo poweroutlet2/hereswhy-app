@@ -18,19 +18,15 @@ export function Tweet(
     if (tweet?.content) {
         return (
             <article className={`tweet-card relative my-0 py-5 px-4 overflow-clip ${last ? "rounded-b-2xl" : ""}`}>
-                <div className={`absolute top-0 left-0 w-[4px] h-full ml-[56px] ${last ? "h-16" : ""} bg-gray-200 bg-opacity-80 dark:bg-gray-700`}></div>
+                <div className={`absolute top-0 left-0 w-[4px] ml-[56px] ${last ? "h-6" : "h-full"} bg-gray-200 bg-opacity-80 dark:bg-gray-700`}></div>
                 <div className='flex items-start'>
                     <div className="profile-pic relative">
                         <Link href={author_internal_url} passHref target="_blank" rel="noopener noreferrer">
-                            <Image className='rounded-full h-20 w-20 mr-2 hover:brightness-90 border-4 border-gray-200 dark:border-gray-700' src={author.profile_picture_url || ""} alt="author profile pic" height={400} width={400} unoptimized={true} />
+                            <Image className='rounded-full h-20 w-20 mr-2 hover:brightness-90 border-4 border-gray-200 dark:border-gray-700' src={author.profile_picture_url || ""} alt={`profile picture for @${author.username}`} height={400} width={400} unoptimized={true} />
                         </Link>
                     </div>
                     <div className="flex-auto w-2/3 text-base md:text-xl">
-                        <div className="flex flex-col md:flex-row">
-                            <Link href={author_internal_url} className='font-semibold break-all hover:underline'>
-                                {author.display_name}
-                            </Link>
-                        </div>
+
                         <Link href={author_external_url} target="_blank" rel="noopener noreferrer" className='gap-1 opacity-50 hover:opacity-100 hover:text-blue-500'>
                             @{author.username}
                         </Link>
@@ -38,7 +34,7 @@ export function Tweet(
                             {tweet.content}
                         </div> */}
                         <div className="tweet-text text-base md:text-lg" dangerouslySetInnerHTML={{ __html: renderTweetText(tweet.content, tweet.links) }} />
-                        {media?.length != 0 ? <MediaContainer media={media} alt={tweet.content} /> : ''}
+                        {media?.length != 0 ? <MediaContainer media={media} alt={tweet.content.substring(0, 100)} /> : ''}
                     </div>
                     <div>
                         {/* Twitter bird icon */}

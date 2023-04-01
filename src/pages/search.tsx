@@ -29,7 +29,7 @@ export default function SearchPage({ term, data }: InferGetServerSidePropsType<t
         return (
             <>
                 <Head>
-                    <title>Search results for "{term}"</title>
+                    <title>Search results for {`"${term}"`}</title>
                     <meta name="robots" content="noindex" />
                 </Head>
                 <h1 className="text-3xl mt-5">{data.length} threads found for the term: {`"${term}"`}</h1>
