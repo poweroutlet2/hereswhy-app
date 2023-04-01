@@ -3,7 +3,7 @@ import { Thread } from "./Thread";
 
 
 export default function ThreadShowcase({ threads }: { threads: ThreadType[] }): JSX.Element {
-    console.log(threads[0])
+
     return (
         <div className="showcase flex">
             <div className="xl:columns-2 3xl:columns-3 pt-2 pb-5">
