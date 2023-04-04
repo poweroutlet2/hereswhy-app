@@ -19,7 +19,7 @@ export function SortDropdown() {
         <div className="w-18 mx-2 mb-2 sm:mb-0">
             <Listbox value={selected} onChange={setSelected}>
                 <div className="relative">
-                    <Listbox.Button className="relative w-full cursor-default rounded-lg text-2xl bg-white bg-opacity-5 py-2 pl-3 pr-10 text-left hover:cursor-pointer hover:bg-opacity-10 shadow-md">
+                    <Listbox.Button className="relative w-full cursor-default rounded-lg text-2xl bg-white bg-opacity-5 -mt-3 py-2 pl-3 pr-10 text-left hover:cursor-pointer hover:bg-opacity-10 shadow-md">
                         <span className="block truncate">{selected}</span>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                             <ChevronDownIcon

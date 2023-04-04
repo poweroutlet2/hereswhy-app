@@ -49,9 +49,9 @@ export default function Home({ top_threads, trending_threads }: InferGetStaticPr
           <ThreadMarquee threads={trending_threads} />
         </div>
         <h1 className="flex flex-col sm:flex-row text-3xl p-3 self-center sm:self-start">
-          <div className="flex hidden"> Most <SortDropdown /> </div>
-          <div className="flex hidden"> Threads From <TimeDropdown /> </div>
-          <div>Top Threads of Today </div>
+          <div className="flex"> Most <SortDropdown /> </div>
+          <div className="flex"> Threads From <TimeDropdown /> </div>
+          <div className="hidden">Top Threads of Today </div>
         </h1>
         <div className=''>
           <ThreadShowcase threads={top_threads} />
