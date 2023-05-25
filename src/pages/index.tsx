@@ -17,7 +17,7 @@ export async function getStaticProps() {
     transformer: superjson,
   });
 
-  const top_threads = await ssg.get_top_threads.fetch({ num_threads: 10, period: 'day' })
+  const top_threads = await ssg.get_top_threads.fetch({ num_threads: 10, period: 'alltime' })
   const trending_threads = await ssg.get_trending_threads.fetch({ num_threads: 10 })
   // console.log('state', ssg.dehydrate());
 
