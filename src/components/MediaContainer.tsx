@@ -5,7 +5,7 @@ import Lightbox from "yet-another-react-lightbox";
 import Video from "yet-another-react-lightbox/plugins/video";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
-export default function MediaContainer({ media, alt }: { media: media[] | undefined, alt: string}) {
+export default function MediaContainer({ media, alt }: { media: media[] | undefined, alt: string }) {
 
     /*
      media.type can be [
@@ -67,6 +67,7 @@ export default function MediaContainer({ media, alt }: { media: media[] | undefi
                                     : <>
                                         <div className="flex justify-center h-full w-full hover:brightness-75 hover:cursor-pointer" onClick={() => setOpen(index)}>
                                             <Image
+                                                unoptimized={true}
                                                 src={media_component.url}
                                                 alt={alt}
                                                 width={250}
@@ -98,6 +99,7 @@ export default function MediaContainer({ media, alt }: { media: media[] | undefi
                                     alt={alt}
                                     width={800}
                                     height={600}
+                                    unoptimized={true}
                                 />
                             </div>
                         );

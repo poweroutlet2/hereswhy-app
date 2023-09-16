@@ -93,6 +93,7 @@ export default function Navbar() {
                     {session?.user?.image && <>
                       <Menu.Button className={`${session.user ? '' : 'hidden'} flex rounded-full text-sm sm:ml-4 hover:opacity-80`}>
                         <Image
+                          unoptimized={true}
                           className="h-12 w-12 min-w-max rounded-full"
                           src={session.user?.image}
                           width={40}
